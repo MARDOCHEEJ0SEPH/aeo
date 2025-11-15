@@ -88,15 +88,19 @@ This example demonstrates how to build a high-performance, AEO-optimized single-
 │   ├── Cargo.toml            # Rust project configuration
 │   ├── src/
 │   │   └── lib.rs            # Rust source code (compiles to WASM)
-│   └── build.sh              # WASM build script
+│   ├── build.sh              # WASM build script
+│   └── .gitignore            # Rust/WASM gitignore
 ├── public/
 │   └── wasm/                 # Generated WASM files (created by build.sh)
 │       ├── oli_juice_wasm.js
 │       ├── oli_juice_wasm_bg.wasm
 │       └── ...
+├── database/
+│   ├── schema.js             # Mongoose schemas (centralized, no duplication)
+│   └── seed.js               # Database seed script with sample data
 ├── backend/
 │   ├── server.js             # Express API server
-│   ├── package.json          # Dependencies
+│   ├── package.json          # Dependencies (includes seed script)
 │   └── .env.example          # Environment variables template
 └── README.md                 # This file
 ```
@@ -248,6 +252,25 @@ mongosh
    - Edit `index.html`
    - Find line ~365 (inside `<script type="module">`)
    - Update `API_URL` if using a different backend port
+
+### Step 5.5: Seed the Database (Optional but Recommended)
+
+Populate your MongoDB database with sample data for development and testing:
+
+```bash
+# From backend directory
+npm run seed
+```
+
+This will create:
+- 1 Product (OLI Premium Organic Juice with full nutrition data)
+- 5 Sample users
+- 5 Sample orders (various statuses: delivered, shipped, processing, pending)
+- 3 Sample subscriptions (active and paused)
+- 4 Sample reviews (5-star ratings)
+- 1000+ Analytics events
+
+**Note:** The seed script will clear existing data first. Comment out the `deleteMany()` calls in `database/seed.js` if you want to keep existing data.
 
 ### Step 6: Start the Backend Server
 
