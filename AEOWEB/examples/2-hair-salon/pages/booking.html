@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | Luxe Hair Studio - Beverly Hills</title>
+
+  <!-- AEO Meta Tags -->
+  <meta name="description" content="Book your appointment at Luxe Hair Studio. Easy online booking for hair color, extensions, cuts, and styling with expert Beverly Hills stylists.">
+  <meta name="keywords" content="book hair appointment, Beverly Hills salon booking, hair appointment online, schedule haircut">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../assets/css/aeo-framework.css">
+  <link rel="stylesheet" href="../styles/custom.css">
+
+  <style>
+    :root {
+      --primary-color: #D4AF37;
+      --secondary-color: #2C1810;
+      --accent-color: #F5E6D3;
+    }
+
+    .booking-hero {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, #4a3428 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .booking-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .booking-form {
+      background: white;
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--secondary-color);
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .stylist-grid,
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .stylist-option,
+    .service-option {
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stylist-option:hover,
+    .service-option:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .stylist-option.selected,
+    .service-option.selected {
+      border-color: var(--primary-color);
+      background: var(--accent-color);
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .time-slot {
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .time-slot:hover {
+      border-color: var(--primary-color);
+    }
+
+    .time-slot.selected {
+      border-color: var(--primary-color);
+      background: var(--accent-color);
+    }
+
+    .time-slot.unavailable {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: var(--secondary-color);
+    }
+
+    .btn-primary:hover {
+      background: #c49b2d;
+    }
+
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #d0d0d0;
+    }
+
+    .progress-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .progress-step::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #e0e0e0;
+    }
+
+    .progress-step.active::before,
+    .progress-step.completed::before {
+      background: var(--primary-color);
+    }
+
+    .step-number {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .progress-step.active .step-number,
+    .progress-step.completed .step-number {
+      background: var(--primary-color);
+      color: var(--secondary-color);
+    }
+
+    .confirmation-box {
+      background: var(--accent-color);
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .confirmation-box h3 {
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+
+    .confirmation-detail {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    .confirmation-detail:last-child {
+      border-bottom: none;
+    }
+
+    .required {
+      color: #ff6b6b;
+    }
+
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .success-message {
+      background: #10b981;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <a href="../index.html">Luxe Hair Studio</a>
+      </div>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="booking.html" class="active">Book Now</a>
+        <a href="#stylists">Our Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="booking-hero">
+    <div class="container">
+      <h1>Book Your Appointment</h1>
+      <p style="font-size: 1.2em;">Reserve your spot with our expert stylists in just a few clicks</p>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section class="booking-container">
+    <div class="success-message" id="successMessage">
+      <h2>✓ Appointment Booked Successfully!</h2>
+      <p>We've sent a confirmation email with all the details. We look forward to seeing you!</p>
+    </div>
+
+    <div class="booking-form">
+      <!-- Progress Bar -->
+      <div class="progress-bar">
+        <div class="progress-step active" data-step="1">
+          <span class="step-number">1</span>
+          <div>Service</div>
+        </div>
+        <div class="progress-step" data-step="2">
+          <span class="step-number">2</span>
+          <div>Stylist</div>
+        </div>
+        <div class="progress-step" data-step="3">
+          <span class="step-number">3</span>
+          <div>Date & Time</div>
+        </div>
+        <div class="progress-step" data-step="4">
+          <span class="step-number">4</span>
+          <div>Your Info</div>
+        </div>
+        <div class="progress-step" data-step="5">
+          <span class="step-number">5</span>
+          <div>Confirm</div>
+        </div>
+      </div>
+
+      <form id="bookingForm">
+        <!-- Step 1: Select Service -->
+        <div class="form-step active" data-step="1">
+          <h2>Select a Service</h2>
+          <div class="service-grid">
+            <div class="service-option" data-service="balayage" data-price="$250-$400" data-duration="180">
+              <h4>Balayage</h4>
+              <p>$250-$400</p>
+              <small>3 hours</small>
+            </div>
+            <div class="service-option" data-service="color-correction" data-price="$400-$800" data-duration="240">
+              <h4>Color Correction</h4>
+              <p>$400-$800</p>
+              <small>4 hours</small>
+            </div>
+            <div class="service-option" data-service="highlights" data-price="$200-$350" data-duration="150">
+              <h4>Highlights</h4>
+              <p>$200-$350</p>
+              <small>2.5 hours</small>
+            </div>
+            <div class="service-option" data-service="womens-cut" data-price="$85-$150" data-duration="60">
+              <h4>Women's Haircut</h4>
+              <p>$85-$150</p>
+              <small>1 hour</small>
+            </div>
+            <div class="service-option" data-service="curly-cut" data-price="$95-$165" data-duration="75">
+              <h4>Curly Hair Cut</h4>
+              <p>$95-$165</p>
+              <small>1.25 hours</small>
+            </div>
+            <div class="service-option" data-service="bridal" data-price="$300-$500" data-duration="120">
+              <h4>Bridal Hair</h4>
+              <p>$300-$500</p>
+              <small>2 hours</small>
+            </div>
+            <div class="service-option" data-service="extensions" data-price="$400-$1200" data-duration="180">
+              <h4>Hair Extensions</h4>
+              <p>$400-$1200</p>
+              <small>3 hours</small>
+            </div>
+            <div class="service-option" data-service="blowout" data-price="$65-$95" data-duration="60">
+              <h4>Blowout & Style</h4>
+              <p>$65-$95</p>
+              <small>1 hour</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Select Stylist -->
+        <div class="form-step" data-step="2">
+          <h2>Choose Your Stylist</h2>
+          <p style="margin-bottom: 20px; color: #666;">Or select "No Preference" and we'll match you with the best available stylist</p>
+          <div class="stylist-grid">
+            <div class="stylist-option" data-stylist="sophia-martinez">
+              <h4>Sophia Martinez</h4>
+              <p><small>Master Colorist</small></p>
+            </div>
+            <div class="stylist-option" data-stylist="isabella-chen">
+              <h4>Isabella Chen</h4>
+              <p><small>Extension Specialist</small></p>
+            </div>
+            <div class="stylist-option" data-stylist="marcus-thompson">
+              <h4>Marcus Thompson</h4>
+              <p><small>Curl Specialist</small></p>
+            </div>
+            <div class="stylist-option" data-stylist="olivia-park">
+              <h4>Olivia Park</h4>
+              <p><small>Color & Cutting</small></p>
+            </div>
+            <div class="stylist-option" data-stylist="james-rodriguez">
+              <h4>James Rodriguez</h4>
+              <p><small>Senior Stylist</small></p>
+            </div>
+            <div class="stylist-option" data-stylist="no-preference">
+              <h4>No Preference</h4>
+              <p><small>Any Available</small></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Select Date & Time -->
+        <div class="form-step" data-step="3">
+          <h2>Select Date & Time</h2>
+          <div class="form-group">
+            <label for="appointmentDate">Appointment Date <span class="required">*</span></label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required>
+          </div>
+          <div class="form-group">
+            <label>Available Time Slots</label>
+            <div class="time-slots" id="timeSlots">
+              <div class="time-slot" data-time="09:00">9:00 AM</div>
+              <div class="time-slot" data-time="10:00">10:00 AM</div>
+              <div class="time-slot" data-time="11:00">11:00 AM</div>
+              <div class="time-slot" data-time="12:00">12:00 PM</div>
+              <div class="time-slot" data-time="13:00">1:00 PM</div>
+              <div class="time-slot" data-time="14:00">2:00 PM</div>
+              <div class="time-slot" data-time="15:00">3:00 PM</div>
+              <div class="time-slot" data-time="16:00">4:00 PM</div>
+              <div class="time-slot" data-time="17:00">5:00 PM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Your Information -->
+        <div class="form-step" data-step="4">
+          <h2>Your Information</h2>
+          <div class="form-group">
+            <label for="firstName">First Name <span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name <span class="required">*</span></label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="notes">Special Requests or Notes</label>
+            <textarea id="notes" name="notes" placeholder="Any allergies, preferences, or special requests we should know about?"></textarea>
+          </div>
+        </div>
+
+        <!-- Step 5: Confirmation -->
+        <div class="form-step" data-step="5">
+          <h2>Confirm Your Appointment</h2>
+          <div class="confirmation-box">
+            <h3>Appointment Summary</h3>
+            <div class="confirmation-detail">
+              <strong>Service:</strong>
+              <span id="confirmService">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Stylist:</strong>
+              <span id="confirmStylist">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Date:</strong>
+              <span id="confirmDate">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Time:</strong>
+              <span id="confirmTime">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Duration:</strong>
+              <span id="confirmDuration">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Price Range:</strong>
+              <span id="confirmPrice">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Name:</strong>
+              <span id="confirmName">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Email:</strong>
+              <span id="confirmEmail">-</span>
+            </div>
+            <div class="confirmation-detail">
+              <strong>Phone:</strong>
+              <span id="confirmPhone">-</span>
+            </div>
+          </div>
+          <p style="margin-top: 20px; color: #666; font-size: 0.95em;">
+            <strong>Cancellation Policy:</strong> Please provide at least 24 hours notice for cancellations.
+          </p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">Previous</button>
+          <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">Next</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Confirm Booking</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: #1a1106; color: white; padding: 40px 20px; text-align: center;">
+    <div class="container">
+      <p>&copy; 2025 Luxe Hair Studio. All rights reserved.</p>
+      <p>9595 Wilshire Boulevard, Beverly Hills, CA 90210 | (310) 555-0199</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentStep = 1;
+    const bookingData = {
+      service: '',
+      servicePrice: '',
+      serviceDuration: '',
+      stylist: '',
+      date: '',
+      time: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      notes: ''
+    };
+
+    // Service selection
+    document.querySelectorAll('.service-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.service-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        bookingData.service = this.dataset.service;
+        bookingData.servicePrice = this.dataset.price;
+        bookingData.serviceDuration = this.dataset.duration;
+      });
+    });
+
+    // Stylist selection
+    document.querySelectorAll('.stylist-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.stylist-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        bookingData.stylist = this.dataset.stylist;
+      });
+    });
+
+    // Time slot selection
+    document.querySelectorAll('.time-slot').forEach(slot => {
+      slot.addEventListener('click', function() {
+        if (!this.classList.contains('unavailable')) {
+          document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+          this.classList.add('selected');
+          bookingData.time = this.dataset.time;
+        }
+      });
+    });
+
+    // Date selection - set min date to today
+    const dateInput = document.getElementById('appointmentDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.addEventListener('change', function() {
+      bookingData.date = this.value;
+    });
+
+    // Step navigation
+    function changeStep(direction) {
+      // Validate current step
+      if (direction === 1 && !validateStep(currentStep)) {
+        return;
+      }
+
+      // Update current step
+      currentStep += direction;
+
+      // Show/hide steps
+      document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+      });
+      document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+
+      // Update progress bar
+      document.querySelectorAll('.progress-step').forEach((step, index) => {
+        if (index < currentStep - 1) {
+          step.classList.add('completed');
+          step.classList.remove('active');
+        } else if (index === currentStep - 1) {
+          step.classList.add('active');
+          step.classList.remove('completed');
+        } else {
+          step.classList.remove('active', 'completed');
+        }
+      });
+
+      // Update buttons
+      document.getElementById('prevBtn').style.display = currentStep === 1 ? 'none' : 'block';
+      document.getElementById('nextBtn').style.display = currentStep === 5 ? 'none' : 'block';
+      document.getElementById('submitBtn').style.display = currentStep === 5 ? 'block' : 'none';
+
+      // If on confirmation step, populate summary
+      if (currentStep === 5) {
+        updateConfirmation();
+      }
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function validateStep(step) {
+      switch(step) {
+        case 1:
+          if (!bookingData.service) {
+            alert('Please select a service');
+            return false;
+          }
+          break;
+        case 2:
+          if (!bookingData.stylist) {
+            alert('Please select a stylist or choose "No Preference"');
+            return false;
+          }
+          break;
+        case 3:
+          if (!bookingData.date || !bookingData.time) {
+            alert('Please select both date and time');
+            return false;
+          }
+          break;
+        case 4:
+          bookingData.firstName = document.getElementById('firstName').value;
+          bookingData.lastName = document.getElementById('lastName').value;
+          bookingData.email = document.getElementById('email').value;
+          bookingData.phone = document.getElementById('phone').value;
+          bookingData.notes = document.getElementById('notes').value;
+
+          if (!bookingData.firstName || !bookingData.lastName || !bookingData.email || !bookingData.phone) {
+            alert('Please fill in all required fields');
+            return false;
+          }
+          break;
+      }
+      return true;
+    }
+
+    function updateConfirmation() {
+      document.getElementById('confirmService').textContent = formatServiceName(bookingData.service);
+      document.getElementById('confirmStylist').textContent = formatStylistName(bookingData.stylist);
+      document.getElementById('confirmDate').textContent = new Date(bookingData.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('confirmTime').textContent = formatTime(bookingData.time);
+      document.getElementById('confirmDuration').textContent = `${Math.floor(bookingData.serviceDuration / 60)} hour${bookingData.serviceDuration > 60 ? 's' : ''}`;
+      document.getElementById('confirmPrice').textContent = bookingData.servicePrice;
+      document.getElementById('confirmName').textContent = `${bookingData.firstName} ${bookingData.lastName}`;
+      document.getElementById('confirmEmail').textContent = bookingData.email;
+      document.getElementById('confirmPhone').textContent = bookingData.phone;
+    }
+
+    function formatServiceName(service) {
+      return service.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
+
+    function formatStylistName(stylist) {
+      if (stylist === 'no-preference') return 'No Preference';
+      return stylist.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
+
+    function formatTime(time) {
+      const [hours, minutes] = time.split(':');
+      const hour = parseInt(hours);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const displayHour = hour > 12 ? hour - 12 : hour;
+      return `${displayHour}:${minutes} ${ampm}`;
+    }
+
+    // Form submission
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      try {
+        // Here you would send the data to your backend API
+        const response = await fetch('/api/appointments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            customer_email: bookingData.email,
+            stylist_slug: bookingData.stylist,
+            service_slug: bookingData.service,
+            appointment_date: bookingData.date,
+            start_time: bookingData.time,
+            customer_notes: bookingData.notes
+          })
+        });
+
+        if (response.ok) {
+          document.querySelector('.booking-form').style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert('There was an error booking your appointment. Please try again or call us at (310) 555-0199.');
+        }
+      } catch (error) {
+        console.error('Booking error:', error);
+        alert('There was an error booking your appointment. Please try again or call us at (310) 555-0199.');
+      }
+    });
+
+    // Pre-select service from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const preSelectedService = urlParams.get('service');
+    if (preSelectedService) {
+      const serviceOption = document.querySelector(`.service-option[data-service="${preSelectedService}"]`);
+      if (serviceOption) {
+        serviceOption.click();
+      }
+    }
+  </script>
+
+</body>
+</html>

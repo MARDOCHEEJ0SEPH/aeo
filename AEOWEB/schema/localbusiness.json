@@ -1,0 +1,147 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "[Your Business Name]",
+  "image": "https://yourdomain.com/assets/images/business-exterior.jpg",
+  "@id": "https://yourdomain.com",
+  "url": "https://yourdomain.com",
+  "telephone": "[+1-XXX-XXX-XXXX]",
+  "priceRange": "[$$, $$$, etc. or specific range]",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[Street Address]",
+    "addressLocality": "[City]",
+    "addressRegion": "[State/Province Code - e.g., CA]",
+    "postalCode": "[ZIP/Postal Code]",
+    "addressCountry": "[US or country code]"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": [XX.XXXXXX],
+    "longitude": [-XX.XXXXXX]
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Wednesday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Thursday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "10:00",
+      "closes": "14:00"
+    }
+  ],
+  "sameAs": [
+    "[Facebook URL]",
+    "[Twitter URL]",
+    "[Instagram URL]",
+    "[LinkedIn URL]",
+    "[Yelp URL]",
+    "[Google Business Profile URL]"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[4.8 or actual rating]",
+    "reviewCount": "[Number of reviews]",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "[Customer Name]"
+      },
+      "datePublished": "[YYYY-MM-DD]",
+      "reviewBody": "[Review text]",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "[Customer Name]"
+      },
+      "datePublished": "[YYYY-MM-DD]",
+      "reviewBody": "[Review text]",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      }
+    }
+  ],
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": [XX.XXXXXX],
+      "longitude": [-XX.XXXXXX]
+    },
+    "geoRadius": "[50 or service radius in miles]"
+  },
+  "hasMap": "https://www.google.com/maps?cid=[Your Google Maps CID]",
+  "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, MasterCard, American Express",
+  "currenciesAccepted": "USD",
+  "email": "[contact@yourdomain.com]",
+  "founder": {
+    "@type": "Person",
+    "name": "[Founder Name]"
+  },
+  "foundingDate": "[YYYY-MM-DD]",
+  "logo": "https://yourdomain.com/assets/images/logo.png",
+  "slogan": "[Your business tagline]",
+  "description": "[Complete description of your local business - services, specialties, what makes you different]",
+  "servesCuisine": "[For restaurants - type of food]",
+  "menu": "[For restaurants - menu URL]",
+  "acceptsReservations": "True",
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Free WiFi",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Wheelchair Accessible",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Parking Available",
+      "value": true
+    }
+  ]
+}

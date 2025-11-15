@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu & Prices - Bean & Brew Coffee | Seattle's Best Coffee</title>
+    <meta name="description" content="View our complete menu of artisan coffee drinks, fresh pastries, and sandwiches. Pour-over coffee, espresso drinks, cold brew, and more. Prices from $3-$7.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../assets/css/aeo-framework.css">
+    <link rel="stylesheet" href="../../../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+
+    <!-- Menu Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Menu",
+      "name": "Bean & Brew Coffee Menu",
+      "description": "Complete coffee shop menu with prices",
+      "hasMenuSection": [
+        {
+          "@type": "MenuSection",
+          "name": "Espresso Drinks",
+          "description": "Handcrafted espresso beverages",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Espresso",
+              "description": "Double shot of rich, bold espresso",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.50",
+                "priceCurrency": "USD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Americano",
+              "description": "Espresso with hot water",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.75",
+                "priceCurrency": "USD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Latte",
+              "description": "Espresso with steamed milk",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.50",
+                "priceCurrency": "USD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Cappuccino",
+              "description": "Espresso with foamed milk",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.50",
+                "priceCurrency": "USD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Mocha",
+              "description": "Espresso, chocolate, steamed milk",
+              "offers": {
+                "@type": "Offer",
+                "price": "6.00",
+                "priceCurrency": "USD"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Cold Drinks",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Nitro Cold Brew",
+              "description": "Smooth, creamy cold brew infused with nitrogen",
+              "offers": {
+                "@type": "Offer",
+                "price": "6.00",
+                "priceCurrency": "USD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Iced Latte",
+              "description": "Espresso over ice with cold milk",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.75",
+                "priceCurrency": "USD"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Pastries",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Croissant",
+              "description": "Buttery, flaky French croissant",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.50",
+                "priceCurrency": "USD"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Blueberry Muffin",
+              "description": "Fresh-baked with organic blueberries",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.00",
+                "priceCurrency": "USD"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" alt="Bean & Brew Coffee" width="200" height="60">
+                    </a>
+                </div>
+                <nav class="main-navigation">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="menu.html" class="active">Menu</a></li>
+                        <li><a href="location.html">Location</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="catering.html">Catering</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <header class="section-header">
+                    <h1>Our Complete Menu</h1>
+                    <p>All drinks available hot or iced | Organic, fair-trade beans</p>
+                </header>
+
+                <!-- Espresso Drinks -->
+                <div style="margin-bottom: var(--space-16);">
+                    <h2 style="border-bottom: 3px solid #6F4E37; padding-bottom: var(--space-3); margin-bottom: var(--space-8);">☕ Espresso Drinks</h2>
+
+                    <div style="display: grid; gap: var(--space-6);">
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Espresso</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Double shot of rich, bold espresso from our signature blend</p>
+                                <span class="badge badge-success">Best Seller</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$4.50</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Americano</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Espresso with hot water for a smooth, rich coffee</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$4.75</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Latte</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Espresso with steamed milk and light foam</p>
+                                <div style="margin-top: var(--space-2);">
+                                    <span style="font-size: var(--text-sm); color: var(--gray-500);">Add flavor: Vanilla, Caramel, Hazelnut (+$0.75)</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$5.50</strong><br>
+                                <span style="font-size: var(--text-sm); color: var(--gray-500);">12oz / 16oz / 20oz</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Cappuccino</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Espresso with equal parts steamed and foamed milk</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$5.50</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Mocha</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Espresso, chocolate, steamed milk, whipped cream</p>
+                                <span class="badge badge-primary">Customer Favorite</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$6.00</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Vanilla Bean Latte</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Latte with real vanilla bean - our signature drink</p>
+                                <span class="badge badge-warning">Signature</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$5.75</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Cold Drinks -->
+                <div style="margin-bottom: var(--space-16);">
+                    <h2 style="border-bottom: 3px solid #6F4E37; padding-bottom: var(--space-3); margin-bottom: var(--space-8);">🧊 Cold Drinks</h2>
+
+                    <div style="display: grid; gap: var(--space-6);">
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Nitro Cold Brew</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Smooth, creamy cold brew infused with nitrogen - naturally sweet</p>
+                                <span class="badge badge-info">Summer Favorite</span>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$6.00</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Cold Brew</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Steeped for 24 hours for smooth, low-acid flavor</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$5.50</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Iced Latte</h3>
+                                <p style="color: var(--gray-600); margin-bottom: var(--space-2);">Espresso over ice with cold milk</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$5.75</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Pastries & Food -->
+                <div style="margin-bottom: var(--space-16);">
+                    <h2 style="border-bottom: 3px solid #6F4E37; padding-bottom: var(--space-3); margin-bottom: var(--space-8);">🥐 Fresh Pastries & Food</h2>
+
+                    <div style="display: grid; gap: var(--space-6);">
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Butter Croissant</h3>
+                                <p style="color: var(--gray-600);">Buttery, flaky French croissant - baked fresh daily</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$4.50</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Blueberry Muffin</h3>
+                                <p style="color: var(--gray-600);">Made with organic blueberries, baked fresh every morning</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$4.00</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: var(--space-4); background: var(--gray-50); border-radius: var(--radius-md);">
+                            <div>
+                                <h3 style="margin-bottom: var(--space-2);">Avocado Toast</h3>
+                                <p style="color: var(--gray-600);">Sourdough toast, smashed avocado, everything bagel seasoning</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong style="font-size: var(--text-3xl); color: #6F4E37;">$8.50</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Milk Options -->
+                <div class="alert alert-info" style="margin-bottom: var(--space-8);">
+                    <h3>Milk Options (No Extra Charge)</h3>
+                    <p style="margin: 0;">Whole • 2% • Oat • Almond • Soy • Coconut</p>
+                    <p style="margin: var(--space-2) 0 0 0; font-size: var(--text-sm);">All plant-based milks are organic and locally sourced</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Order Ahead for Pickup</h2>
+                    <p>Skip the line - order online and pick up at the counter</p>
+                    <a href="contact.html" class="btn btn-primary btn-large">Start Your Order</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bean & Brew Coffee. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "[Article Title - Question Format Preferred]",
+  "alternativeHeadline": "[Alternative title if applicable]",
+  "description": "[Brief summary of what the article covers]",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://yourdomain.com/assets/images/article-image.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "author": {
+    "@type": "Person",
+    "name": "[Author Name]",
+    "url": "https://yourdomain.com/about",
+    "jobTitle": "[Author Job Title]",
+    "description": "[Brief author bio highlighting expertise]",
+    "sameAs": [
+      "[Author LinkedIn URL]",
+      "[Author Twitter URL]"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "[Your Business Name]",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yourdomain.com/assets/images/logo.png",
+      "width": 600,
+      "height": 60
+    }
+  },
+  "datePublished": "[YYYY-MM-DD]",
+  "dateModified": "[YYYY-MM-DD]",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yourdomain.com/blog/article-slug"
+  },
+  "articleSection": "[Category - e.g., Guides, Tutorials, Industry News]",
+  "keywords": "[keyword1], [keyword2], [keyword3], [keyword4]",
+  "wordCount": "[Approximate word count]",
+  "articleBody": "[First 300-500 characters of the article for context]",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".article-summary", ".article-content h2", ".article-content p"]
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "[Main topic of article]",
+    "description": "[What the topic is]"
+  },
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "[Related topic or entity mentioned]"
+    },
+    {
+      "@type": "Thing",
+      "name": "[Another related topic or entity]"
+    }
+  ]
+}

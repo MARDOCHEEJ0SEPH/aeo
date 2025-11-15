@@ -1,0 +1,20 @@
+[package]
+name = "oli-juice-wasm"
+version = "1.0.0"
+authors = ["Mardochée JOSEPH <mardochee@example.com>"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+opt-level = "z"     # Optimize for size
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce number of codegen units to improve optimization
+panic = "abort"     # Abort on panic
+strip = true        # Strip symbols from binary
