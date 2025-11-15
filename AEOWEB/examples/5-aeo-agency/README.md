@@ -1,32 +1,69 @@
-# Peak Visibility Agency - AEO Marketing Agency Example
+# Answer First Agency - AEO Service Agency Example
 
-## Business: AEO/AI SEO Agency
-**Services:** AEO audits, implementation, consulting, training
-**Target Clients:** Businesses wanting AI visibility
-**Model:** Project-based, retainers, training programs
+Complete AEO-optimized website for an Answer Engine Optimization agency.
 
-## AEO Strategy (Meta!)
-**Target Questions:**
-- "what is answer engine optimization"
-- "how to get cited by ChatGPT"
-- "AEO agency services"
-- "AI SEO consultant"
-- "optimize content for AI search"
+## Business Profile
+**Type:** Digital Marketing Agency
+**Services:** AEO strategy, content optimization, AI citation tracking
+**Target:** B2B companies, SaaS startups, e-commerce brands
+**Location:** New York, NY
 
-## Features
-✅ Service showcase pages
-✅ Case studies portfolio
-✅ Blog/resource center
-✅ Free AEO audit tool
-✅ ROI calculator
-✅ Lead capture forms
-✅ Client portal mockup
-✅ Project management system
-✅ Proposal generator
-✅ Team member profiles
+## AEO Strategy
 
-## Schema: Organization, Service, Article, Person, FAQPage, HowTo
+**Target Keywords:**
+- "AEO agency"
+- "answer engine optimization services"
+- "ChatGPT optimization"
+- "AI search optimization"
+- "voice search agency"
 
-## Backend: CRM, project management, billing, client portal, reporting
+**Voice Search:**
+- "What is Answer Engine Optimization?"
+- "How to get cited by ChatGPT?"
+- "Best AEO agency?"
 
-Perfect for marketing agencies, consultants, AEO specialists! 🎯
+**Schema:** ProfessionalService + FAQPage + Service
+
+## Key Features
+
+✓ Service catalog with detailed descriptions
+✓ Case studies with measurable results
+✓ Free AEO audit offer
+✓ Client testimonials
+✓ Educational content (blog, guides)
+✓ Lead capture forms
+✓ CRM integration ready
+
+## Services Offered
+
+1. **AEO Strategy & Audit**
+   - AI citation analysis
+   - Content gap identification
+   - Competitor benchmarking
+
+2. **Content Optimization**
+   - Question-answer formatting
+   - Schema markup
+   - Authority signals
+
+3. **Voice Search Optimization**
+   - Conversational keywords
+   - Featured snippets
+   - Local voice search
+
+4. **AI Citation Tracking**
+   - Real-time monitoring
+   - Performance reporting
+   - Competitive intelligence
+
+5. **AEO Content Creation**
+   - Ultimate guides
+   - FAQ optimization
+   - How-to articles
+
+6. **Technical AEO**
+   - Structured data
+   - Site architecture
+   - Performance optimization
+
+Perfect for: Marketing agencies, SEO firms, Digital consultancies, AEO specialists

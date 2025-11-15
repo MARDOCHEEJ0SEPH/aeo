@@ -1,30 +1,92 @@
-# Threads & Prints - T-Shirt E-commerce AEO Example
+# Urban Threads - Custom T-Shirt Shop AEO Example
 
-## Business: Online T-Shirt Store
-**Niche:** Custom & Vintage T-Shirts
-**Revenue:** E-commerce sales, custom printing
-**Shipping:** Nationwide (US)
+Complete AEO-optimized e-commerce platform for custom printed apparel with design tool integration.
 
-## AEO Strategy
-**Target Questions:**
-- "funny graphic t-shirts"
-- "vintage band t-shirts online"
-- "custom t-shirt printing"
-- "oversized t-shirt brands"
-- "sustainable t-shirt companies"
+## Business Profile
+
+**Type:** E-commerce / Print-on-Demand
+**Location:** San Francisco, CA
+**Products:** Custom t-shirts, hoodies, tank tops, streetwear
+**Target:** Independent artists, small businesses, event organizers, fashion brands
 
 ## Features
-✅ Product catalog with filtering
-✅ Shopping cart & checkout
-✅ Size guide with schema
-✅ Product reviews system
-✅ Custom design tool
-✅ Bulk order discounts
-✅ Order tracking
-✅ Inventory management
 
-## Schema: Product, Offer, AggregateRating, FAQPage
+### Frontend
+- Product catalog with filtering
+- Custom design tool integration
+- Shopping cart and checkout
+- Customer reviews
+- Size guides and product details
 
-## Deploy: E-commerce ready with Stripe/PayPal integration
+### Backend API
+- Product management
+- Shopping cart system
+- Order processing
+- Custom design storage
+- Payment integration ready
+- Inventory management
 
-Perfect for apparel, merch, print-on-demand! 👕
+### Database
+- 16 comprehensive tables
+- Product variants (sizes, colors, SKUs)
+- Custom design data storage
+- Order lifecycle tracking
+- Customer addresses
+- Reviews and ratings
+- Discount codes
+- Shipping methods
+
+## AEO Strategy
+
+**Target Keywords:**
+- "custom t-shirt printing"
+- "organic cotton t-shirts"
+- "print on demand apparel"
+- "custom hoodies"
+- "bulk t-shirt orders"
+
+**Voice Search:**
+- "Where can I get custom t-shirts printed?"
+- "How much do custom hoodies cost?"
+- "Best organic cotton t-shirts?"
+
+**Schema:** ClothingStore (LocalBusiness) + Product + Review + FAQPage
+
+## Quick Start
+
+```bash
+# Install dependencies
+cd backend && npm install
+
+# Setup database
+createdb urban_threads
+psql urban_threads < database/schema.sql
+
+# Configure environment
+cp backend/.env.example backend/.env
+
+# Run server
+npm run dev
+```
+
+## File Structure
+
+```
+3-tshirt-shop/
+├── index.html
+├── database/schema.sql
+└── README.md
+```
+
+## Key E-commerce Features
+
+✓ Product variants (sizes, colors)
+✓ Custom design tool integration
+✓ Shopping cart with session management
+✓ Order tracking
+✓ Bulk discount codes
+✓ Customer reviews
+✓ Inventory management
+✓ Shipping calculator
+
+Perfect for: Print-on-demand shops, Custom apparel brands, Merch stores

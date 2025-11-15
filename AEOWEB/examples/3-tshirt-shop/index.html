@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Threads - Custom T-Shirts & Streetwear | Premium Quality</title>
+
+  <!-- AEO Meta Tags -->
+  <meta name="description" content="Custom printed t-shirts, hoodies, and streetwear. Design your own or shop our collection. Free shipping over $50. Eco-friendly materials.">
+  <meta name="keywords" content="custom t-shirts, print on demand, streetwear, graphic tees, custom hoodies, organic cotton shirts">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Urban Threads - Custom T-Shirts & Streetwear">
+  <meta property="og:description" content="Premium custom apparel with your designs. Fast shipping, eco-friendly materials.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/images/og-image.jpg">
+
+  <!-- JSON-LD Schema - Online Store -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "Urban Threads",
+    "description": "Custom printed t-shirts, hoodies, and streetwear with premium quality materials",
+    "url": "https://urbanthreads.com",
+    "logo": "https://urbanthreads.com/assets/images/logo.png",
+    "image": "https://urbanthreads.com/assets/images/store-front.jpg",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1250 Valencia Street",
+      "addressLocality": "San Francisco",
+      "addressRegion": "CA",
+      "postalCode": "94110",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.7505,
+      "longitude": -122.4216
+    },
+    "telephone": "+1-415-555-0177",
+    "email": "hello@urbanthreads.com",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "10:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "11:00",
+        "closes": "18:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1247",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "paymentAccepted": "Credit Card, PayPal, Apple Pay, Google Pay",
+    "currenciesAccepted": "USD"
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does custom printing take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Custom t-shirt orders are typically printed and shipped within 3-5 business days. Rush orders (2-day turnaround) are available for an additional fee."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What materials do you use for t-shirts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We use 100% organic cotton, eco-friendly water-based inks, and sustainable packaging. All our blanks are certified GOTS (Global Organic Textile Standard)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I upload my own design?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Our design tool accepts PNG, JPG, SVG, and AI files. For best results, upload high-resolution images (at least 300 DPI at 12 inches wide)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is your return policy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer 30-day returns on all stock items. Custom printed items can be returned only if there's a printing defect. We stand behind our quality 100%."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #000000;
+      --secondary-color: #FF6B35;
+      --accent-color: #F7F7F7;
+      --text-color: #333333;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: 900;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--secondary-color);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--secondary-color);
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--secondary-color);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75em;
+      font-weight: bold;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #333 100%);
+      color: white;
+      padding: 120px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 1.4em;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--secondary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #ff5722;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent-color);
+    }
+
+    /* Features */
+    .features {
+      padding: 80px 20px;
+      background: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 50px;
+      font-weight: 900;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    /* Products */
+    .products {
+      padding: 80px 20px;
+      background: var(--accent-color);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 300px;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4em;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+
+    .product-rating {
+      color: #FFB800;
+      margin-bottom: 15px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 20px;
+      background: white;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background: var(--accent-color);
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid var(--secondary-color);
+    }
+
+    .testimonial-text {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-weight: 700;
+    }
+
+    .testimonial-role {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--secondary-color);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary-color);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5em;
+      }
+
+      .hero p {
+        font-size: 1.1em;
+      }
+
+      nav {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">Urban<span>Threads</span></a>
+      <nav>
+        <a href="#shop">Shop</a>
+        <a href="#custom">Custom Design</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#cart" class="cart-icon">
+          🛒 <span class="cart-count">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Your Design, Your Style</h1>
+    <p>Premium custom t-shirts & streetwear. Eco-friendly materials. Fast shipping. Design yours in minutes.</p>
+    <div class="cta-buttons">
+      <a href="#design-tool" class="btn btn-primary">Start Designing</a>
+      <a href="#shop" class="btn btn-secondary">Shop Collection</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why Choose Urban Threads?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌱</div>
+          <h3>100% Organic Cotton</h3>
+          <p>GOTS-certified organic materials. Eco-friendly water-based inks. Sustainable packaging.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Custom Design Tool</h3>
+          <p>Easy-to-use design studio. Upload your art or use our templates. See it before you buy it.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Fast Production</h3>
+          <p>Printed and shipped in 3-5 days. Rush orders available. Track every step of production.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💯</div>
+          <h3>Quality Guaranteed</h3>
+          <p>Premium printing that lasts 50+ washes. 30-day returns. We stand behind every shirt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="products" id="shop">
+    <div class="container">
+      <h2 class="section-title">Featured Collection</h2>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-image">👕</div>
+          <div class="product-info">
+            <h3>Classic Organic Tee</h3>
+            <div class="product-rating">★★★★★ (287 reviews)</div>
+            <div class="product-price">$28.00</div>
+            <p>Ultra-soft 100% organic cotton. Available in 12 colors.</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">👔</div>
+          <div class="product-info">
+            <h3>Premium Hoodie</h3>
+            <div class="product-rating">★★★★★ (412 reviews)</div>
+            <div class="product-price">$58.00</div>
+            <p>Heavyweight fleece. Kangaroo pocket. Perfect for custom prints.</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">👚</div>
+          <div class="product-info">
+            <h3>Women's V-Neck</h3>
+            <div class="product-rating">★★★★☆ (156 reviews)</div>
+            <div class="product-price">$32.00</div>
+            <p>Flattering fit. Soft hand feel. Retail-quality finish.</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">🎽</div>
+          <div class="product-info">
+            <h3>Tank Top</h3>
+            <div class="product-rating">★★★★★ (203 reviews)</div>
+            <div class="product-price">$24.00</div>
+            <p>Lightweight. Breathable. Perfect for summer designs.</p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            "Best quality custom shirts I've found. Printed 200 shirts for our startup and they turned out perfect. The organic cotton feels amazing."
+          </div>
+          <div class="testimonial-author">Marcus Chen</div>
+          <div class="testimonial-role">Tech Startup Founder</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            "I run a small merch shop and Urban Threads is my go-to supplier. Fast turnaround, great quality, and the design tool makes everything easy."
+          </div>
+          <div class="testimonial-author">Sarah Williams</div>
+          <div class="testimonial-role">Independent Artist</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            "Ordered custom family reunion shirts. The team helped with the design, colors came out vibrant, and everyone loved them. Will order again!"
+          </div>
+          <div class="testimonial-author">James Rodriguez</div>
+          <div class="testimonial-role">Event Organizer</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="features-grid">
+        <div class="feature-card" style="text-align: left;">
+          <h3>📦 How long does shipping take?</h3>
+          <p>Standard shipping: 5-7 business days. Express: 2-3 days. Free shipping on orders over $50.</p>
+        </div>
+        <div class="feature-card" style="text-align: left;">
+          <h3>🎨 Can I print any design?</h3>
+          <p>Yes! Upload your own design or choose from our library. We review all designs to ensure quality.</p>
+        </div>
+        <div class="feature-card" style="text-align: left;">
+          <h3>💰 Do you offer bulk discounts?</h3>
+          <p>Absolutely! 10% off 25+, 15% off 50+, 20% off 100+ shirts. Contact us for enterprise pricing.</p>
+        </div>
+        <div class="feature-card" style="text-align: left;">
+          <h3>♻️ Are your products sustainable?</h3>
+          <p>100% organic cotton, water-based inks, recycled packaging. Carbon-neutral shipping available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Create Your Custom Apparel?</h2>
+      <p>Join thousands of happy customers. Design your perfect t-shirt in minutes.</p>
+      <a href="#design-tool" class="btn btn-secondary">Start Designing Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#shipping">Shipping</a>
+        <a href="#returns">Returns</a>
+        <a href="#bulk">Bulk Orders</a>
+        <a href="#contact">Contact</a>
+        <a href="#sustainability">Sustainability</a>
+      </div>
+      <p>&copy; 2025 Urban Threads. All rights reserved.</p>
+      <p>1250 Valencia Street, San Francisco, CA 94110 | (415) 555-0177</p>
+      <p><a href="mailto:hello@urbanthreads.com" style="color: var(--secondary-color);">hello@urbanthreads.com</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

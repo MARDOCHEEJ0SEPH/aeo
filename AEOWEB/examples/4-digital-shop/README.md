@@ -1,30 +1,36 @@
-# CloudTools Pro - Digital Products & SaaS AEO Example
+# DesignKit Pro - Digital Product Shop AEO Example
 
-## Business: SaaS & Digital Products
-**Type:** Project management software, digital tools
-**Model:** Subscription (monthly/annual) + one-time licenses
-**Market:** Global, B2B and B2C
+AEO-optimized platform for selling digital products (UI kits, templates, SaaS tools, courses).
+
+## Business Profile
+**Type:** Digital Products / SaaS
+**Products:** UI components, design templates, code libraries
+**Target:** Developers, designers, agencies
+**Model:** One-time purchase + lifetime updates
 
 ## AEO Strategy
-**Target Questions:**
-- "best project management software for small teams"
-- "affordable CRM alternative"
-- "project tracking tool with API"
-- "team collaboration software comparison"
 
-## Features
-✅ Pricing tiers (Free, Pro, Enterprise)
-✅ Feature comparison table
-✅ API documentation
-✅ Knowledge base/docs
-✅ User dashboard
-✅ Subscription management
-✅ License key system
-✅ Usage analytics
-✅ Webhook integration
+**Target Keywords:**
+- "best UI component library"
+- "React templates 2025"
+- "Tailwind UI components"
+- "premium design system"
 
-## Schema: SoftwareApplication, Offer, HowTo, FAQPage
+**Voice Search:**
+- "What's the best UI kit for React?"
+- "Where to buy Tailwind templates?"
+- "Best design system for startups?"
 
-## Backend: User accounts, billing, API management, webhooks
+**Schema:** SoftwareApplication + Product + Review
 
-Perfect for SaaS, software, digital downloads, online tools! 💻
+## Key Features
+
+✓ Digital product catalog
+✓ Instant delivery system
+✓ License key management
+✓ Version control & updates
+✓ Customer dashboard
+✓ Affiliate program
+✓ Documentation portal
+
+Perfect for: SaaS products, Digital downloads, Online courses, Software tools
