@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | Luxe Hair Studio - Beverly Hills Premium Salon</title>
+
+  <!-- AEO Meta Tags -->
+  <meta name="description" content="Explore our premium hair services including balayage, extensions, bridal styling, color correction, and specialized curly hair cuts. Expert stylists in Beverly Hills.">
+  <meta name="keywords" content="hair salon services, balayage Beverly Hills, hair extensions, bridal hair, color correction, curly hair specialist">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Premium Hair Services | Luxe Hair Studio">
+  <meta property="og:description" content="Professional hair color, extensions, cuts, and styling from expert stylists">
+  <meta property="og:type" content="website">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../assets/css/aeo-framework.css">
+  <link rel="stylesheet" href="../styles/custom.css">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Hair Salon Services",
+    "description": "Complete list of professional hair services offered at Luxe Hair Studio",
+    "itemListElement": [
+      {
+        "@type": "Service",
+        "name": "Balayage",
+        "description": "Hand-painted highlights for a natural, sun-kissed look",
+        "provider": {
+          "@type": "HairSalon",
+          "name": "Luxe Hair Studio"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceRange": "$250-$400",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "Service",
+        "name": "Hair Extensions",
+        "description": "Premium quality extensions including tape-in, clip-in, and sew-in methods",
+        "provider": {
+          "@type": "HairSalon",
+          "name": "Luxe Hair Studio"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceRange": "$150-$1200",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "Service",
+        "name": "Bridal Hair Styling",
+        "description": "Complete bridal hair services including trial and wedding day styling",
+        "provider": {
+          "@type": "HairSalon",
+          "name": "Luxe Hair Studio"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceRange": "$300-$500",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "Service",
+        "name": "Color Correction",
+        "description": "Expert color correction to fix previous coloring mistakes",
+        "provider": {
+          "@type": "HairSalon",
+          "name": "Luxe Hair Studio"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceRange": "$400-$800",
+          "priceCurrency": "USD"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary-color: #D4AF37;
+      --secondary-color: #2C1810;
+      --accent-color: #F5E6D3;
+    }
+
+    .services-hero {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, #4a3428 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+    }
+
+    .service-header {
+      background: linear-gradient(135deg, var(--primary-color), #e6c878);
+      color: var(--secondary-color);
+      padding: 30px;
+      text-align: center;
+    }
+
+    .service-header h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.8em;
+    }
+
+    .service-price {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .service-body {
+      padding: 30px;
+    }
+
+    .service-body p {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .service-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #666;
+    }
+
+    .detail-item strong {
+      color: var(--secondary-color);
+    }
+
+    .book-btn {
+      width: 100%;
+      background: var(--primary-color);
+      color: var(--secondary-color);
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .book-btn:hover {
+      background: #c49b2d;
+    }
+
+    .category-section {
+      margin-bottom: 60px;
+    }
+
+    .category-title {
+      text-align: center;
+      color: var(--secondary-color);
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .category-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--primary-color);
+    }
+
+    .consultation-badge {
+      display: inline-block;
+      background: #ff6b6b;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <a href="../index.html">Luxe Hair Studio</a>
+      </div>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="booking.html">Book Now</a>
+        <a href="#stylists">Our Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="services-hero">
+    <div class="container">
+      <h1>Our Premium Services</h1>
+      <p style="font-size: 1.2em; max-width: 800px; margin: 20px auto;">Expert hair care tailored to your unique style and needs. From color transformations to specialized cuts, we deliver luxury results.</p>
+    </div>
+  </section>
+
+  <!-- Hair Color Services -->
+  <section class="category-section">
+    <div class="container">
+      <h2 class="category-title">Hair Color Services</h2>
+
+      <div class="services-grid">
+        <!-- Balayage -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Balayage</h3>
+            <p class="service-price">$250 - $400</p>
+          </div>
+          <div class="service-body">
+            <p>Hand-painted highlights that create a natural, sun-kissed look with seamless color transitions. Perfect for low-maintenance dimension.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 3 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Best For:</strong> Natural highlights, dimensional color
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Technique:</strong> Hand-painted, customized placement
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=balayage'">Book Balayage</button>
+          </div>
+        </div>
+
+        <!-- Color Correction -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Color Correction</h3>
+            <p class="service-price">$400 - $800</p>
+            <span class="consultation-badge">Consultation Required</span>
+          </div>
+          <div class="service-body">
+            <p>Expert correction of previous color mishaps. Our master colorists specialize in transforming damaged or unwanted color into your dream shade.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 4+ hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Best For:</strong> Fixing color mistakes, going lighter
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Includes:</strong> Olaplex treatment for protection
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=color-correction'">Book Consultation</button>
+          </div>
+        </div>
+
+        <!-- Highlights -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Highlights</h3>
+            <p class="service-price">$200 - $350</p>
+          </div>
+          <div class="service-body">
+            <p>Traditional foil highlights for all-over brightness and dimension. Customized to complement your base color and skin tone.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 2.5 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Best For:</strong> Blonde maintenance, brightening
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Options:</strong> Full or partial highlights
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=highlights'">Book Highlights</button>
+          </div>
+        </div>
+
+        <!-- Full Color -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Full Color</h3>
+            <p class="service-price">$180 - $280</p>
+          </div>
+          <div class="service-body">
+            <p>Complete color transformation with all-over application. Cover grays, go darker, or refresh your current shade.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 2.5 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Best For:</strong> Gray coverage, dramatic change
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Includes:</strong> Toner and gloss
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=full-color'">Book Full Color</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hair Extensions -->
+  <section class="category-section" style="background: #fafafa;">
+    <div class="container">
+      <h2 class="category-title">Hair Extensions</h2>
+
+      <div class="services-grid">
+        <!-- Tape-In Extensions -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Tape-In Extensions</h3>
+            <p class="service-price">$400 - $800</p>
+            <span class="consultation-badge">Consultation Required</span>
+          </div>
+          <div class="service-body">
+            <p>Semi-permanent extensions that last 6-8 weeks. Thin, lightweight, and virtually undetectable for natural-looking length and volume.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 2 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Lasts:</strong> 6-8 weeks (reusable)
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Hair Quality:</strong> Premium Remy human hair
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=tape-extensions'">Book Consultation</button>
+          </div>
+        </div>
+
+        <!-- Sew-In Extensions -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Sew-In Extensions</h3>
+            <p class="service-price">$600 - $1,200</p>
+            <span class="consultation-badge">Consultation Required</span>
+          </div>
+          <div class="service-body">
+            <p>Long-lasting braided track extensions perfect for thick hair. Can last 2-3 months with proper care and maintenance.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 4 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Lasts:</strong> 2-3 months
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Best For:</strong> Maximum length, volume
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=sew-in'">Book Consultation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Occasions -->
+  <section class="category-section">
+    <div class="container">
+      <h2 class="category-title">Special Occasions</h2>
+
+      <div class="services-grid">
+        <!-- Bridal Hair -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Bridal Hair</h3>
+            <p class="service-price">$300 - $500</p>
+            <span class="consultation-badge">Trial Included</span>
+          </div>
+          <div class="service-body">
+            <p>Your wedding day deserves perfection. Includes consultation, trial run, and flawless execution on your special day.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Trial:</strong> 1.5 hours
+              </div>
+              <div class="detail-item">
+                <strong>⏱ Wedding Day:</strong> 2 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Includes:</strong> Touch-up kit, veil placement
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=bridal'">Book Bridal Hair</button>
+          </div>
+        </div>
+
+        <!-- Special Event Updo -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Special Event Updo</h3>
+            <p class="service-price">$150 - $250</p>
+          </div>
+          <div class="service-body">
+            <p>Elegant upstyles for galas, proms, or any special occasion. Long-lasting styles that photograph beautifully.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 1.5 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Styles:</strong> Classic, modern, bohemian
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Includes:</strong> Finishing products
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=updo'">Book Updo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Haircuts & Styling -->
+  <section class="category-section" style="background: #fafafa;">
+    <div class="container">
+      <h2 class="category-title">Haircuts & Styling</h2>
+
+      <div class="services-grid">
+        <!-- Women's Haircut -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Women's Haircut</h3>
+            <p class="service-price">$85 - $150</p>
+          </div>
+          <div class="service-body">
+            <p>Precision cutting tailored to your face shape, hair texture, and lifestyle. Includes consultation, cut, style, and finishing.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 1 hour
+              </div>
+              <div class="detail-item">
+                <strong>💫 Includes:</strong> Shampoo, cut, blowout
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Styles:</strong> Bob, layers, long layers, pixie
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=womens-cut'">Book Haircut</button>
+          </div>
+        </div>
+
+        <!-- Curly Hair Cut -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Curly Hair Specialist Cut</h3>
+            <p class="service-price">$95 - $165</p>
+          </div>
+          <div class="service-body">
+            <p>DevaCurl certified cutting for curly and textured hair. Cut dry to see true curl pattern and create the perfect shape.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 1.25 hours
+              </div>
+              <div class="detail-item">
+                <strong>💫 Technique:</strong> Dry cutting, curl-by-curl
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Best For:</strong> Wavy, curly, coily hair
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=curly-cut'">Book Curly Cut</button>
+          </div>
+        </div>
+
+        <!-- Blowout -->
+        <div class="service-card">
+          <div class="service-header">
+            <h3>Blowout & Style</h3>
+            <p class="service-price">$65 - $95</p>
+          </div>
+          <div class="service-body">
+            <p>Professional blowout with voluminous styling. Perfect for special events or when you want to look and feel your best.</p>
+            <div class="service-details">
+              <div class="detail-item">
+                <strong>⏱ Duration:</strong> 45 min - 1 hour
+              </div>
+              <div class="detail-item">
+                <strong>💫 Includes:</strong> Shampoo, blow dry, style
+              </div>
+              <div class="detail-item">
+                <strong>🎨 Styles:</strong> Smooth, voluminous, beachy
+              </div>
+            </div>
+            <button class="book-btn" onclick="window.location.href='booking.html?service=blowout'">Book Blowout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section style="background: var(--secondary-color); color: white; padding: 80px 20px; text-align: center;">
+    <div class="container">
+      <h2 style="font-size: 2.5em; margin-bottom: 20px;">Ready to Transform Your Hair?</h2>
+      <p style="font-size: 1.2em; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Book your appointment with our expert stylists today and experience luxury hair care.</p>
+      <button class="book-btn" style="max-width: 300px; margin: 0 auto; background: var(--primary-color);" onclick="window.location.href='booking.html'">Book Now</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: #1a1106; color: white; padding: 40px 20px; text-align: center;">
+    <div class="container">
+      <p>&copy; 2025 Luxe Hair Studio. All rights reserved.</p>
+      <p>9595 Wilshire Boulevard, Beverly Hills, CA 90210 | (310) 555-0199</p>
+      <p><a href="mailto:contact@luxehairstudio.com" style="color: var(--primary-color);">contact@luxehairstudio.com</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
