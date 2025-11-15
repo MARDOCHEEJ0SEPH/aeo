@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundWave Pro - Premium Wireless Headset | Studio-Quality Audio</title>
+
+  <!-- AEO Meta Tags -->
+  <meta name="description" content="SoundWave Pro wireless headset with active noise cancellation, 40-hour battery, studio-quality audio. Free shipping. 30-day money-back guarantee.">
+  <meta name="keywords" content="wireless headset, noise cancelling headphones, studio headphones, premium headset, bluetooth headphones">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SoundWave Pro - Premium Wireless Headset">
+  <meta property="og:description" content="Studio-quality audio with 40-hour battery and active noise cancellation">
+  <meta property="og:type" content="product">
+  <meta property="og:image" content="/assets/images/soundwave-pro-og.jpg">
+  <meta property="og:price:amount" content="299.00">
+  <meta property="og:price:currency" content="USD">
+
+  <!-- JSON-LD Schema - Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SoundWave Pro Wireless Headset",
+    "description": "Premium wireless headset with active noise cancellation, 40-hour battery life, and studio-quality sound. Perfect for music production, gaming, and travel.",
+    "image": [
+      "https://soundwavepro.com/images/product-front.jpg",
+      "https://soundwavepro.com/images/product-side.jpg",
+      "https://soundwavepro.com/images/product-case.jpg"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "SoundWave"
+    },
+    "sku": "SWP-2024-BLK",
+    "mpn": "SWP2024",
+    "offers": {
+      "@type": "Offer",
+      "url": "https://soundwavepro.com",
+      "priceCurrency": "USD",
+      "price": "299.00",
+      "priceValidUntil": "2025-12-31",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "SoundWave Audio"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "USD"
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "US"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "businessDays": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 5,
+            "unitCode": "DAY"
+          }
+        }
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1247",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Sarah Johnson"
+        },
+        "datePublished": "2024-11-05",
+        "reviewBody": "Best headphones I've ever owned. The noise cancellation is incredible and battery lasts for days.",
+        "name": "Amazing sound quality",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does the battery last?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The SoundWave Pro offers up to 40 hours of continuous playback with ANC off, and 30 hours with active noise cancellation enabled. Fast charging gives you 5 hours of playback from just 10 minutes of charging."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it compatible with iPhone and Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! SoundWave Pro uses Bluetooth 5.3 and is compatible with all Bluetooth-enabled devices including iPhone, Android, iPad, Mac, Windows PC, and gaming consoles. The companion app is available for both iOS and Android."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's included in the box?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your purchase includes: SoundWave Pro headphones, premium hard-shell carrying case, USB-C charging cable, 3.5mm audio cable for wired connection, airplane adapter, cleaning cloth, and quick start guide."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is your return policy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer a 30-day money-back guarantee. If you're not completely satisfied, return your SoundWave Pro in original condition for a full refund. We also include a 2-year manufacturer warranty covering all defects."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563EB;
+      --dark: #1E293B;
+      --light: #F8FAFC;
+      --success: #10B981;
+      --danger: #EF4444;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding: 80px 20px;
+      align-items: center;
+    }
+
+    .product-image {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+    }
+
+    .product-info h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: var(--dark);
+      font-weight: 900;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: #F59E0B;
+      font-size: 1.1em;
+    }
+
+    .rating span {
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 3em;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 20px 0;
+    }
+
+    .price-note {
+      color: #64748B;
+      margin-bottom: 30px;
+    }
+
+    .features-list {
+      list-style: none;
+      margin: 30px 0;
+    }
+
+    .features-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .features-list li:before {
+      content: "✓";
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 18px 50px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: #1D4ED8;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--light);
+    }
+
+    .guarantee {
+      display: flex;
+      gap: 30px;
+      margin: 30px 0;
+      padding: 20px;
+      background: var(--light);
+      border-radius: 12px;
+    }
+
+    .guarantee-item {
+      flex: 1;
+      text-align: center;
+    }
+
+    .guarantee-icon {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .specs {
+      background: var(--light);
+      padding: 80px 20px;
+    }
+
+    .specs h2 {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .spec-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .spec-card h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.3em;
+    }
+
+    .reviews {
+      padding: 80px 20px;
+    }
+
+    .reviews h2 {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .review-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .review-rating {
+      color: #F59E0B;
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+
+    .review-text {
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .review-author {
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .review-date {
+      color: #64748B;
+      font-size: 0.9em;
+    }
+
+    .cta-section {
+      background: var(--primary);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .auth-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-modal.active {
+      display: flex;
+    }
+
+    .auth-content {
+      background: white;
+      padding: 50px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2em;
+      cursor: pointer;
+      color: #64748B;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .product-info h1 {
+        font-size: 2em;
+      }
+
+      .price {
+        font-size: 2.5em;
+      }
+
+      .guarantee {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">🎧 SoundWave Pro</div>
+        <div id="userStatus">
+          <button class="btn btn-secondary" onclick="showAuthModal()">Sign In</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="product-image">
+      <div style="width: 100%; height: 500px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 8em;">
+        🎧
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1>SoundWave Pro</h1>
+      <div class="rating">
+        ★★★★★ <span>4.8 (1,247 reviews)</span>
+      </div>
+      <p style="font-size: 1.3em; color: #64748B; margin-bottom: 20px;">
+        Premium wireless headset with active noise cancellation and 40-hour battery life
+      </p>
+
+      <div class="price">$299</div>
+      <p class="price-note">Free shipping • 30-day money-back guarantee • 2-year warranty</p>
+
+      <ul class="features-list">
+        <li>Active Noise Cancellation (ANC) - Block out the world</li>
+        <li>40-Hour Battery Life - Listen for days</li>
+        <li>Studio-Quality Sound - Professional audio drivers</li>
+        <li>Bluetooth 5.3 - Seamless connectivity</li>
+        <li>Premium Comfort - Memory foam ear cushions</li>
+        <li>Multi-Device Support - Switch between devices instantly</li>
+      </ul>
+
+      <button class="btn" onclick="buyNow()" style="width: 100%; margin-bottom: 15px;">
+        Buy Now - $299
+      </button>
+
+      <div class="guarantee">
+        <div class="guarantee-item">
+          <div class="guarantee-icon">📦</div>
+          <strong>Free Shipping</strong>
+          <p style="font-size: 0.9em; color: #64748B;">Worldwide</p>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-icon">↩️</div>
+          <strong>30-Day Returns</strong>
+          <p style="font-size: 0.9em; color: #64748B;">Money-back guarantee</p>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-icon">🛡️</div>
+          <strong>2-Year Warranty</strong>
+          <p style="font-size: 0.9em; color: #64748B;">Full coverage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specs -->
+  <section class="specs">
+    <div class="container">
+      <h2>Technical Specifications</h2>
+      <div class="specs-grid">
+        <div class="spec-card">
+          <h3>Audio</h3>
+          <p><strong>Driver Size:</strong> 40mm</p>
+          <p><strong>Frequency:</strong> 20Hz - 40kHz</p>
+          <p><strong>Impedance:</strong> 32 Ohms</p>
+          <p><strong>ANC:</strong> Hybrid Active</p>
+        </div>
+
+        <div class="spec-card">
+          <h3>Battery</h3>
+          <p><strong>Capacity:</strong> 1000mAh</p>
+          <p><strong>Playback:</strong> 40 hours (ANC off)</p>
+          <p><strong>Charging:</strong> USB-C Fast Charge</p>
+          <p><strong>Quick Charge:</strong> 10min = 5hrs</p>
+        </div>
+
+        <div class="spec-card">
+          <h3>Connectivity</h3>
+          <p><strong>Bluetooth:</strong> 5.3</p>
+          <p><strong>Range:</strong> 30m (100ft)</p>
+          <p><strong>Codec:</strong> aptX HD, AAC, SBC</p>
+          <p><strong>Multi-point:</strong> 2 devices</p>
+        </div>
+
+        <div class="spec-card">
+          <h3>Physical</h3>
+          <p><strong>Weight:</strong> 250g (8.8oz)</p>
+          <p><strong>Foldable:</strong> Yes</p>
+          <p><strong>Case:</strong> Hard shell included</p>
+          <p><strong>Colors:</strong> Black, Silver, Navy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews -->
+  <section class="reviews">
+    <div class="container">
+      <h2>What Our Customers Say</h2>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <div class="review-text">
+            "Absolutely incredible headphones. The noise cancellation is better than my Bose QuietComfort and the sound quality blows away my old Sony's. Battery lasts forever!"
+          </div>
+          <div class="review-author">Sarah Johnson</div>
+          <div class="review-date">November 5, 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <div class="review-text">
+            "As a music producer, I'm very picky about headphones. These sound amazing - flat response, great detail. I use them for mixing now. Worth every penny."
+          </div>
+          <div class="review-author">Marcus Chen</div>
+          <div class="review-date">November 2, 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <div class="review-text">
+            "Perfect for my daily commute. Blocks out train noise completely. Comfortable enough to wear for hours. The app EQ settings are a nice touch."
+          </div>
+          <div class="review-author">Jessica Martinez</div>
+          <div class="review-date">October 28, 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <div class="review-text">
+            "Gaming headset quality at audiophile pricing, but worth it. Low latency mode works great for gaming. Mic quality surprised me - crystal clear on calls."
+          </div>
+          <div class="review-author">David Kim</div>
+          <div class="review-date">October 25, 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★☆</div>
+          <div class="review-text">
+            "Really great headphones overall. Sound is fantastic, comfort is top-tier. Only minor complaint is the case is a bit bulky, but protects them well."
+          </div>
+          <div class="review-author">Emily Rodriguez</div>
+          <div class="review-date">October 20, 2024</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-rating">★★★★★</div>
+          <div class="review-text">
+            "Switched from AirPods Max. These are lighter, sound better, and cost half as much. No regrets. The 40-hour battery is not exaggerated - actually lasts!"
+          </div>
+          <div class="review-author">James Thompson</div>
+          <div class="review-date">October 15, 2024</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section (for AEO) -->
+  <section class="specs">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="specs-grid">
+        <div class="spec-card">
+          <h3>How long does the battery last?</h3>
+          <p>Up to 40 hours with ANC off, 30 hours with ANC on. Fast charging: 10 minutes = 5 hours of playback.</p>
+        </div>
+
+        <div class="spec-card">
+          <h3>Is it compatible with iPhone and Android?</h3>
+          <p>Yes! Works with all Bluetooth devices. Companion app available for iOS and Android.</p>
+        </div>
+
+        <div class="spec-card">
+          <h3>What's included in the box?</h3>
+          <p>Headphones, hard-shell case, USB-C cable, 3.5mm audio cable, airplane adapter, cleaning cloth, quick start guide.</p>
+        </div>
+
+        <div class="spec-card">
+          <h3>What is your return policy?</h3>
+          <p>30-day money-back guarantee + 2-year manufacturer warranty covering all defects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready for Studio-Quality Sound?</h2>
+      <p>Join thousands of happy customers. 30-day money-back guarantee. Free shipping worldwide.</p>
+      <button class="btn btn-secondary" onclick="buyNow()">Buy SoundWave Pro - $299</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 SoundWave Audio. All rights reserved.</p>
+      <p style="margin-top: 10px;">
+        <a href="#" style="color: #60A5FA; margin: 0 15px;">Privacy Policy</a>
+        <a href="#" style="color: #60A5FA; margin: 0 15px;">Terms of Service</a>
+        <a href="#" style="color: #60A5FA; margin: 0 15px;">Contact</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-content">
+      <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+      <h2 style="margin-bottom: 30px;">Sign In to Continue</h2>
+      <form id="authForm" onsubmit="handleAuth(event)">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com">
+        </div>
+        <button type="submit" class="btn" style="width: 100%;">Continue to Checkout</button>
+      </form>
+      <p style="text-align: center; margin-top: 20px; color: #64748B; font-size: 0.9em;">
+        We'll send you a secure link to complete your purchase.
+      </p>
+    </div>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    // Stripe configuration
+    const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY'); // Replace with your Stripe key
+    const API_URL = 'http://localhost:3000/api';
+
+    let currentUser = null;
+
+    // Check if user is logged in
+    function checkAuth() {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        // Verify token with backend
+        fetch(`${API_URL}/auth/verify`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.user) {
+            currentUser = data.user;
+            updateUserStatus();
+          }
+        });
+      }
+    }
+
+    function updateUserStatus() {
+      const statusEl = document.getElementById('userStatus');
+      if (currentUser) {
+        statusEl.innerHTML = `
+          <span style="margin-right: 15px;">Hi, ${currentUser.email}</span>
+          <button class="btn btn-secondary" onclick="logout()">Logout</button>
+        `;
+      }
+    }
+
+    function showAuthModal() {
+      document.getElementById('authModal').classList.add('active');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.remove('active');
+    }
+
+    function buyNow() {
+      if (!currentUser) {
+        showAuthModal();
+      } else {
+        proceedToCheckout();
+      }
+    }
+
+    async function handleAuth(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+
+      try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (data.token) {
+          localStorage.setItem('authToken', data.token);
+          currentUser = data.user;
+          updateUserStatus();
+          closeAuthModal();
+          proceedToCheckout();
+        } else {
+          alert('Authentication failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Auth error:', error);
+        alert('An error occurred. Please try again.');
+      }
+    }
+
+    async function proceedToCheckout() {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_URL}/checkout/create-session`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const session = await response.json();
+
+        // Redirect to Stripe Checkout
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id
+        });
+
+        if (result.error) {
+          alert(result.error.message);
+        }
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('An error occurred during checkout. Please try again.');
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('authToken');
+      currentUser = null;
+      location.reload();
+    }
+
+    // Check auth on page load
+    checkAuth();
+  </script>
+
+</body>
+</html>

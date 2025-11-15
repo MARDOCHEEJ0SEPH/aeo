@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Cancelled - SoundWave Pro</title>
+    <meta name="description" content="Your checkout was cancelled. Return anytime to complete your purchase.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cancel-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .icon-circle {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: #F59E0B;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        .icon {
+            color: white;
+            font-size: 60px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        h1 {
+            color: #1F2937;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #6B7280;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #92400E;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #78350F;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            color: #78350F;
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h2 {
+            color: #374151;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            min-width: 30px;
+        }
+
+        .feature-text {
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .cancel-container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cancel-container">
+        <div class="icon-circle">
+            <span class="icon">⚠️</span>
+        </div>
+
+        <h1>Checkout Cancelled</h1>
+        <p class="subtitle">No worries! Your order was not completed. Feel free to return anytime to purchase your SoundWave Pro headset.</p>
+
+        <div class="info-box">
+            <h3>What Happened?</h3>
+            <p>You cancelled the checkout process before completing your payment. This can happen if you:</p>
+            <ul>
+                <li>Clicked the back button during checkout</li>
+                <li>Closed the payment window</li>
+                <li>Decided you needed more time to think</li>
+                <li>Had questions about the product</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h2>Why Choose SoundWave Pro?</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🎧</span>
+                    <span class="feature-text"><strong>Active Noise Cancellation</strong> - Block out distractions with premium ANC technology</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔋</span>
+                    <span class="feature-text"><strong>40-Hour Battery Life</strong> - All-week listening on a single charge</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎵</span>
+                    <span class="feature-text"><strong>Studio-Quality Sound</strong> - 40mm drivers with Hi-Res Audio certification</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span class="feature-text"><strong>Multipoint Bluetooth 5.3</strong> - Connect two devices simultaneously</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text"><strong>30-Day Money-Back Guarantee</strong> - Try risk-free</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" style="background: #DBEAFE; border-color: #3B82F6;">
+            <h3 style="color: #1E40AF;">💡 Need Help Deciding?</h3>
+            <p style="color: #1E3A8A;">
+                We're here to help! If you have questions about the SoundWave Pro, shipping, returns, or anything else, don't hesitate to reach out. Our support team typically responds within 2 hours.
+            </p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="../index.html" class="btn btn-primary">Try Again - Buy Now</a>
+            <a href="../index.html#faq" class="btn btn-secondary">Read FAQ</a>
+        </div>
+
+        <p style="margin-top: 40px; color: #9CA3AF; font-size: 0.9em;">
+            Your product is still in stock and waiting for you. Complete your purchase anytime!
+        </p>
+    </div>
+
+    <script>
+        // Track cancellation (optional analytics)
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Checkout cancelled - User returned to site');
+
+            // Optional: Send analytics event
+            // Analytics implementation would go here
+        });
+    </script>
+</body>
+</html>
