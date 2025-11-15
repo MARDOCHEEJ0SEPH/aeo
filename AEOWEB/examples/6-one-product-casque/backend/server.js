@@ -30,118 +30,12 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB connected successfully'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// MongoDB Schemas
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true
-  },
-  loginToken: String,
-  tokenExpiry: Date,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  lastLogin: Date
-});
+// ==============================================
+// IMPORT MONGODB MODELS (Following AEOWEB 100%)
+// ==============================================
 
-const orderSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  productId: {
-    type: String,
-    default: 'soundwave-pro-headset'
-  },
-  productName: {
-    type: String,
-    default: 'SoundWave Pro Wireless Headset'
-  },
-  quantity: {
-    type: Number,
-    default: 1
-  },
-  amount: {
-    type: Number,
-    required: true
-  },
-  currency: {
-    type: String,
-    default: 'usd'
-  },
-  stripeSessionId: String,
-  stripePaymentIntentId: String,
-  status: {
-    type: String,
-    enum: ['pending', 'processing', 'completed', 'cancelled', 'refunded'],
-    default: 'pending'
-  },
-  shippingAddress: {
-    name: String,
-    line1: String,
-    line2: String,
-    city: String,
-    state: String,
-    postal_code: String,
-    country: String
-  },
-  customerDetails: {
-    name: String,
-    phone: String
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-const productSchema = new mongoose.Schema({
-  productId: {
-    type: String,
-    unique: true,
-    default: 'soundwave-pro-headset'
-  },
-  name: {
-    type: String,
-    default: 'SoundWave Pro Wireless Headset'
-  },
-  description: String,
-  price: {
-    type: Number,
-    default: 29900 // $299.00 in cents
-  },
-  currency: {
-    type: String,
-    default: 'usd'
-  },
-  images: [String],
-  inStock: {
-    type: Boolean,
-    default: true
-  },
-  inventory: {
-    type: Number,
-    default: 100
-  },
-  stripePriceId: String
-});
-
-const User = mongoose.model('User', userSchema);
-const Order = mongoose.model('Order', orderSchema);
-const Product = mongoose.model('Product', productSchema);
+// Import models from centralized schema file to avoid duplication
+const { User, Order, Product, Review } = require('../database/schema');
 
 // JWT Authentication Middleware
 const authenticateToken = (req, res, next) => {

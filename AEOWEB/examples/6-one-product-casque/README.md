@@ -64,12 +64,17 @@ This example demonstrates how to build a scalable, AEO-optimized single-product 
 ├── pages/
 │   ├── success.html       # Order confirmation page
 │   └── cancel.html        # Checkout cancelled page
+├── database/
+│   ├── schema.js          # Mongoose schemas (centralized, no duplication)
+│   └── seed.js            # Database seed script with sample data
 ├── backend/
 │   ├── server.js          # Express API server
-│   ├── package.json       # Dependencies
+│   ├── package.json       # Dependencies (includes seed script)
 │   └── .env.example       # Environment variables template
 └── README.md              # This file
 ```
+
+**Note:** Following AEOWEB 100% standards - schemas are centralized in `database/schema.js` to avoid code duplication. The backend imports models from this centralized location.
 
 ## 🛠️ Installation & Setup
 
@@ -169,6 +174,23 @@ mongosh
 3. **Update Frontend:**
    - Edit `index.html`
    - Replace `pk_test_YOUR_PUBLISHABLE_KEY` with your actual Stripe publishable key (line ~370)
+
+### Step 4.5: Seed the Database (Optional but Recommended)
+
+Populate your MongoDB database with sample data for development and testing:
+
+```bash
+# From backend directory
+npm run seed
+```
+
+This will create:
+- 1 Product (SoundWave Pro Wireless Headset with full specifications)
+- 3 Sample users with profiles and addresses
+- 3 Sample orders (completed, processing, pending)
+- 3 Customer reviews (4-5 star ratings)
+
+**Note:** The seed script will clear existing data first. Comment out the `deleteMany()` calls in `database/seed.js` if you want to keep existing data.
 
 ### Step 5: Start the Server
 
