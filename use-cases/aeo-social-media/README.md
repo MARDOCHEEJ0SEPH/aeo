@@ -20,18 +20,95 @@ This advanced module demonstrates how to apply Answer Engine Optimization (AEO) 
 
 ## Module Structure
 
-### Chapter 1: AEO Social Media Fundamentals (8 pages)
+### Chapter 1: AEO Social Media Fundamentals
 Core principles of AEO for social media platforms
+- Social + AI discoverability
+- Question-answer format for social
+- Platform-specific AI integration
+- Content pyramid strategy
+- AEO-optimized workflow
+- Metrics and measurement
 
-### Chapter 2: Platform-Specific Strategies (15 pages)
-Deep dive into each of the 10 platforms with examples
+### Platform-Specific Chapters (One per Platform)
 
-### Chapter 3: Content Repurposing Framework (7 pages)
-System for creating 10 pieces of content from one source
+### Chapter 2: LinkedIn Articles
+Building professional authority through long-form content
+- Dual indexing power (LinkedIn + Google + AI)
+- Article structure template
+- Title optimization formulas
+- Complete example with 90-day roadmap
 
-### Chapter 4: Measurement & Optimization (5 pages)
+### Chapter 3: Twitter Threads
+Bite-sized authority that goes viral
+- Real-time indexing and AI citations
+- Hook formulas and thread structure
+- Formatting for maximum AEO impact
+- Complete thread examples
+
+### Chapter 4: Instagram Carousels
+Visual storytelling for swipeable AEO content
+- Design principles for AI discovery
+- Text optimization within visuals
+- Carousel structure templates
+
+### Chapter 5: Instagram Reels
+Short-form video discovery optimization
+- Algorithm secrets for 2025
+- Caption and overlay text strategies
+- Trending audio + AEO content
+
+### Chapter 6: Facebook Posts
+Community engagement with AEO principles
+- Long-form post structure
+- Group posting strategies
+- AI-friendly formatting
+
+### Chapter 7: YouTube Videos
+Long-form video authority building
+- Title and thumbnail optimization
+- Description and transcript strategies
+- Chapter markers for AI parsing
+- Complete video script example
+
+### Chapter 8: Podcast Episodes
+Audio content depth for voice search
+- Show notes optimization
+- Transcript strategies
+- Distribution for AI discovery
+- Interview format examples
+
+### Chapter 9: Infographics
+Data visualization for visual search
+- Design for AI readability
+- Alt text and metadata
+- Distribution channels
+- Tools and templates
+
+### Chapter 10: Email Newsletters
+Direct audience nurturing with AEO
+- Subject line formulas
+- Content structure for forwarding
+- Archive page optimization
+
+### Chapter 11: Medium Blog Posts
+SEO-optimized written content
+- Medium's algorithm secrets
+- Publication strategies
+- Cross-platform syndication
+
+### Chapter 12: Content Repurposing Framework
+Transform one piece into 10 platform-optimized versions
+- The content cascade system
+- Platform adaptation matrix
+- Automation workflows
+
+### Chapter 13: Measurement & Optimization
 Track and improve your AEO social media performance
+- Platform-specific analytics
+- AI citation tracking
+- ROI measurement
+- Optimization workflows
 
 ---
 
-**Total:** 35+ pages of actionable AEO social media strategies
+**Total:** 30+ pages of actionable AEO social media strategies across all major platforms
