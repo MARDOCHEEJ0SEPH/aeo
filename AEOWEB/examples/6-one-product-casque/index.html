@@ -500,13 +500,19 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">🎧 SoundWave Pro</div>
-        <div id="userStatus">
-          <button class="btn btn-secondary" onclick="showAuthModal()">Sign In</button>
-        </div>
+        <nav aria-label="Main Navigation" style="display: flex; gap: 1.5rem; align-items: center;">
+          <a href="#features" style="text-decoration: none; color: var(--dark); font-weight: 500;">Features</a>
+          <a href="#specs" style="text-decoration: none; color: var(--dark); font-weight: 500;">Specs</a>
+          <a href="#reviews" style="text-decoration: none; color: var(--dark); font-weight: 500;">Reviews</a>
+          <div id="userStatus">
+            <button class="btn btn-secondary" onclick="showAuthModal()">Sign In</button>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
 
+  <main>
   <!-- Hero Section -->
   <section class="hero container">
     <div class="product-image">
@@ -700,6 +706,7 @@
       <button class="btn btn-secondary" onclick="buyNow()">Buy SoundWave Pro - $299</button>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer>

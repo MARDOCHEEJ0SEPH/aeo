@@ -728,11 +728,17 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">OLI</a>
-                <button class="cart-btn" onclick="showCart()">🛒 Cart (0)</button>
+                <nav aria-label="Main Navigation" style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="#nutrition" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Nutrition</a>
+                    <a href="#subscribe" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Subscribe</a>
+                    <a href="#faq" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">FAQ</a>
+                    <button class="cart-btn" onclick="showCart()">🛒 Cart (0)</button>
+                </nav>
             </div>
         </div>
     </header>
 
+    <main>
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -965,11 +971,12 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 OLI - Premium Organic Juice. All rights reserved.</p>
+            <p>&copy; 2025 OLI - Premium Organic Juice. All rights reserved.</p>
             <p style="margin-top: 10px; opacity: 0.8;">Powered by WebAssembly for lightning-fast performance ⚡</p>
         </div>
     </footer>
