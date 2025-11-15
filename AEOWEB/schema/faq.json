@@ -1,0 +1,86 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "[First frequently asked question]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[Complete, direct answer to the question. Be specific and helpful.]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "[Second frequently asked question]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[Complete, direct answer to the question. Be specific and helpful.]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "[Third frequently asked question]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[Complete, direct answer to the question. Be specific and helpful.]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does [your service/product] cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our pricing starts at [amount] for [basic package]. We offer [number] packages: [package 1] at [price], [package 2] at [price], and [package 3] at [price]. All packages include [core features]. Contact us for custom quotes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is included in [your service/product]?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[Your service/product] includes: [feature 1], [feature 2], [feature 3], [feature 4], and [feature 5]. Additionally, we provide [support details], [warranty/guarantee], and [any extras]."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does [process/service] take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most [processes/services] take [timeframe]. Timeline depends on [factors]. Typical phases include: [phase 1] ([duration]), [phase 2] ([duration]), and [phase 3] ([duration]). Rush options are available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you serve [location/industry/audience]?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! We serve [specific locations/industries/audiences]. Our primary service area is [area], but we also work with clients in [other areas]. We specialize in [specific niche or segment]."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes [your business] different from competitors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unlike other [industry] providers, we offer [unique differentiator 1], [unique differentiator 2], and [unique differentiator 3]. Our [X years] of experience and [unique methodology] means you get [specific benefit]. We're the only [provider type] that [unique feature]."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get started?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Getting started is easy: 1) [First step - usually contact/consultation], 2) [Second step - assessment/quote], 3) [Third step - onboarding/start]. The entire process takes about [timeframe] from initial contact to [start/completion]."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What results can I expect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our clients typically see [specific result 1] within [timeframe 1] and [specific result 2] within [timeframe 2]. [X]% of our clients achieve [measurable outcome]. Results depend on [factors affecting results]."
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "[How to Do Something - Clear Action]",
+  "description": "[Brief overview of what this tutorial teaches and who it's for]",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://yourdomain.com/assets/images/howto-image.jpg",
+    "height": 406,
+    "width": 305
+  },
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "[0 for free, or cost amount]"
+  },
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "[Tool/Material needed 1]"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "[Tool/Material needed 2]"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "[Tool/Material needed 3]"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "[Software/Tool required 1]"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "[Software/Tool required 2]"
+    }
+  ],
+  "totalTime": "PT[X]H[Y]M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "[Step 1 Title]",
+      "text": "[Detailed instructions for step 1. Be specific and clear.]",
+      "url": "https://yourdomain.com/how-to/article#step1",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/assets/images/step1.jpg",
+        "height": 406,
+        "width": 305
+      }
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "[Step 2 Title]",
+      "text": "[Detailed instructions for step 2. Include specific details.]",
+      "url": "https://yourdomain.com/how-to/article#step2",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/assets/images/step2.jpg",
+        "height": 406,
+        "width": 305
+      }
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "[Step 3 Title]",
+      "text": "[Detailed instructions for step 3. What specifically should they do?]",
+      "url": "https://yourdomain.com/how-to/article#step3",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/assets/images/step3.jpg",
+        "height": 406,
+        "width": 305
+      }
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "[Step 4 Title]",
+      "text": "[Detailed instructions for step 4. Include expected outcomes.]",
+      "url": "https://yourdomain.com/how-to/article#step4",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/assets/images/step4.jpg",
+        "height": 406,
+        "width": 305
+      }
+    }
+  ],
+  "yield": "[What the end result is - e.g., 'A fully configured email automation system']"
+}

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- AEO-Optimized Meta Tags -->
+    <title>[Your Business Name] | [What You Do] | [Location if local]</title>
+    <meta name="description" content="[Your Business] helps [target audience] [achieve specific outcome]. [Key differentiator]. Serving [location] since [year].">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="[Your Business Name] | [What You Do]">
+    <meta property="og:description" content="[Short compelling description]">
+    <meta property="og:image" content="https://yourdomain.com/assets/images/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="[Your Business Name]">
+    <meta name="twitter:description" content="[Short compelling description]">
+    <meta name="twitter:image" content="https://yourdomain.com/assets/images/twitter-card.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/aeo-framework.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <!-- Organization Schema - Load from external file -->
+    <script type="application/ld+json" src="schema/organization.json"></script>
+
+    <!-- Website Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "[Your Business Name]",
+      "url": "https://yourdomain.com",
+      "description": "[Your business description]",
+      "publisher": {
+        "@type": "Organization",
+        "name": "[Your Business Name]",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://yourdomain.com/assets/images/logo.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://yourdomain.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://yourdomain.com"
+      }]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/">
+                        <img src="assets/images/logo.png" alt="[Your Business Name] Logo" width="200" height="60">
+                    </a>
+                </div>
+
+                <nav class="main-navigation" aria-label="Main Navigation">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="pages/about.html">About</a></li>
+                        <li><a href="pages/services.html">Services</a></li>
+                        <li><a href="content/blog/blog-index.html">Blog</a></li>
+                        <li><a href="content/faq/faq-page.html">FAQ</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-cta">
+                    <a href="pages/contact.html" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section - Above the Fold Answer -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>
+                        [Answer the question: What do you do?]<br>
+                        <span class="hero-subtitle">[For whom? Achieving what result?]</span>
+                    </h1>
+
+                    <!-- Direct Answer Pattern for AI -->
+                    <p class="hero-description">
+                        <strong>[Your Business Name]</strong> is a <span>[industry/category]</span> that helps <span>[target audience]</span> <span>[achieve specific outcome]</span> through <span>[your unique approach/method]</span>.
+                    </p>
+
+                    <div class="hero-cta">
+                        <a href="pages/contact.html" class="btn btn-primary btn-large">Get Started Today</a>
+                        <a href="pages/services.html" class="btn btn-secondary btn-large">Learn More</a>
+                    </div>
+
+                    <!-- Trust Signals -->
+                    <div class="trust-signals">
+                        <div class="trust-item">
+                            <strong>[X]+</strong>
+                            <span>Satisfied Customers</span>
+                        </div>
+                        <div class="trust-item">
+                            <strong>[X]</strong>
+                            <span>Years in Business</span>
+                        </div>
+                        <div class="trust-item">
+                            <strong>[X]%</strong>
+                            <span>Success Rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img src="assets/images/hero-image.jpg" alt="[Descriptive alt text for AI understanding]" width="600" height="400">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services/Products Section -->
+        <section class="services-overview">
+            <div class="container">
+                <header class="section-header">
+                    <h2>What We Do</h2>
+                    <p>Complete solutions for [your target audience]</p>
+                </header>
+
+                <div class="services-grid">
+
+                    <!-- Service 1 -->
+                    <article class="service-card">
+                        <div class="service-icon">
+                            <img src="assets/images/service-1-icon.svg" alt="[Service 1] Icon" width="80" height="80">
+                        </div>
+                        <h3>[Service/Product Name 1]</h3>
+                        <p>
+                            [Brief description answering: What is this? Who is it for? What problem does it solve?]
+                        </p>
+                        <a href="pages/service-single.html" class="btn btn-link">Learn More →</a>
+                    </article>
+
+                    <!-- Service 2 -->
+                    <article class="service-card">
+                        <div class="service-icon">
+                            <img src="assets/images/service-2-icon.svg" alt="[Service 2] Icon" width="80" height="80">
+                        </div>
+                        <h3>[Service/Product Name 2]</h3>
+                        <p>
+                            [Brief description answering: What is this? Who is it for? What problem does it solve?]
+                        </p>
+                        <a href="pages/service-single.html" class="btn btn-link">Learn More →</a>
+                    </article>
+
+                    <!-- Service 3 -->
+                    <article class="service-card">
+                        <div class="service-icon">
+                            <img src="assets/images/service-3-icon.svg" alt="[Service 3] Icon" width="80" height="80">
+                        </div>
+                        <h3>[Service/Product Name 3]</h3>
+                        <p>
+                            [Brief description answering: What is this? Who is it for? What problem does it solve?]
+                        </p>
+                        <a href="pages/service-single.html" class="btn btn-link">Learn More →</a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <header class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Our simple [3/4/5]-step process</p>
+                </header>
+
+                <div class="steps">
+
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>[Step 1 Name]</h3>
+                        <p>[Brief description of what happens in step 1]</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>[Step 2 Name]</h3>
+                        <p>[Brief description of what happens in step 2]</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>[Step 3 Name]</h3>
+                        <p>[Brief description of what happens in step 3]</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>[Step 4 Name]</h3>
+                        <p>[Brief description of what happens in step 4]</p>
+                    </div>
+
+                </div>
+
+                <div class="cta-center">
+                    <a href="pages/contact.html" class="btn btn-primary btn-large">Start Your Journey</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section - Critical for AEO -->
+        <section class="faq-section">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Quick answers to common questions about [your business/services]</p>
+                </header>
+
+                <div class="faq-list">
+
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">What is [Your Service/Product]?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>
+                                    [Your Service/Product] is [clear, direct definition]. It helps [target audience] [achieve specific outcome] by [method/approach].
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How much does it cost?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>
+                                    Our pricing starts at [amount] for [basic option]. We offer [number] packages ranging from [low] to [high]. <a href="pages/services.html">View detailed pricing</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">Who is this for?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>
+                                    Our services are perfect for [target audience 1], [target audience 2], and [target audience 3] who want to [desired outcome]. We specialize in helping [specific segment] [achieve specific result].
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">How long does it take?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>
+                                    Most clients see [initial results] within [timeframe 1] and [complete results] within [timeframe 2]. Timeline depends on [factors that affect timeline].
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h3 itemprop="name">What makes you different from competitors?</h3>
+                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>
+                                    Unlike other [industry] providers, we [unique differentiator 1], [unique differentiator 2], and [unique differentiator 3]. Our [X years] of experience and [unique methodology/approach] sets us apart.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cta-center">
+                    <a href="content/faq/faq-page.html" class="btn btn-secondary">View All FAQs →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQPage Schema -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is [Your Service/Product]?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "[Your Service/Product] is [clear, direct definition]. It helps [target audience] [achieve specific outcome] by [method/approach]."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does it cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our pricing starts at [amount] for [basic option]. We offer [number] packages ranging from [low] to [high]."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who is this for?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our services are perfect for [target audience 1], [target audience 2], and [target audience 3] who want to [desired outcome]."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most clients see [initial results] within [timeframe 1] and [complete results] within [timeframe 2]."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What makes you different from competitors?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unlike other providers, we [unique differentiator 1], [unique differentiator 2], and [unique differentiator 3]."
+              }
+            }
+          ]
+        }
+        </script>
+
+        <!-- Testimonials/Social Proof Section -->
+        <section class="testimonials">
+            <div class="container">
+                <header class="section-header">
+                    <h2>What Our Customers Say</h2>
+                    <p>Real results from real people</p>
+                </header>
+
+                <div class="testimonials-grid">
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                        <blockquote>
+                            "[Specific positive result achieved]. [Your Business] helped us [specific outcome]. Highly recommend!"
+                        </blockquote>
+                        <cite>
+                            <strong>[Customer Name]</strong>
+                            <span>[Job Title], [Company]</span>
+                        </cite>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                        <blockquote>
+                            "[Specific benefit]. The team at [Your Business] was [positive attribute]. [Measurable result]."
+                        </blockquote>
+                        <cite>
+                            <strong>[Customer Name]</strong>
+                            <span>[Job Title], [Company]</span>
+                        </cite>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            ⭐⭐⭐⭐⭐
+                        </div>
+                        <blockquote>
+                            "[Pain point before] but now [positive outcome after]. Couldn't be happier!"
+                        </blockquote>
+                        <cite>
+                            <strong>[Customer Name]</strong>
+                            <span>[Job Title], [Company]</span>
+                        </cite>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Preview Section -->
+        <section class="blog-preview">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Latest Insights</h2>
+                    <p>Helpful guides and articles about [your topic]</p>
+                </header>
+
+                <div class="blog-grid">
+
+                    <article class="blog-card">
+                        <img src="assets/images/blog-1.jpg" alt="[Article topic description]" width="400" height="250">
+                        <div class="blog-content">
+                            <h3><a href="content/blog/blog-post.html">[Question-Format Blog Title]</a></h3>
+                            <p>[Brief preview of the article answering the main question]</p>
+                            <div class="blog-meta">
+                                <time datetime="2025-01-15">January 15, 2025</time>
+                                <span>5 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <img src="assets/images/blog-2.jpg" alt="[Article topic description]" width="400" height="250">
+                        <div class="blog-content">
+                            <h3><a href="content/blog/blog-post.html">[Question-Format Blog Title]</a></h3>
+                            <p>[Brief preview of the article answering the main question]</p>
+                            <div class="blog-meta">
+                                <time datetime="2025-01-10">January 10, 2025</time>
+                                <span>7 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <img src="assets/images/blog-3.jpg" alt="[Article topic description]" width="400" height="250">
+                        <div class="blog-content">
+                            <h3><a href="content/blog/blog-post.html">[Question-Format Blog Title]</a></h3>
+                            <p>[Brief preview of the article answering the main question]</p>
+                            <div class="blog-meta">
+                                <time datetime="2025-01-05">January 5, 2025</time>
+                                <span>6 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="cta-center">
+                    <a href="content/blog/blog-index.html" class="btn btn-secondary">View All Articles →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to [Achieve Desired Outcome]?</h2>
+                    <p>Join [X]+ satisfied customers who have [achieved specific result] with [Your Business Name].</p>
+                    <div class="cta-buttons">
+                        <a href="pages/contact.html" class="btn btn-primary btn-large">Get Started Now</a>
+                        <a href="pages/about.html" class="btn btn-secondary-outline btn-large">Learn About Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <!-- Company Info -->
+                <div class="footer-column">
+                    <h4>[Your Business Name]</h4>
+                    <p>
+                        [Brief mission statement or tagline]
+                    </p>
+                    <address>
+                        [Street Address]<br>
+                        [City, State ZIP]<br>
+                        Phone: <a href="tel:+1234567890">[Phone Number]</a><br>
+                        Email: <a href="mailto:hello@yourbusiness.com">[Email]</a>
+                    </address>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="pages/about.html">About</a></li>
+                        <li><a href="pages/services.html">Services</a></li>
+                        <li><a href="content/blog/blog-index.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="content/faq/faq-page.html">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div class="footer-column">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="[Facebook URL]" aria-label="Facebook">Facebook</a>
+                        <a href="[Twitter URL]" aria-label="Twitter">Twitter</a>
+                        <a href="[LinkedIn URL]" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="[Instagram URL]" aria-label="Instagram">Instagram</a>
+                    </div>
+
+                    <!-- Newsletter Signup -->
+                    <div class="newsletter">
+                        <h5>Subscribe to Our Newsletter</h5>
+                        <form action="#" method="post">
+                            <input type="email" placeholder="Your email" required>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 [Your Business Name]. All rights reserved.</p>
+                <p>Last updated: <time datetime="2025-01-15">January 2025</time></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/aeo-utils.js"></script>
+    <script src="assets/js/schema-injector.js"></script>
+
+</body>
+</html>

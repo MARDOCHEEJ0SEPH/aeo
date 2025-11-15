@@ -1,0 +1,74 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "[Your Business Name]",
+  "alternateName": "[Any alternate name or DBA]",
+  "url": "https://yourdomain.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://yourdomain.com/assets/images/logo.png",
+    "width": 600,
+    "height": 60
+  },
+  "description": "[Complete description of your business - what you do, who you serve, how you help]",
+  "foundingDate": "[YYYY-MM-DD]",
+  "founder": {
+    "@type": "Person",
+    "name": "[Founder Name]"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[Street Address]",
+    "addressLocality": "[City]",
+    "addressRegion": "[State/Province]",
+    "postalCode": "[ZIP/Postal Code]",
+    "addressCountry": "[Country Code - e.g., US]"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "[+1-XXX-XXX-XXXX]",
+      "contactType": "customer service",
+      "email": "[contact@yourdomain.com]",
+      "areaServed": "[US, CA, or specific regions]",
+      "availableLanguage": ["English"]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "[+1-XXX-XXX-XXXX]",
+      "contactType": "sales",
+      "email": "[sales@yourdomain.com]",
+      "areaServed": "[US, CA, or specific regions]",
+      "availableLanguage": ["English"]
+    }
+  ],
+  "sameAs": [
+    "[https://www.facebook.com/yourpage]",
+    "[https://twitter.com/yourhandle]",
+    "[https://www.linkedin.com/company/yourcompany]",
+    "[https://www.instagram.com/yourhandle]",
+    "[https://www.youtube.com/c/yourchannel]"
+  ],
+  "email": "[hello@yourdomain.com]",
+  "telephone": "[+1-XXX-XXX-XXXX]",
+  "priceRange": "[$$ or specific range like $50-$500]",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  ],
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": "[XX.XXXXXX]",
+      "longitude": "[-XX.XXXXXX]"
+    },
+    "geoRadius": "[50 miles or specific service area]"
+  },
+  "award": "[Any awards or recognition]",
+  "slogan": "[Your business slogan or tagline]"
+}

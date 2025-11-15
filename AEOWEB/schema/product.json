@@ -1,0 +1,117 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "[Product Name]",
+  "description": "[Complete product description. What is it? Who is it for? What problem does it solve?]",
+  "image": [
+    "https://yourdomain.com/assets/images/product-1.jpg",
+    "https://yourdomain.com/assets/images/product-2.jpg",
+    "https://yourdomain.com/assets/images/product-3.jpg"
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": "[Your Business Name or Product Brand]"
+  },
+  "sku": "[Product SKU]",
+  "mpn": "[Manufacturer Part Number if applicable]",
+  "gtin": "[GTIN/UPC/EAN if applicable]",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://yourdomain.com/products/product-slug",
+    "priceCurrency": "USD",
+    "price": "[Price as number - e.g., 99.99]",
+    "priceValidUntil": "[YYYY-MM-DD]",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "[Your Business Name]"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "[Shipping cost or 0 for free]",
+        "currency": "USD"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 3,
+          "maxValue": 7,
+          "unitCode": "DAY"
+        }
+      }
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[Average rating - e.g., 4.8]",
+    "reviewCount": "[Number of reviews]",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "[Reviewer Name]"
+      },
+      "datePublished": "[YYYY-MM-DD]",
+      "reviewBody": "[Review text]",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "[Reviewer Name]"
+      },
+      "datePublished": "[YYYY-MM-DD]",
+      "reviewBody": "[Review text]",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+  ],
+  "category": "[Product Category]",
+  "material": "[Materials used if applicable]",
+  "color": "[Available colors]",
+  "size": "[Available sizes]",
+  "weight": {
+    "@type": "QuantitativeValue",
+    "value": "[Weight amount]",
+    "unitCode": "[LBR for pounds or KGM for kilograms]"
+  },
+  "width": {
+    "@type": "QuantitativeValue",
+    "value": "[Width]",
+    "unitCode": "INH"
+  },
+  "height": {
+    "@type": "QuantitativeValue",
+    "value": "[Height]",
+    "unitCode": "INH"
+  },
+  "depth": {
+    "@type": "QuantitativeValue",
+    "value": "[Depth]",
+    "unitCode": "INH"
+  }
+}
