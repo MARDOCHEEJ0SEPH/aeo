@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - OLI Premium Juice</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <style>
+        :root {
+            --primary: #059669;
+            --secondary: #10b981;
+            --text-dark: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .orders-container {
+            background: white;
+            padding: 30px;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state svg {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .order-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .order-number {
+            font-weight: 600;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .order-status {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .order-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .product-icon {
+            font-size: 60px;
+        }
+
+        .product-details h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-details p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .shipping-address {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .shipping-address h4 {
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .shipping-address p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #f0fdf4;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .order-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍊 Order History</h1>
+            <p>Track your OLI juice orders</p>
+        </div>
+
+        <div class="orders-container">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 20px;">Loading your orders...</p>
+            </div>
+
+            <div id="error" style="display: none;"></div>
+
+            <div id="orders-list"></div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <p style="font-size: 80px;">🍊</p>
+                <h2>No Orders Yet</h2>
+                <p>You haven't placed any orders yet.</p>
+                <a href="../index.html" class="btn">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="../index.html" class="btn btn-secondary">← Back to Shop</a>
+        </div>
+    </div>
+
+    <script>
+        // Utility function to format currency
+        function formatCurrency(amount, currency = 'usd') {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency.toUpperCase()
+            }).format(amount / 100);
+        }
+
+        // Utility function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Render order card
+        function renderOrder(order) {
+            const statusClass = `status-${order.status}`;
+
+            let shippingAddressHTML = '';
+            if (order.shippingAddress) {
+                const addr = order.shippingAddress;
+                shippingAddressHTML = `
+                    <div class="shipping-address">
+                        <h4>🚚 Shipping Address</h4>
+                        <p>
+                            ${order.customerDetails?.name || 'N/A'}<br>
+                            ${addr.line1 || ''}<br>
+                            ${addr.line2 ? addr.line2 + '<br>' : ''}
+                            ${addr.city || ''}, ${addr.state || ''} ${addr.postal_code || ''}<br>
+                            ${addr.country || ''}
+                        </p>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-number">
+                            Order #${order._id.slice(-8).toUpperCase()}
+                        </div>
+                        <div class="order-status ${statusClass}">
+                            ${order.status}
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-icon">🍊</div>
+                        <div class="product-details">
+                            <h3>${order.productName}</h3>
+                            <p>Quantity: ${order.quantity || 1} bottle${order.quantity > 1 ? 's' : ''}</p>
+                        </div>
+                    </div>
+
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Order Date</div>
+                            <div class="detail-value">${formatDate(order.createdAt)}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Total Amount</div>
+                            <div class="detail-value">${formatCurrency(order.amount, order.currency)}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">${order.email}</div>
+                        </div>
+                        ${order.stripePaymentIntentId ? `
+                        <div class="detail-item">
+                            <div class="detail-label">Payment ID</div>
+                            <div class="detail-value">${order.stripePaymentIntentId.slice(0, 20)}...</div>
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    ${shippingAddressHTML}
+                </div>
+            `;
+        }
+
+        // Load orders
+        async function loadOrders() {
+            try {
+                const token = localStorage.getItem('authToken');
+
+                if (!token) {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('error').innerHTML = `
+                        <div class="error-message">
+                            Please log in to view your order history.
+                            <br><br>
+                            <a href="../index.html" class="btn">Go to Home</a>
+                        </div>
+                    `;
+                    document.getElementById('error').style.display = 'block';
+                    return;
+                }
+
+                const response = await fetch('/api/orders', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+
+                const orders = await response.json();
+
+                document.getElementById('loading').style.display = 'none';
+
+                if (orders.length === 0) {
+                    document.getElementById('empty-state').style.display = 'block';
+                    return;
+                }
+
+                const ordersListHTML = orders.map(order => renderOrder(order)).join('');
+                document.getElementById('orders-list').innerHTML = ordersListHTML;
+
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').innerHTML = `
+                    <div class="error-message">
+                        Failed to load order history. Please try again later.
+                    </div>
+                `;
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Load orders on page load
+        window.addEventListener('DOMContentLoaded', loadOrders);
+    </script>
+</body>
+</html>
