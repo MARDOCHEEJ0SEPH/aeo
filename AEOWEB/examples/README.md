@@ -1,8 +1,8 @@
 # AEOWEB Complete Website Examples
 
-## 5 Production-Ready AEO-Optimized Websites
+## 8 Production-Ready AEO-Optimized Websites
 
-This folder contains **complete, customized implementations** of the AEOWEB framework for 5 different business types. Each example is 100% production-ready with full-stack capabilities.
+This folder contains **complete, customized implementations** of the AEOWEB framework for 8 different business types. Each example is 100% AEOWEB-compliant and production-ready.
 
 ---
 
@@ -207,17 +207,110 @@ This folder contains **complete, customized implementations** of the AEOWEB fram
 
 ---
 
+## 🎧 6. One Product - Headphones (SoundWave Pro)
+
+**Type:** Single Product E-commerce
+**Location:** Online (Global)
+**Focus:** Product-focused landing page, conversions
+
+### What's Included
+- ✅ Product landing page optimized for single SKU
+- ✅ Full product specifications and features
+- ✅ Customer reviews and ratings
+- ✅ FAQ section for common questions
+- ✅ Shopping cart integration (Stripe)
+- ✅ Authentication system
+- ✅ Product schema with detailed metadata
+- ✅ Technical specifications section
+
+### Target Keywords
+- "wireless headphones with ANC"
+- "studio quality headphones"
+- "best noise cancelling headphones"
+- "40 hour battery headphones"
+
+**[View Complete Example →](6-one-product-casque/)**
+
+---
+
+## 🧃 7. One Product - Juice (OLI Premium Juice)
+
+**Type:** Single Product E-commerce (Consumable)
+**Location:** Online with Subscription
+**Focus:** Product + subscription model, nutrition focus
+
+### What's Included
+- ✅ Product landing page with WebAssembly integration
+- ✅ Interactive nutrition calculator
+- ✅ Subscription pricing tiers
+- ✅ Carbon footprint calculator
+- ✅ Product schema with nutrition information
+- ✅ FAQ section
+- ✅ Customer reviews
+- ✅ Real-time pricing calculations
+
+### Advanced Features
+- WebAssembly for high-performance calculations
+- Interactive nutrition tracking
+- Subscription management
+- Environmental impact tracking
+
+### Target Keywords
+- "organic cold pressed juice"
+- "healthy juice subscription"
+- "premium organic juice delivery"
+- "juice with vitamin C"
+
+**[View Complete Example →](7-one-product-oli-juice/)**
+
+---
+
+## ⚡ 8. Data Indexing Platform (TeraIndex Pro)
+
+**Type:** Enterprise SaaS Platform
+**Location:** Cloud-Based (GCP)
+**Focus:** B2B technical solution, enterprise sales
+
+### What's Included
+- ✅ Enterprise platform landing page
+- ✅ Technology stack showcase (Teradata, GCP, Docker, Redis)
+- ✅ Multi-layer architecture diagram
+- ✅ Industry-specific use cases
+- ✅ SoftwareApplication schema
+- ✅ Comprehensive FAQ (7 questions)
+- ✅ Performance statistics and benchmarks
+- ✅ Security and compliance information
+
+### Technology Stack
+- **Teradata**: MPP database for petabyte-scale analytics
+- **GCP**: Google Cloud Platform for global deployment
+- **BigQuery**: Google's serverless data warehouse (data provider)
+- **Docker**: Containerization for consistent deployments
+- **Redis**: In-memory caching for sub-millisecond performance
+
+### Target Keywords
+- "enterprise data indexing platform"
+- "Teradata cloud solution"
+- "scalable data warehouse GCP"
+- "Docker containerized database"
+- "Redis caching enterprise"
+
+**[View Complete Example →](8-data-indexing-platform/)**
+
+---
+
 ## Comparison Matrix
 
-| Feature | Coffee Shop | Hair Salon | T-Shirt Shop | Digital Shop | AEO Agency |
-|---------|-------------|------------|--------------|--------------|------------|
-| **Type** | Local Biz | Local Biz | E-commerce | SaaS/Digital | Service Biz |
-| **Complexity** | Medium | Medium | High | High | Medium-High |
-| **Schema Types** | 5 | 6 | 7 | 6 | 8 |
-| **DB Tables** | 10 | 12 | 15 | 18 | 20 |
-| **Backend Complexity** | Medium | Medium | High | Very High | High |
-| **AEO Focus** | Local | Local | Product | Software | Thought Leadership |
-| **Best For** | Cafes, Restaurants | Salons, Spas | Retail, Merch | SaaS, Tools | Agencies, Consultants |
+| Feature | Coffee | Salon | T-Shirt | Digital | Agency | Headphones | Juice | Data Platform |
+|---------|--------|-------|---------|---------|--------|------------|-------|---------------|
+| **Type** | Local | Local | E-comm | SaaS | Service | Product | Product+Sub | Enterprise SaaS |
+| **Complexity** | Medium | Medium | High | High | High | Medium | Very High | Very High |
+| **Schema Types** | 5 | 6 | 7 | 6 | 6 | 6 | 6 | 5 |
+| **AEOWEB** | 100% | 100% | 100% | 100% | 100% | 100% | 100% | 100% |
+| **AEO Focus** | Local | Local | Product | Software | Services | Single SKU | Subscription | B2B Tech |
+| **Best For** | Cafes | Salons | Retail | SaaS | Agencies | Products | Consumables | Enterprise |
+| **Tech Stack** | Basic | Basic | Medium | Medium | Medium | Medium | Advanced | Advanced |
+| **Features** | - | - | - | - | - | Stripe | WASM | Multi-tech |
 
 ---
 

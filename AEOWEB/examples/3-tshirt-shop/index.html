@@ -67,6 +67,30 @@
   }
   </script>
 
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Urban Threads",
+    "url": "https://urbanthreads.com"
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://urbanthreads.com"
+    }]
+  }
+  </script>
+
   <!-- FAQ Schema -->
   <script type="application/ld+json">
   {
@@ -453,7 +477,7 @@
   <header>
     <div class="header-container">
       <a href="index.html" class="logo">Urban<span>Threads</span></a>
-      <nav>
+      <nav aria-label="Main Navigation">
         <a href="#shop">Shop</a>
         <a href="#custom">Custom Design</a>
         <a href="#about">About</a>
@@ -465,6 +489,7 @@
     </div>
   </header>
 
+  <main>
   <!-- Hero Section -->
   <section class="hero">
     <h1>Your Design, Your Style</h1>
@@ -625,6 +650,7 @@
       <a href="#design-tool" class="btn btn-secondary">Start Designing Now</a>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer>

@@ -17,6 +17,30 @@
   <meta property="og:price:amount" content="299.00">
   <meta property="og:price:currency" content="USD">
 
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SoundWave Pro",
+    "url": "https://soundwavepro.com"
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://soundwavepro.com"
+    }]
+  }
+  </script>
+
   <!-- JSON-LD Schema - Product -->
   <script type="application/ld+json">
   {
@@ -500,13 +524,19 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">🎧 SoundWave Pro</div>
-        <div id="userStatus">
-          <button class="btn btn-secondary" onclick="showAuthModal()">Sign In</button>
-        </div>
+        <nav aria-label="Main Navigation" style="display: flex; gap: 1.5rem; align-items: center;">
+          <a href="#features" style="text-decoration: none; color: var(--dark); font-weight: 500;">Features</a>
+          <a href="#specs" style="text-decoration: none; color: var(--dark); font-weight: 500;">Specs</a>
+          <a href="#reviews" style="text-decoration: none; color: var(--dark); font-weight: 500;">Reviews</a>
+          <div id="userStatus">
+            <button class="btn btn-secondary" onclick="showAuthModal()">Sign In</button>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
 
+  <main>
   <!-- Hero Section -->
   <section class="hero container">
     <div class="product-image">
@@ -700,6 +730,7 @@
       <button class="btn btn-secondary" onclick="buyNow()">Buy SoundWave Pro - $299</button>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer>

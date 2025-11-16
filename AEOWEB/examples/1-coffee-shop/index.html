@@ -127,6 +127,64 @@
       }]
     }
     </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are your hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We're open Monday through Friday from 7:00 AM to 7:00 PM, and Saturday through Sunday from 8:00 AM to 8:00 PM. We're open every day of the year except Thanksgiving and Christmas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you have WiFi for remote work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We offer free high-speed fiber-optic WiFi to all customers. We have plenty of power outlets, comfortable seating, and a quiet atmosphere perfect for remote work or studying. Many of our regulars use Bean & Brew as their daily coworking space."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Bean & Brew Coffee located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We're located at 742 Pike Street in downtown Seattle, WA 98101. We're just two blocks from Pike Place Market, easily accessible by bus, and have street parking nearby."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer plant-based milk options?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! We offer oat milk, almond milk, soy milk, and coconut milk at no extra charge. All our plant-based milks are organic and locally sourced when possible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I buy your coffee beans to brew at home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We sell our freshly roasted beans by the pound ($16/lb). We also offer a monthly coffee subscription where we ship freshly roasted beans to your door. Choose from our signature blend or rotating single-origin options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you cater for corporate events or meetings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We provide coffee catering for corporate meetings, conferences, and events. Our catering includes fresh brewed coffee, espresso drinks, pastries, and all necessary equipment. Minimum order of 10 people."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 
@@ -367,71 +425,47 @@
 
                 <div class="faq-list">
 
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">What are your hours?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>
-                                    We're open Monday through Friday from 7:00 AM to 7:00 PM, and Saturday through Sunday from 8:00 AM to 8:00 PM. We're open every day of the year except Thanksgiving and Christmas.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="faq-item">
+                        <h3>What are your hours?</h3>
+                        <p>
+                            We're open Monday through Friday from 7:00 AM to 7:00 PM, and Saturday through Sunday from 8:00 AM to 8:00 PM. We're open every day of the year except Thanksgiving and Christmas.
+                        </p>
+                    </article>
 
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Do you have WiFi for remote work?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>
-                                    Yes! We offer free high-speed fiber-optic WiFi to all customers. We have plenty of power outlets, comfortable seating, and a quiet atmosphere perfect for remote work or studying. Many of our regulars use Bean & Brew as their daily coworking space.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="faq-item">
+                        <h3>Do you have WiFi for remote work?</h3>
+                        <p>
+                            Yes! We offer free high-speed fiber-optic WiFi to all customers. We have plenty of power outlets, comfortable seating, and a quiet atmosphere perfect for remote work or studying. Many of our regulars use Bean & Brew as their daily coworking space.
+                        </p>
+                    </article>
 
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Where is Bean & Brew Coffee located?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>
-                                    We're located at 742 Pike Street in downtown Seattle, WA 98101. We're just two blocks from Pike Place Market, easily accessible by bus, and have street parking nearby. <a href="pages/location.html">Get detailed directions</a>.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="faq-item">
+                        <h3>Where is Bean & Brew Coffee located?</h3>
+                        <p>
+                            We're located at 742 Pike Street in downtown Seattle, WA 98101. We're just two blocks from Pike Place Market, easily accessible by bus, and have street parking nearby. <a href="pages/location.html">Get detailed directions</a>.
+                        </p>
+                    </article>
 
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Do you offer plant-based milk options?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>
-                                    Absolutely! We offer oat milk, almond milk, soy milk, and coconut milk at no extra charge. All our plant-based milks are organic and locally sourced when possible.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="faq-item">
+                        <h3>Do you offer plant-based milk options?</h3>
+                        <p>
+                            Absolutely! We offer oat milk, almond milk, soy milk, and coconut milk at no extra charge. All our plant-based milks are organic and locally sourced when possible.
+                        </p>
+                    </article>
 
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Can I buy your coffee beans to brew at home?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>
-                                    Yes! We sell our freshly roasted beans by the pound ($16/lb). We also offer a monthly coffee subscription where we ship freshly roasted beans to your door. Choose from our signature blend or rotating single-origin options.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="faq-item">
+                        <h3>Can I buy your coffee beans to brew at home?</h3>
+                        <p>
+                            Yes! We sell our freshly roasted beans by the pound ($16/lb). We also offer a monthly coffee subscription where we ship freshly roasted beans to your door. Choose from our signature blend or rotating single-origin options.
+                        </p>
+                    </article>
 
-                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h3 itemprop="name">Do you cater for corporate events or meetings?</h3>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                <p>
-                                    Yes! We provide coffee catering for corporate meetings, conferences, and events. Our catering includes fresh brewed coffee, espresso drinks, pastries, and all necessary equipment. Minimum order of 10 people. <a href="pages/catering.html">Learn more about catering</a>.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <article class="faq-item">
+                        <h3>Do you cater for corporate events or meetings?</h3>
+                        <p>
+                            Yes! We provide coffee catering for corporate meetings, conferences, and events. Our catering includes fresh brewed coffee, espresso drinks, pastries, and all necessary equipment. Minimum order of 10 people. <a href="pages/catering.html">Learn more about catering</a>.
+                        </p>
+                    </article>
 
                 </div>
             </div>

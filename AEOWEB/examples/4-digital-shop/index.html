@@ -38,17 +38,127 @@
   }
   </script>
 
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DesignKit Pro",
+    "url": "https://designkit.pro"
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://designkit.pro"
+    }]
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What frameworks does DesignKit Pro support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DesignKit Pro supports React, Vue, Svelte, and plain HTML/CSS. All components are available in multiple framework variants with full TypeScript support. We also provide versions for both Tailwind CSS and Styled Components."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I get lifetime updates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! With your one-time purchase, you get lifetime access to all updates. We release new components and templates every month, and you'll automatically get access to everything we release in the future."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use DesignKit Pro for client projects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! Your license allows unlimited use in personal and commercial projects, including client work. You can create unlimited end products for yourself or clients. The only restriction is you cannot resell or redistribute the source components."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's included in DesignKit Pro?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You get 1,200+ UI components, 50+ complete page templates, dashboard templates, e-commerce layouts, authentication flows, landing pages, Figma design files, full documentation, and video tutorials. Everything you need to build modern web applications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer refunds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! We offer a 30-day money-back guarantee. If you're not satisfied with DesignKit Pro for any reason, just email us within 30 days of purchase for a full refund."
+        }
+      }
+    ]
+  }
+  </script>
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --primary: #6366F1;
       --dark: #1E293B;
       --light: #F8FAFC;
+      --gray-600: #64748B;
+      --gray-50: #F8FAFC;
     }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
       color: var(--dark);
+    }
+    header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: 900;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
     }
     .hero {
       background: linear-gradient(135deg, var(--primary) 0%, #8B5CF6 100%);
@@ -56,7 +166,18 @@
       padding: 120px 20px;
       text-align: center;
     }
-    .hero h1 { font-size: 3.5em; margin-bottom: 20px; }
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .btn {
       padding: 15px 40px;
       background: white;
@@ -66,52 +187,196 @@
       font-weight: 700;
       cursor: pointer;
       font-size: 1.1em;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .section {
+      padding: 80px 20px;
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 50px;
+      font-weight: 900;
     }
     .features {
-      padding: 80px 20px;
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 40px;
     }
-    .feature { text-align: center; padding: 30px; }
-    .feature-icon { font-size: 3em; margin-bottom: 15px; }
-    footer { background: var(--dark); color: white; padding: 40px 20px; text-align: center; }
+    .feature {
+      text-align: center;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .feature-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+    }
+    .feature h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    .faq-section {
+      background: var(--gray-50);
+    }
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: white;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .faq-item h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    .faq-item p {
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+    .cta-section {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+    }
+    .cta-section h2 {
+      color: white;
+    }
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5em; }
+      .hero p { font-size: 1.1em; }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">DesignKit Pro</a>
+        <nav aria-label="Main Navigation">
+          <a href="#features">Features</a>
+          <a href="#components">Components</a>
+          <a href="#faq">FAQ</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
   <section class="hero">
     <h1>Beautiful Components.<br>Ship Faster.</h1>
-    <p style="font-size: 1.3em; margin-bottom: 30px;">1,200+ premium UI components. React, Vue, Tailwind. Lifetime access.</p>
-    <button class="btn">Get DesignKit Pro - $199</button>
+    <p>1,200+ premium UI components for React, Vue, and Tailwind. Build professional web apps in hours, not weeks. One-time payment, lifetime access.</p>
+    <a href="#pricing" class="btn">Get DesignKit Pro - $199</a>
   </section>
 
-  <section class="features">
-    <div class="feature">
-      <div class="feature-icon">⚡</div>
-      <h3>1,200+ Components</h3>
-      <p>Landing pages, dashboards, e-commerce, auth flows, and more.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🎨</div>
-      <h3>Multiple Frameworks</h3>
-      <p>React, Vue, Svelte, HTML. Tailwind CSS & Styled Components.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🔄</div>
-      <h3>Lifetime Updates</h3>
-      <p>Pay once, get updates forever. New components every month.</p>
-    </div>
-    <div class="feature">
-      <div-icon">📚</div>
-      <h3>Full Documentation</h3>
-      <p>Step-by-step guides, video tutorials, and Figma files included.</p>
+  <section class="section" id="features">
+    <div class="container">
+      <h2>Everything You Need to Build Modern Web Apps</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>1,200+ Components</h3>
+          <p>Landing pages, dashboards, e-commerce, auth flows, forms, tables, charts, and more. Every component you need to build production-ready applications.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <h3>Multiple Frameworks</h3>
+          <p>React, Vue, Svelte, and HTML. Tailwind CSS and Styled Components versions. Full TypeScript support with type definitions included.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔄</div>
+          <h3>Lifetime Updates</h3>
+          <p>Pay once, get updates forever. New components every month. Priority feature requests for all customers. No recurring fees ever.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📚</div>
+          <h3>Full Documentation</h3>
+          <p>Step-by-step guides, video tutorials, code examples, and Figma design files. Everything documented with live previews and copy-paste code.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>Production Ready</h3>
+          <p>Fully accessible (WCAG 2.1), responsive on all devices, optimized for performance. Used by 50,000+ developers worldwide in production apps.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💼</div>
+          <h3>Commercial License</h3>
+          <p>Use in unlimited personal and commercial projects. Create client work without restrictions. Lifetime license with no attribution required.</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>What frameworks does DesignKit Pro support?</h3>
+          <p>DesignKit Pro supports React, Vue, Svelte, and plain HTML/CSS. All components are available in multiple framework variants with full TypeScript support. We also provide versions for both Tailwind CSS and Styled Components.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Do I get lifetime updates?</h3>
+          <p>Yes! With your one-time purchase, you get lifetime access to all updates. We release new components and templates every month, and you'll automatically get access to everything we release in the future.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I use DesignKit Pro for client projects?</h3>
+          <p>Absolutely! Your license allows unlimited use in personal and commercial projects, including client work. You can create unlimited end products for yourself or clients. The only restriction is you cannot resell or redistribute the source components.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What's included in DesignKit Pro?</h3>
+          <p>You get 1,200+ UI components, 50+ complete page templates, dashboard templates, e-commerce layouts, authentication flows, landing pages, Figma design files, full documentation, and video tutorials. Everything you need to build modern web applications.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Do you offer refunds?</h3>
+          <p>Yes! We offer a 30-day money-back guarantee. If you're not satisfied with DesignKit Pro for any reason, just email us within 30 days of purchase for a full refund.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section" id="pricing">
+    <div class="container">
+      <h2>Ready to Build Faster?</h2>
+      <p>Join 50,000+ developers building better web apps with DesignKit Pro</p>
+      <a href="#buy" class="btn">Get Lifetime Access - $199</a>
+      <p style="margin-top: 20px; opacity: 0.9;">✓ 1,200+ Components &nbsp;&nbsp; ✓ Lifetime Updates &nbsp;&nbsp; ✓ 30-Day Money-Back Guarantee</p>
+    </div>
+  </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 DesignKit Pro. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2025 DesignKit Pro. All rights reserved.</p>
+      <p style="margin-top: 10px; opacity: 0.8;">Premium UI components for modern web applications</p>
+    </div>
   </footer>
 </body>
 </html>
