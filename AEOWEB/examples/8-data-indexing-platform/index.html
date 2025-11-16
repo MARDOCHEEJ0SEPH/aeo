@@ -140,6 +140,14 @@
       },
       {
         "@type": "Question",
+        "name": "How do I query data across Teradata and BigQuery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TeraIndex Pro provides three ways to query data: (1) SQL with federated queries - write standard SQL that joins data across Teradata and BigQuery transparently, (2) REST API - send JSON requests to our HTTP endpoints with automatic query routing, and (3) GraphQL - use type-safe queries with nested data fetching. Our smart query router automatically directs queries to Redis for cached data, Teradata for complex analytics, or BigQuery for large scans and ML predictions. You can also specify the data source explicitly if needed."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "How long does implementation take?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -470,6 +478,7 @@
         </a>
         <nav aria-label="Main Navigation">
           <a href="#features">Features</a>
+          <a href="#query">Query Data</a>
           <a href="#architecture">Architecture</a>
           <a href="#use-cases">Use Cases</a>
           <a href="#faq">FAQ</a>
@@ -562,8 +571,8 @@
 
         <div class="feature-card">
           <div class="feature-icon">🔍</div>
-          <h3>Advanced Search</h3>
-          <p>Full-text search, fuzzy matching, faceted search, geo-spatial queries, and complex Boolean logic. Customize ranking algorithms and boost relevance for your use case.</p>
+          <h3>Advanced Search & Query</h3>
+          <p>Full-text search, fuzzy matching, faceted search, geo-spatial queries, and complex Boolean logic. Query across Teradata and BigQuery simultaneously using SQL, REST API, or GraphQL. Customize ranking algorithms and boost relevance for your use case.</p>
         </div>
 
         <div class="feature-card">
@@ -582,6 +591,86 @@
           <div class="feature-icon">🎯</div>
           <h3>Query Optimization</h3>
           <p>Automatic query optimization, intelligent indexing strategies, materialized views, and partition pruning. Machine learning-based performance tuning reduces query costs by 60%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--light);" id="query">
+    <div class="container">
+      <h2>How You Query Data</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: var(--gray);">
+        Query billions of records across Teradata and BigQuery using familiar SQL syntax or REST/GraphQL APIs.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">📊 SQL Queries</h3>
+          <p style="margin-bottom: 15px;">Standard ANSI SQL with federated query support. Query Teradata and BigQuery in a single statement:</p>
+          <pre style="background: var(--dark); color: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em;"><code>SELECT t.customer_id, t.order_total, b.behavior_score
+FROM teradata.orders t
+JOIN bigquery.customer_analytics b
+  ON t.customer_id = b.customer_id
+WHERE t.order_date >= '2025-01-01'
+LIMIT 1000;</code></pre>
+        </div>
+
+        <div class="feature-card">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">🔌 REST API</h3>
+          <p style="margin-bottom: 15px;">RESTful API with JSON responses. Paginated results with sub-50ms latency:</p>
+          <pre style="background: var(--dark); color: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em;"><code>POST /api/v1/query
+{
+  "query": "SELECT * FROM products WHERE category = ?",
+  "params": ["electronics"],
+  "source": "auto",
+  "cache": true,
+  "limit": 100
+}</code></pre>
+        </div>
+
+        <div class="feature-card">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">🔗 GraphQL</h3>
+          <p style="margin-bottom: 15px;">Type-safe GraphQL queries with nested data fetching:</p>
+          <pre style="background: var(--dark); color: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em;"><code>query {
+  customers(limit: 10) {
+    id
+    name
+    orders {
+      id
+      total
+      items { productName }
+    }
+  }
+}</code></pre>
+        </div>
+
+        <div class="feature-card">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">⚡ Smart Query Routing</h3>
+          <p style="margin-bottom: 10px;"><strong>Automatic source selection:</strong></p>
+          <p>• <strong>Redis</strong> → Hot/cached data (sub-ms)</p>
+          <p>• <strong>Teradata</strong> → Complex analytics queries</p>
+          <p>• <strong>BigQuery</strong> → Large scans, ML predictions</p>
+          <p style="margin-top: 10px;">The system automatically routes your query to the optimal data source based on query patterns, data freshness, and performance requirements.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">📈 Query Examples</h3>
+          <p><strong>Full-text search:</strong></p>
+          <p style="font-family: monospace; font-size: 0.9em; background: var(--light); padding: 5px; margin: 5px 0;">SELECT * FROM products WHERE MATCH(description) AGAINST('wireless headphones')</p>
+          <p style="margin-top: 15px;"><strong>Aggregation:</strong></p>
+          <p style="font-family: monospace; font-size: 0.9em; background: var(--light); padding: 5px; margin: 5px 0;">SELECT category, COUNT(*), AVG(price) FROM products GROUP BY category</p>
+          <p style="margin-top: 15px;"><strong>Time-series:</strong></p>
+          <p style="font-family: monospace; font-size: 0.9em; background: var(--light); padding: 5px; margin: 5px 0;">SELECT DATE_TRUNC('hour', timestamp), COUNT(*) FROM events GROUP BY 1</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 style="color: var(--primary); margin-bottom: 15px;">🎯 Client Libraries</h3>
+          <p style="margin-bottom: 10px;">Official SDKs for popular languages:</p>
+          <p>• <strong>Python:</strong> pip install teraindex</p>
+          <p>• <strong>Node.js:</strong> npm install @teraindex/client</p>
+          <p>• <strong>Java:</strong> Maven/Gradle available</p>
+          <p>• <strong>Go:</strong> go get github.com/teraindex/client</p>
+          <p style="margin-top: 15px; font-size: 0.95em; color: var(--gray);">All SDKs include connection pooling, automatic retries, and built-in caching.</p>
         </div>
       </div>
     </div>
@@ -715,6 +804,11 @@
         <article class="faq-item">
           <h3>How does BigQuery integration work as a data provider?</h3>
           <p>BigQuery serves as a primary data source and data lake for TeraIndex Pro. We use BigQuery's federated query capabilities to access data directly from your GCP data warehouse, leverage BigQuery Storage API for high-speed data transfer, and sync indexed data bi-directionally. This allows you to query across both Teradata's analytical power and BigQuery's serverless data lake in a unified interface. BigQuery ML models can also be integrated for predictive analytics and recommendations.</p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How do I query data across Teradata and BigQuery?</h3>
+          <p>TeraIndex Pro provides three ways to query data: (1) SQL with federated queries - write standard SQL that joins data across Teradata and BigQuery transparently, (2) REST API - send JSON requests to our HTTP endpoints with automatic query routing, and (3) GraphQL - use type-safe queries with nested data fetching. Our smart query router automatically directs queries to Redis for cached data, Teradata for complex analytics, or BigQuery for large scans and ML predictions. You can also specify the data source explicitly if needed.</p>
         </article>
 
         <article class="faq-item">
