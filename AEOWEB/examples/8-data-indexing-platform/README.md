@@ -22,8 +22,16 @@ This example demonstrates a 100% AEOWEB-compliant enterprise data indexing platf
 - Global cloud infrastructure with 35+ regions
 - Google Kubernetes Engine (GKE) for container orchestration
 - Cloud Storage for cost-effective archival
-- BigQuery integration for advanced analytics
+- Native integration with BigQuery
 - Auto-scaling based on workload
+
+#### 📊 BigQuery (Google Data Provider)
+- Serverless data warehouse and data lake
+- Primary data source for TeraIndex Pro
+- Federated queries across Teradata + BigQuery
+- BigQuery Storage API for high-speed data transfer
+- BigQuery ML integration for predictive analytics
+- Bi-directional data sync with sub-minute latency
 
 #### 🐳 Docker
 - Containerization for consistent deployments
@@ -102,6 +110,8 @@ This example demonstrates **100% compliance** with all AEOWEB requirements:
 
 ### Enterprise Architecture
 - **Multi-layer architecture** with clear separation of concerns
+- **Google data provider integration** via BigQuery
+- **Federated queries** across Teradata and BigQuery
 - **Horizontal scalability** via Kubernetes and containerization
 - **High availability** with multi-region deployment
 - **Performance optimization** through Redis caching
@@ -174,6 +184,7 @@ Unlike the other examples, this one:
 
 - [Teradata Database](https://www.teradata.com/)
 - [Google Cloud Platform](https://cloud.google.com/)
+- [BigQuery](https://cloud.google.com/bigquery)
 - [Docker](https://www.docker.com/)
 - [Redis](https://redis.io/)
 

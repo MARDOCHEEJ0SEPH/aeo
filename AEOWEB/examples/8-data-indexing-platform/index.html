@@ -64,11 +64,13 @@
     "featureList": [
       "Teradata database integration",
       "Google Cloud Platform deployment",
+      "BigQuery data provider integration",
       "Docker containerization",
       "Redis in-memory caching",
       "Horizontal auto-scaling",
       "Real-time indexing",
       "Multi-region replication",
+      "Federated query across Teradata and BigQuery",
       "Advanced query optimization"
     ]
   }
@@ -130,10 +132,18 @@
       },
       {
         "@type": "Question",
+        "name": "How does BigQuery integration work as a data provider?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BigQuery serves as a primary data source and data lake for TeraIndex Pro. We use BigQuery's federated query capabilities to access data directly from your GCP data warehouse, leverage BigQuery Storage API for high-speed data transfer, and sync indexed data bi-directionally. This allows you to query across both Teradata's analytical power and BigQuery's serverless data lake in a unified interface. BigQuery ML models can also be integrated for predictive analytics and recommendations."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "How long does implementation take?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Initial deployment on GCP using our Docker containers typically takes 2-4 weeks, including infrastructure setup, Teradata configuration, Redis cluster deployment, and data migration. Full production rollout with custom indexing strategies, optimization, and team training typically takes 8-12 weeks. We provide implementation services and support throughout the process."
+          "text": "Initial deployment on GCP using our Docker containers typically takes 2-4 weeks, including infrastructure setup, Teradata configuration, BigQuery connector setup, Redis cluster deployment, and data migration. Full production rollout with custom indexing strategies, optimization, and team training typically takes 8-12 weeks. We provide implementation services and support throughout the process."
         }
       }
     ]
@@ -473,11 +483,12 @@
   <section class="hero">
     <div class="container">
       <h1>Enterprise Data Indexing at Massive Scale</h1>
-      <p>Power your data infrastructure with Teradata's MPP architecture, Google Cloud Platform's global reach, Docker's portability, and Redis's lightning-fast caching. Index billions of records with sub-second query performance.</p>
+      <p>Power your data infrastructure with Teradata's MPP architecture, Google Cloud Platform's global reach, BigQuery's serverless data lake, Docker's portability, and Redis's lightning-fast caching. Index billions of records with sub-second query performance.</p>
 
       <div class="tech-stack">
         <div class="tech-badge">🗄️ Teradata</div>
         <div class="tech-badge">☁️ Google Cloud Platform</div>
+        <div class="tech-badge">📊 BigQuery</div>
         <div class="tech-badge">🐳 Docker</div>
         <div class="tech-badge">⚡ Redis</div>
       </div>
@@ -516,13 +527,19 @@
         <div class="feature-card">
           <div class="feature-icon">🗄️</div>
           <h3>Teradata MPP Power</h3>
-          <p>Leverage Teradata's massively parallel processing architecture to index and query petabytes of data. Linear scalability as your data grows from gigabytes to petabytes.</p>
+          <p>Leverage Teradata's massively parallel processing architecture to index and query petabytes of data. Linear scalability as your data grows from gigabytes to petabytes. Federated queries across Teradata and BigQuery.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">☁️</div>
           <h3>GCP Global Scale</h3>
-          <p>Deploy across Google Cloud Platform's 35+ regions worldwide. Auto-scale based on workload with GKE, leverage BigQuery integration, and utilize Cloud Storage for cost-effective archival.</p>
+          <p>Deploy across Google Cloud Platform's 35+ regions worldwide. Auto-scale based on workload with GKE, seamless BigQuery data lake integration, and utilize Cloud Storage for cost-effective archival.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>BigQuery Data Provider</h3>
+          <p>Native integration with Google BigQuery as a data source. Query federated data across Teradata and BigQuery, leverage BigQuery ML for predictive analytics, and sync data bi-directionally with sub-minute latency.</p>
         </div>
 
         <div class="feature-card">
@@ -582,6 +599,7 @@
           <h3>Layer 1: Data Ingestion</h3>
           <p>• Apache Kafka for streaming data ingestion</p>
           <p>• GCP Pub/Sub for event-driven architecture</p>
+          <p>• BigQuery as primary data provider (native GCP integration)</p>
           <p>• Batch import from S3, GCS, Azure Blob Storage</p>
           <p>• CDC connectors for MySQL, PostgreSQL, Oracle, SQL Server</p>
         </div>
@@ -597,9 +615,11 @@
         <div class="arch-layer">
           <h3>Layer 3: Storage</h3>
           <p>• Teradata database for primary analytical storage (hot data)</p>
+          <p>• BigQuery for data lake and serverless analytics</p>
           <p>• Redis clusters for in-memory caching and session data</p>
           <p>• GCP Cloud Storage for archival and cold data</p>
           <p>• Multi-region replication for high availability</p>
+          <p>• Federated queries across Teradata + BigQuery</p>
         </div>
 
         <div class="arch-layer">
@@ -693,8 +713,13 @@
         </article>
 
         <article class="faq-item">
+          <h3>How does BigQuery integration work as a data provider?</h3>
+          <p>BigQuery serves as a primary data source and data lake for TeraIndex Pro. We use BigQuery's federated query capabilities to access data directly from your GCP data warehouse, leverage BigQuery Storage API for high-speed data transfer, and sync indexed data bi-directionally. This allows you to query across both Teradata's analytical power and BigQuery's serverless data lake in a unified interface. BigQuery ML models can also be integrated for predictive analytics and recommendations.</p>
+        </article>
+
+        <article class="faq-item">
           <h3>How long does implementation take?</h3>
-          <p>Initial deployment on GCP using our Docker containers typically takes 2-4 weeks, including infrastructure setup, Teradata configuration, Redis cluster deployment, and data migration. Full production rollout with custom indexing strategies, optimization, and team training typically takes 8-12 weeks. We provide implementation services and support throughout the process.</p>
+          <p>Initial deployment on GCP using our Docker containers typically takes 2-4 weeks, including infrastructure setup, Teradata configuration, BigQuery connector setup, Redis cluster deployment, and data migration. Full production rollout with custom indexing strategies, optimization, and team training typically takes 8-12 weeks. We provide implementation services and support throughout the process.</p>
         </article>
       </div>
     </div>
@@ -734,7 +759,7 @@
         <a href="mailto:info@teraindexpro.com">info@teraindexpro.com</a>
       </p>
       <p style="margin-top: 15px; opacity: 0.8;">
-        Powered by Teradata • GCP • Docker • Redis
+        Powered by Teradata • GCP • BigQuery • Docker • Redis
       </p>
     </div>
   </footer>

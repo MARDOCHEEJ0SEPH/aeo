@@ -284,6 +284,7 @@ This folder contains **complete, customized implementations** of the AEOWEB fram
 ### Technology Stack
 - **Teradata**: MPP database for petabyte-scale analytics
 - **GCP**: Google Cloud Platform for global deployment
+- **BigQuery**: Google's serverless data warehouse (data provider)
 - **Docker**: Containerization for consistent deployments
 - **Redis**: In-memory caching for sub-millisecond performance
 
