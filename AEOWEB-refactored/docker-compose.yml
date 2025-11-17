@@ -1,0 +1,340 @@
+version: '3.8'
+
+services:
+  # Frontend (React + Vite)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:4000
+      - VITE_GRAPHQL_URL=http://localhost:4001/graphql
+      - VITE_GRAPHQL_WS_URL=ws://localhost:4001/graphql
+      - VITE_WS_URL=http://localhost:4000
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # API Gateway (Fastify)
+  gateway:
+    build:
+      context: ./backend/gateway
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/gateway:/app
+      - /app/node_modules
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - MONGODB_URI=mongodb://mongo:27017/aeoweb
+      - JWT_SECRET=dev-secret-change-in-production
+      - CORS_ORIGIN=http://localhost:3000
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # GraphQL Server (Apollo)
+  graphql:
+    build:
+      context: ./backend/graphql
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/graphql:/app
+      - /app/node_modules
+    ports:
+      - "4001:4001"
+    environment:
+      - NODE_ENV=development
+      - PORT=4001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - MONGODB_URI=mongodb://mongo:27017/aeoweb
+      - JWT_SECRET=dev-secret-change-in-production
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # AEO Service
+  aeo-service:
+    build:
+      context: ./backend/services/aeo
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/aeo:/app
+      - /app/node_modules
+    ports:
+      - "4002:4002"
+    environment:
+      - NODE_ENV=development
+      - PORT=4002
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Auth Service (JWT/OAuth/WebAuthn)
+  auth-service:
+    build:
+      context: ./backend/services/auth
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/auth:/app
+      - /app/node_modules
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=development
+      - PORT=8081
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=dev-secret-change-in-production
+      - JWT_EXPIRES_IN=15m
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET}
+      - WEBAUTHN_RP_ID=localhost
+      - WEBAUTHN_ORIGIN=http://localhost:3000
+      - APP_URL=http://localhost:8081
+      - FRONTEND_URL=http://localhost:3000
+    depends_on:
+      - postgres
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Content Service (CRUD + S3)
+  content-service:
+    build:
+      context: ./backend/services/content
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/content:/app
+      - /app/node_modules
+    ports:
+      - "8082:8082"
+    environment:
+      - NODE_ENV=development
+      - PORT=8082
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - MONGODB_URI=mongodb://mongo:27017/aeoweb
+      - REDIS_URL=redis://redis:6379
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - S3_BUCKET=${S3_BUCKET}
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Analytics Service (Events + Metrics)
+  analytics-service:
+    build:
+      context: ./backend/services/analytics
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/analytics:/app
+      - /app/node_modules
+    ports:
+      - "8083:8083"
+    environment:
+      - NODE_ENV=development
+      - PORT=8083
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Search Service (Elasticsearch)
+  search-service:
+    build:
+      context: ./backend/services/search
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/search:/app
+      - /app/node_modules
+    ports:
+      - "8084:8084"
+    environment:
+      - NODE_ENV=development
+      - PORT=8084
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - elasticsearch
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=aeoweb
+      - POSTGRES_USER=aeoweb
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aeoweb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aeoweb
+
+  # MongoDB
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=aeoweb
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/aeoweb --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - aeoweb
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - aeoweb
+
+  # Elasticsearch
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: curl -s http://localhost:9200 >/dev/null || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - aeoweb
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infrastructure/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - aeoweb
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-clock-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infrastructure/monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    networks:
+      - aeoweb
+
+  # Jaeger (Distributed Tracing)
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "14250:14250"
+      - "9411:9411"
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+    networks:
+      - aeoweb
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:
+  elasticsearch_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  aeoweb:
+    driver: bridge
