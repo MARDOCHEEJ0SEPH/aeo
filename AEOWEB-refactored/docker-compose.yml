@@ -80,6 +80,10 @@ services:
     build:
       context: ./backend/services/aeo
       dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/aeo:/app
+      - /app/node_modules
     ports:
       - "4002:4002"
     environment:
@@ -92,6 +96,117 @@ services:
     depends_on:
       - postgres
       - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Auth Service (JWT/OAuth/WebAuthn)
+  auth-service:
+    build:
+      context: ./backend/services/auth
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/auth:/app
+      - /app/node_modules
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=development
+      - PORT=8081
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=dev-secret-change-in-production
+      - JWT_EXPIRES_IN=15m
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${MICROSOFT_CLIENT_SECRET}
+      - WEBAUTHN_RP_ID=localhost
+      - WEBAUTHN_ORIGIN=http://localhost:3000
+      - APP_URL=http://localhost:8081
+      - FRONTEND_URL=http://localhost:3000
+    depends_on:
+      - postgres
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Content Service (CRUD + S3)
+  content-service:
+    build:
+      context: ./backend/services/content
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/content:/app
+      - /app/node_modules
+    ports:
+      - "8082:8082"
+    environment:
+      - NODE_ENV=development
+      - PORT=8082
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - MONGODB_URI=mongodb://mongo:27017/aeoweb
+      - REDIS_URL=redis://redis:6379
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - S3_BUCKET=${S3_BUCKET}
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Analytics Service (Events + Metrics)
+  analytics-service:
+    build:
+      context: ./backend/services/analytics
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/analytics:/app
+      - /app/node_modules
+    ports:
+      - "8083:8083"
+    environment:
+      - NODE_ENV=development
+      - PORT=8083
+      - DATABASE_URL=postgresql://aeoweb:password@postgres:5432/aeoweb
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    command: npm run dev
+    networks:
+      - aeoweb
+
+  # Search Service (Elasticsearch)
+  search-service:
+    build:
+      context: ./backend/services/search
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./backend/services/search:/app
+      - /app/node_modules
+    ports:
+      - "8084:8084"
+    environment:
+      - NODE_ENV=development
+      - PORT=8084
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - elasticsearch
+      - redis
+    command: npm run dev
     networks:
       - aeoweb
 
