@@ -1,0 +1,44 @@
+[package]
+name = "asa-frontend"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Workspace dependencies
+leptos.workspace = true
+leptos_meta.workspace = true
+leptos_router.workspace = true
+wasm-bindgen.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+# Local dependencies
+asa-models = { path = "../../shared/models" }
+
+# Additional dependencies
+web-sys = { version = "0.3", features = [
+    "Window",
+    "Document",
+    "Element",
+    "HtmlElement",
+    "Storage",
+    "History",
+    "Location",
+    "Request",
+    "RequestInit",
+    "Response",
+    "Headers",
+] }
+js-sys = "0.3"
+wasm-bindgen-futures = "0.4"
+gloo-net = { version = "0.5", features = ["http"] }
+console_error_panic_hook = "0.1"
+console_log = "1.0"
+log = "0.4"
+
+[features]
+hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
+csr = ["leptos/csr", "leptos_meta/csr", "leptos_router/csr"]
