@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- AEO-Optimized Meta Tags -->
+    <title>Baby Products Catalog - Shop All Baby Essentials | Little Wonders Baby Shop</title>
+    <meta name="description" content="Browse our complete collection of baby products: clothing, diapers, strollers, cribs, feeding essentials, toys, and more. Filter by age, category, or brand. Free shipping over $50.">
+    <meta name="keywords" content="baby products catalog, baby shopping, baby essentials list, newborn products, baby gear, baby supplies">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Baby Products Catalog | Little Wonders Baby Shop">
+    <meta property="og:description" content="Shop 1000+ baby products from trusted brands. Free shipping, easy returns.">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://littlewondersbaby.com/pages/products.html">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../assets/css/aeo-framework.css">
+    <link rel="stylesheet" href="../../../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://littlewondersbaby.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://littlewondersbaby.com/pages/products.html"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        .filters-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .product-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: box-shadow 0.3s;
+        }
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .product-card h3 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2a9d8f;
+        }
+        .rating {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        .tag {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        .tag.organic {
+            background: #d4edda;
+            color: #155724;
+        }
+        .tag.eco {
+            background: #cfe2ff;
+            color: #084298;
+        }
+        .tag.safety {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .tag.bestseller {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <h1>🍼 Little Wonders Baby Shop</h1>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <a href="../index.html">Home</a>
+                    <a href="products.html" class="active">Products</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#contact">Contact</a>
+                    <a href="cart.html" class="cart-link">🛒 Cart (0)</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Home</a> / <span>Products</span>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Shop All Baby Products</h1>
+        <p class="section-intro">Browse our complete collection of 1,000+ baby products from trusted brands. All items are safety-tested and backed by our satisfaction guarantee.</p>
+
+        <!-- Filters -->
+        <section class="filters-section">
+            <h2>Filter Products</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="filter-group">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="">All Categories</option>
+                        <option value="newborn">Newborn Essentials</option>
+                        <option value="clothing">Baby Clothing</option>
+                        <option value="furniture">Nursery Furniture</option>
+                        <option value="feeding">Feeding Essentials</option>
+                        <option value="diapers">Diapers & Wipes</option>
+                        <option value="travel">Strollers & Car Seats</option>
+                        <option value="toys">Toys & Books</option>
+                        <option value="bath">Bath & Skincare</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="age">Age Range</label>
+                    <select id="age">
+                        <option value="">All Ages</option>
+                        <option value="newborn">Newborn (0-3 months)</option>
+                        <option value="infant">Infant (3-12 months)</option>
+                        <option value="toddler">Toddler (1-3 years)</option>
+                        <option value="preschool">Preschool (3-5 years)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="price">Price Range</label>
+                    <select id="price">
+                        <option value="">All Prices</option>
+                        <option value="0-25">Under $25</option>
+                        <option value="25-50">$25 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="brand">Brand</label>
+                    <select id="brand">
+                        <option value="">All Brands</option>
+                        <option value="little-wonders">Little Wonders Essentials</option>
+                        <option value="greenbaby">GreenBaby</option>
+                        <option value="urban-baby">Urban Baby Gear</option>
+                        <option value="soft-start">Soft Start</option>
+                        <option value="happy-feet">Happy Feet Baby</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="features">Special Features</label>
+                    <select id="features">
+                        <option value="">All Products</option>
+                        <option value="organic">Organic</option>
+                        <option value="eco-friendly">Eco-Friendly</option>
+                        <option value="hypoallergenic">Hypoallergenic</option>
+                        <option value="safety-certified">Safety Certified</option>
+                        <option value="bestseller">Bestsellers</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort">Sort By</label>
+                    <select id="sort">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+            <button id="apply-filters" class="btn btn-primary" style="margin-top: 15px;">Apply Filters</button>
+        </section>
+
+        <!-- Products Grid -->
+        <section id="products-container">
+            <div class="products-grid">
+                <!-- Product cards will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Load More -->
+        <div style="text-align: center; margin-top: 40px;">
+            <button id="load-more" class="btn btn-secondary">Load More Products</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Little Wonders Baby Shop. All rights reserved.</p>
+                <p><a href="../index.html">Back to Home</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data (in production, this would come from API)
+        const allProducts = [
+            {
+                id: 1,
+                name: "Organic Cotton Baby Onesies (3-Pack)",
+                description: "Ultra-soft GOTS-certified organic cotton onesies. Tagless design, snap closures, perfect for sensitive skin.",
+                price: 29.99,
+                category: "clothing",
+                age: "infant",
+                brand: "little-wonders",
+                features: ["organic"],
+                rating: 4.9,
+                reviews: 234,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 2,
+                name: "Eco-Friendly Disposable Diapers (Size 1, 100-count)",
+                description: "Plant-based, chlorine-free diapers. Hypoallergenic, wetness indicator, 12-hour leak protection.",
+                price: 49.99,
+                category: "diapers",
+                age: "newborn",
+                brand: "greenbaby",
+                features: ["eco-friendly", "hypoallergenic"],
+                rating: 4.8,
+                reviews: 567,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 3,
+                name: "Premium Baby Stroller with Bassinet",
+                description: "All-terrain wheels, one-hand fold, reversible seat, adjustable handlebar. Includes rain cover.",
+                price: 399.99,
+                category: "travel",
+                age: "newborn",
+                brand: "urban-baby",
+                features: ["safety-certified"],
+                rating: 4.7,
+                reviews: 189,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 4,
+                name: "Convertible 4-in-1 Crib",
+                description: "Grows with your baby: crib, toddler bed, daybed, full-size bed. Solid wood construction.",
+                price: 349.99,
+                category: "furniture",
+                age: "newborn",
+                brand: "little-wonders",
+                features: ["safety-certified", "bestseller"],
+                rating: 4.9,
+                reviews: 412,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 5,
+                name: "Wearable Electric Breast Pump (Double)",
+                description: "Hands-free, quiet operation, rechargeable battery. 9 suction levels, memory function.",
+                price: 279.99,
+                category: "feeding",
+                age: "newborn",
+                brand: "soft-start",
+                features: ["bestseller"],
+                rating: 4.6,
+                reviews: 328,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 6,
+                name: "Smart Baby Monitor with HD Camera",
+                description: "1080p HD video, night vision, two-way audio, temperature sensor. WiFi enabled.",
+                price: 159.99,
+                category: "furniture",
+                age: "newborn",
+                brand: "urban-baby",
+                features: ["safety-certified"],
+                rating: 4.7,
+                reviews: 523,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 7,
+                name: "Organic Bamboo Baby Washcloths (10-Pack)",
+                description: "Super soft bamboo washcloths. Naturally antibacterial, ultra-absorbent, gentle on skin.",
+                price: 19.99,
+                category: "bath",
+                age: "newborn",
+                brand: "greenbaby",
+                features: ["organic", "hypoallergenic"],
+                rating: 4.8,
+                reviews: 156,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 8,
+                name: "Wooden Activity Cube - Montessori Inspired",
+                description: "5-sided activity cube with bead maze, shape sorter, gears, and more. Non-toxic paint.",
+                price: 79.99,
+                category: "toys",
+                age: "infant",
+                brand: "happy-feet",
+                features: ["eco-friendly", "safety-certified"],
+                rating: 4.9,
+                reviews: 267,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 9,
+                name: "Infant Car Seat with Base",
+                description: "Rear-facing car seat for 4-35 lbs. Side-impact protection, easy installation, adjustable base.",
+                price: 229.99,
+                category: "travel",
+                age: "newborn",
+                brand: "urban-baby",
+                features: ["safety-certified", "bestseller"],
+                rating: 4.8,
+                reviews: 892,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 10,
+                name: "High Chair with Removable Tray",
+                description: "Adjustable height, reclining seat, dishwasher-safe tray. Grows from infant to toddler.",
+                price: 149.99,
+                category: "feeding",
+                age: "infant",
+                brand: "little-wonders",
+                features: ["safety-certified"],
+                rating: 4.7,
+                reviews: 445,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 11,
+                name: "Organic Cotton Swaddle Blankets (4-Pack)",
+                description: "Breathable muslin swaddles. Large 47x47 inches, gets softer with washing.",
+                price: 34.99,
+                category: "newborn",
+                age: "newborn",
+                brand: "greenbaby",
+                features: ["organic", "bestseller"],
+                rating: 4.9,
+                reviews: 678,
+                image: "../../../assets/images/placeholder-product.jpg"
+            },
+            {
+                id: 12,
+                name: "Baby Bathtub with Temperature Indicator",
+                description: "Ergonomic design, slip-resistant, color-changing temperature indicator, newborn insert included.",
+                price: 39.99,
+                category: "bath",
+                age: "newborn",
+                brand: "soft-start",
+                features: ["safety-certified"],
+                rating: 4.6,
+                reviews: 234,
+                image: "../../../assets/images/placeholder-product.jpg"
+            }
+        ];
+
+        let displayedProducts = [];
+        let filteredProducts = [];
+        let productsPerPage = 12;
+        let currentPage = 1;
+
+        // Initialize
+        function init() {
+            filteredProducts = [...allProducts];
+            loadProducts();
+            setupEventListeners();
+        }
+
+        // Load products into grid
+        function loadProducts() {
+            const container = document.querySelector('.products-grid');
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const productsToShow = filteredProducts.slice(startIndex, endIndex);
+
+            if (productsToShow.length === 0 && currentPage === 1) {
+                container.innerHTML = '<div class="no-results"><h3>No products found</h3><p>Try adjusting your filters</p></div>';
+                document.getElementById('load-more').style.display = 'none';
+                return;
+            }
+
+            productsToShow.forEach(product => {
+                const card = createProductCard(product);
+                container.appendChild(card);
+            });
+
+            displayedProducts = displayedProducts.concat(productsToShow);
+
+            // Hide load more button if all products are shown
+            if (displayedProducts.length >= filteredProducts.length) {
+                document.getElementById('load-more').style.display = 'none';
+            }
+        }
+
+        // Create product card HTML
+        function createProductCard(product) {
+            const card = document.createElement('article');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <div class="product-meta">
+                    <span class="price">$${product.price.toFixed(2)}</span>
+                    <span class="rating">⭐ ${product.rating} (${product.reviews})</span>
+                </div>
+                <div class="product-tags">
+                    ${product.features.map(f => {
+                        let tagClass = f.replace('-', '');
+                        let label = f.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        let icon = '';
+                        if (f === 'organic') icon = '🌱';
+                        else if (f === 'eco-friendly') icon = '♻️';
+                        else if (f === 'safety-certified') icon = '✅';
+                        else if (f === 'bestseller') icon = '🔥';
+                        else if (f === 'hypoallergenic') icon = '🌿';
+                        return `<span class="tag ${tagClass}">${icon} ${label}</span>`;
+                    }).join('')}
+                </div>
+                <button class="btn btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button>
+            `;
+            return card;
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const category = document.getElementById('category').value;
+            const age = document.getElementById('age').value;
+            const price = document.getElementById('price').value;
+            const brand = document.getElementById('brand').value;
+            const features = document.getElementById('features').value;
+            const sort = document.getElementById('sort').value;
+
+            filteredProducts = allProducts.filter(product => {
+                if (category && product.category !== category) return false;
+                if (age && product.age !== age) return false;
+                if (brand && product.brand !== brand) return false;
+                if (features && !product.features.includes(features)) return false;
+
+                if (price) {
+                    const [min, max] = price.split('-').map(p => p === '+' ? Infinity : parseInt(p));
+                    if (product.price < min || product.price > max) return false;
+                }
+
+                return true;
+            });
+
+            // Sort products
+            if (sort === 'price-low') {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if (sort === 'price-high') {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            } else if (sort === 'rating') {
+                filteredProducts.sort((a, b) => b.rating - a.rating);
+            } else if (sort === 'newest') {
+                filteredProducts.sort((a, b) => b.id - a.id);
+            }
+
+            // Reset and reload
+            currentPage = 1;
+            displayedProducts = [];
+            document.querySelector('.products-grid').innerHTML = '';
+            document.getElementById('load-more').style.display = 'block';
+            loadProducts();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            document.getElementById('apply-filters').addEventListener('click', applyFilters);
+
+            document.getElementById('load-more').addEventListener('click', () => {
+                currentPage++;
+                loadProducts();
+            });
+
+            // Add to cart
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const productId = parseInt(e.target.dataset.id);
+                    const product = allProducts.find(p => p.id === productId);
+                    addToCart(product);
+                }
+            });
+        }
+
+        // Add to cart function
+        function addToCart(product) {
+            alert(`Added "${product.name}" to cart!\n\n(This is a demo. In production, this would add to your shopping cart.)`);
+
+            // Update cart count
+            const cartLink = document.querySelector('.cart-link');
+            const currentCount = parseInt(cartLink.textContent.match(/\d+/)[0]);
+            cartLink.textContent = `🛒 Cart (${currentCount + 1})`;
+        }
+
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>
