@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: asa
+  labels:
+    name: asa
+    environment: production

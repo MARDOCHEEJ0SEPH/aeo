@@ -1,0 +1,20 @@
+[[hooks]]
+stage = "pre_build"
+command = "sh"
+command_arguments = ["-c", "echo 'Building WASM application...'"]
+
+[build]
+target = "index.html"
+dist = "dist"
+public_url = "/"
+
+[watch]
+ignore = ["dist"]
+
+[serve]
+address = "127.0.0.1"
+port = 8080
+open = false
+
+[[proxy]]
+backend = "http://127.0.0.1:3000/api/"

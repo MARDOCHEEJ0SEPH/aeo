@@ -1,0 +1,209 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_VERSION: "1.75"
+
+jobs:
+  # Rust Backend Tests
+  test-backend:
+    name: Test Backend Services
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: asa
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: asa_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          components: rustfmt, clippy
+
+      - name: Cache Cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Check Formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Run Tests
+        env:
+          DATABASE_URL: postgres://asa:password@localhost:5432/asa_test
+          REDIS_URL: redis://localhost:6379
+        run: cargo test --all --verbose
+
+      - name: Build All Services
+        run: cargo build --release --all
+
+  # Frontend Tests
+  test-frontend:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          targets: wasm32-unknown-unknown
+
+      - name: Install Trunk
+        run: cargo install trunk
+
+      - name: Build Frontend
+        working-directory: frontend/app
+        run: trunk build --release
+
+      - name: Upload Frontend Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-dist
+          path: frontend/app/dist
+
+  # Security Audit
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+
+      - name: Run Security Audit
+        run: cargo audit
+
+  # Docker Build
+  build-docker:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push Gateway
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./backend/gateway/Dockerfile
+          push: true
+          tags: asa/gateway:latest,asa/gateway:${{ github.sha }}
+
+      - name: Build and Push Auth Service
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./backend/services/auth/Dockerfile
+          push: true
+          tags: asa/auth-service:latest,asa/auth-service:${{ github.sha }}
+
+      - name: Build and Push Content Service
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./backend/services/content/Dockerfile
+          push: true
+          tags: asa/content-service:latest,asa/content-service:${{ github.sha }}
+
+      - name: Build and Push Analytics Service
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./backend/services/analytics/Dockerfile
+          push: true
+          tags: asa/analytics-service:latest,asa/analytics-service:${{ github.sha }}
+
+      - name: Build and Push Search Service
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./backend/services/search/Dockerfile
+          push: true
+          tags: asa/search-service:latest,asa/search-service:${{ github.sha }}
+
+  # Deploy to Kubernetes
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    needs: [build-docker]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Set up Kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f infrastructure/kubernetes/namespace.yaml
+          kubectl apply -f infrastructure/kubernetes/configmap.yaml
+          kubectl apply -f infrastructure/kubernetes/secrets.yaml
+          kubectl apply -f infrastructure/kubernetes/
+
+      - name: Verify Deployment
+        run: |
+          kubectl rollout status deployment/gateway -n asa
+          kubectl rollout status deployment/auth-service -n asa
+          kubectl rollout status deployment/content-service -n asa

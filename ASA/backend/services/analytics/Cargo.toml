@@ -1,0 +1,46 @@
+[package]
+name = "asa-analytics"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+# Async runtime
+tokio.workspace = true
+async-trait.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Database
+sqlx.workspace = true
+redis.workspace = true
+scylla.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Observability
+tracing.workspace = true
+metrics.workspace = true
+
+# Utilities
+uuid.workspace = true
+chrono.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+config.workspace = true
+dotenvy.workspace = true
+
+# HTTP client
+reqwest.workspace = true
+
+# Shared crates
+asa-models = { path = "../../../shared/models" }
+asa-database = { path = "../../../shared/database" }
+asa-telemetry = { path = "../../../shared/telemetry" }
+
+# Additional dependencies
+dashmap = "5.5"  # Concurrent hashmap for real-time aggregation

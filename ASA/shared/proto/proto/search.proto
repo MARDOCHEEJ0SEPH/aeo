@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package asa.search.v1;
+
+service SearchService {
+  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc AEOSearch(AEOSearchRequest) returns (AEOSearchResponse);
+  rpc Suggest(SuggestRequest) returns (SuggestResponse);
+  rpc IndexContent(IndexContentRequest) returns (IndexContentResponse);
+}
+
+message SearchRequest {
+  string query = 1;
+  optional int32 limit = 2;
+  optional int32 offset = 3;
+}
+
+message SearchResponse {
+  repeated SearchResult results = 1;
+  int32 total = 2;
+  string query = 3;
+  int64 processing_time_ms = 4;
+}
+
+message SearchResult {
+  string id = 1;
+  string title = 2;
+  string snippet = 3;
+  double score = 4;
+  string content_type = 5;
+  string url = 6;
+}
+
+message AEOSearchRequest {
+  string query = 1;
+  string platform = 2;
+  optional string intent = 3;
+}
+
+message AEOSearchResponse {
+  optional string direct_answer = 1;
+  optional SearchResult featured_content = 2;
+  repeated SearchResult related_results = 3;
+  repeated string suggested_questions = 4;
+}
+
+message SuggestRequest {
+  string query = 1;
+  optional int32 limit = 2;
+}
+
+message SuggestResponse {
+  repeated Suggestion suggestions = 1;
+}
+
+message Suggestion {
+  string text = 1;
+  double score = 2;
+  optional int32 result_count = 3;
+}
+
+message IndexContentRequest {
+  string content_id = 1;
+  string title = 2;
+  string body = 3;
+  string content_type = 4;
+}
+
+message IndexContentResponse {
+  bool success = 1;
+}

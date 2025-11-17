@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package asa.analytics.v1;
+
+service AnalyticsService {
+  rpc TrackEvent(TrackEventRequest) returns (TrackEventResponse);
+  rpc TrackCitation(TrackCitationRequest) returns (TrackCitationResponse);
+  rpc GetPerformance(GetPerformanceRequest) returns (GetPerformanceResponse);
+}
+
+message TrackEventRequest {
+  string event_type = 1;
+  optional string user_id = 2;
+  optional string session_id = 3;
+  map<string, string> properties = 4;
+}
+
+message TrackEventResponse {
+  string event_id = 1;
+  string timestamp = 2;
+}
+
+message TrackCitationRequest {
+  string platform = 1;
+  optional string content_id = 2;
+  string query = 3;
+  bool cited = 4;
+  optional string citation_text = 5;
+  optional int32 position = 6;
+}
+
+message TrackCitationResponse {
+  string citation_id = 1;
+  string timestamp = 2;
+}
+
+message GetPerformanceRequest {
+  string content_id = 1;
+}
+
+message GetPerformanceResponse {
+  repeated PlatformPerformance platforms = 1;
+  double overall_score = 2;
+  int64 citation_count = 3;
+}
+
+message PlatformPerformance {
+  string platform = 1;
+  int64 citations = 2;
+  double avg_position = 3;
+  double citation_rate = 4;
+}

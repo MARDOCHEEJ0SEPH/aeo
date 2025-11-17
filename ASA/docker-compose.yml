@@ -1,0 +1,179 @@
+version: '3.8'
+
+services:
+  # PostgreSQL - Primary Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: asa_postgres
+    environment:
+      POSTGRES_DB: asa
+      POSTGRES_USER: asa_user
+      POSTGRES_PASSWORD: asa_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U asa_user -d asa"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - asa-network
+
+  # Redis - Cache Layer
+  redis:
+    image: redis:7-alpine
+    container_name: asa_redis
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - asa-network
+
+  # MeiliSearch - Search Engine
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: asa_meilisearch
+    environment:
+      MEILI_ENV: development
+      MEILI_MASTER_KEY: masterKey123
+      MEILI_NO_ANALYTICS: "true"
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+    networks:
+      - asa-network
+
+  # ScyllaDB - Time-series Data
+  scylla:
+    image: scylladb/scylla:latest
+    container_name: asa_scylla
+    command: --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+    ports:
+      - "9042:9042"
+      - "9160:9160"
+    volumes:
+      - scylla_data:/var/lib/scylla
+    networks:
+      - asa-network
+
+  # Prometheus - Metrics Collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: asa_prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infrastructure/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - asa-network
+
+  # Grafana - Metrics Visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: asa_grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_INSTALL_PLUGINS: grafana-clock-panel
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infrastructure/monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    networks:
+      - asa-network
+
+  # Jaeger - Distributed Tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: asa_jaeger
+    environment:
+      COLLECTOR_ZIPKIN_HOST_PORT: 9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"  # UI
+      - "14268:14268"  # Collector
+      - "14250:14250"
+      - "9411:9411"
+    networks:
+      - asa-network
+
+  # API Gateway (Rust)
+  gateway:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/gateway.Dockerfile
+    container_name: asa_gateway
+    environment:
+      ENVIRONMENT: development
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATABASE_URL: postgres://asa_user:asa_password@postgres:5432/asa
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: your-jwt-secret-change-in-production
+      AUTH_SERVICE_URL: http://auth:3001
+      CONTENT_SERVICE_URL: http://content:3002
+      ANALYTICS_SERVICE_URL: http://analytics:3003
+      SEARCH_SERVICE_URL: http://search:3004
+      RUST_LOG: debug
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - asa-network
+    restart: unless-stopped
+
+  # NGINX - Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: asa_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infrastructure/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - gateway
+    networks:
+      - asa-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  meilisearch_data:
+    driver: local
+  scylla_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  asa-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

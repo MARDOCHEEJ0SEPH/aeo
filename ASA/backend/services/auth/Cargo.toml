@@ -1,0 +1,52 @@
+[package]
+name = "asa-auth"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+# Async runtime
+tokio.workspace = true
+async-trait.workspace = true
+
+# Web framework
+axum.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+
+# Database
+sqlx.workspace = true
+redis.workspace = true
+
+# Authentication
+jsonwebtoken.workspace = true
+argon2.workspace = true
+webauthn-rs.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Observability
+tracing.workspace = true
+metrics.workspace = true
+
+# Utilities
+uuid.workspace = true
+chrono.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+config.workspace = true
+dotenvy.workspace = true
+
+# HTTP client for OAuth
+reqwest.workspace = true
+
+# Shared crates
+asa-models = { path = "../../../shared/models" }
+asa-database = { path = "../../../shared/database" }
+asa-telemetry = { path = "../../../shared/telemetry" }
+
+# Additional dependencies
+base64 = "0.21"
+url = "2.5"
+rand = "0.8"

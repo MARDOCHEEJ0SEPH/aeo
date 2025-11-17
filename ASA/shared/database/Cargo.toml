@@ -1,0 +1,16 @@
+[package]
+name = "asa-database"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+tokio.workspace = true
+sqlx.workspace = true
+redis.workspace = true
+anyhow.workspace = true
+uuid.workspace = true
+chrono.workspace = true
+serde.workspace = true
+
+# Local
+asa-models = { path = "../models" }
