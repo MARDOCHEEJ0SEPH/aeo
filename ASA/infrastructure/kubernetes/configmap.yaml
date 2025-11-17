@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: asa-config
+  namespace: asa
+data:
+  # Database URLs
+  DATABASE_URL: "postgresql://asa:password@postgres:5432/asa"
+  REDIS_URL: "redis://redis:6379"
+  SCYLLA_NODES: "scylla:9042"
+  SCYLLA_KEYSPACE: "asa_analytics"
+  MEILISEARCH_URL: "http://meilisearch:7700"
+
+  # Service addresses
+  AUTH_ADDRESS: "0.0.0.0:8081"
+  CONTENT_ADDRESS: "0.0.0.0:8082"
+  ANALYTICS_ADDRESS: "0.0.0.0:8083"
+  SEARCH_ADDRESS: "0.0.0.0:8084"
+  GATEWAY_ADDRESS: "0.0.0.0:8080"
+
+  # Service URLs for gateway
+  AUTH_SERVICE_URL: "http://auth-service:8081"
+  CONTENT_SERVICE_URL: "http://content-service:8082"
+  ANALYTICS_SERVICE_URL: "http://analytics-service:8083"
+  SEARCH_SERVICE_URL: "http://search-service:8084"
+
+  # JWT
+  JWT_ACCESS_EXPIRY: "900"
+  JWT_REFRESH_EXPIRY: "604800"
+
+  # WebAuthn
+  WEBAUTHN_RP_ID: "asa-platform.com"
+  WEBAUTHN_RP_NAME: "ASA Platform"
+  WEBAUTHN_RP_ORIGIN: "https://asa-platform.com"
