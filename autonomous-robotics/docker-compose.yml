@@ -1,0 +1,349 @@
+version: '3.8'
+
+services:
+  # Neural Core - The AI Brain
+  neural-core:
+    build: ./services/neural-core
+    container_name: robotics_neural_core
+    environment:
+      - NODE_ENV=production
+      - AI_DECISION_MODE=autonomous
+      - LEARNING_ENABLED=true
+      - EVOLUTION_SPEED=aggressive
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    depends_on:
+      - database
+      - redis
+      - elasticsearch
+    networks:
+      - robotics-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Content Generation Service
+  content-generator:
+    build: ./services/content-generator
+    container_name: robotics_content_generator
+    environment:
+      - NODE_ENV=production
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GENERATION_RATE=10_per_day
+      - OPTIMIZATION_LEVEL=maximum
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - REDIS_URL=redis://redis:6379
+      - NEURAL_CORE_URL=http://neural-core:3000
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 3G
+    depends_on:
+      - neural-core
+      - database
+      - redis
+    networks:
+      - robotics-network
+    volumes:
+      - content_storage:/app/generated_content
+
+  # AEO/LLMO Optimization Service
+  aeo-llmo-optimizer:
+    build: ./services/aeo-llmo-optimizer
+    container_name: robotics_aeo_optimizer
+    environment:
+      - NODE_ENV=production
+      - TARGET_PLATFORMS=chatgpt,claude,perplexity,gemini,bing
+      - OPTIMIZATION_FREQUENCY=hourly
+      - SCHEMA_AUTO_UPDATE=true
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - NEURAL_CORE_URL=http://neural-core:3000
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    volumes:
+      - ./database/schemas:/app/schemas
+      - content_storage:/app/content
+    networks:
+      - robotics-network
+    depends_on:
+      - neural-core
+      - elasticsearch
+
+  # Evolution Engine
+  evolution-engine:
+    build: ./services/evolution-engine
+    container_name: robotics_evolution_engine
+    environment:
+      - NODE_ENV=production
+      - EVOLUTION_MODE=autonomous
+      - TEST_GENERATION=automatic
+      - DEPLOYMENT_STRATEGY=blue_green
+      - AB_TEST_CONCURRENT=10
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - REDIS_URL=redis://redis:6379
+      - NEURAL_CORE_URL=http://neural-core:3000
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+    depends_on:
+      - neural-core
+      - analytics-service
+    networks:
+      - robotics-network
+
+  # Analytics & Monitoring Service
+  analytics-service:
+    build: ./services/analytics-service
+    container_name: robotics_analytics
+    environment:
+      - NODE_ENV=production
+      - TRACKING_MODE=comprehensive
+      - AI_METRICS_ENABLED=true
+      - REAL_TIME_ANALYSIS=true
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - REDIS_URL=redis://redis:6379
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    ports:
+      - "3001:3001"
+    networks:
+      - robotics-network
+    depends_on:
+      - database
+      - elasticsearch
+
+  # Business Operations Service
+  business-operations:
+    build: ./services/business-operations
+    container_name: robotics_business_ops
+    environment:
+      - NODE_ENV=production
+      - AUTONOMOUS_PRICING=true
+      - LEAD_AUTO_QUALIFICATION=true
+      - AUTO_RESPONSE_ENABLED=true
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - REDIS_URL=redis://redis:6379
+      - NEURAL_CORE_URL=http://neural-core:3000
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - robotics-network
+    depends_on:
+      - neural-core
+      - database
+
+  # Monitoring & Self-Healing Service
+  monitoring-service:
+    build: ./services/monitoring-service
+    container_name: robotics_monitoring
+    environment:
+      - NODE_ENV=production
+      - SELF_HEALING_ENABLED=true
+      - AUTO_SCALING_ENABLED=true
+      - ALERT_THRESHOLD=critical_only
+      - DATABASE_URL=postgresql://postgres:password@database:5432/robotics_brain
+      - REDIS_URL=redis://redis:6379
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - robotics-network
+    depends_on:
+      - neural-core
+
+  # API Gateway
+  api-gateway:
+    build: ./services/api-gateway
+    container_name: robotics_api_gateway
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - RATE_LIMITING=adaptive
+      - CACHE_STRATEGY=intelligent
+      - REDIS_URL=redis://redis:6379
+      - NEURAL_CORE_URL=http://neural-core:3000
+      - CONTENT_GEN_URL=http://content-generator:3002
+      - ANALYTICS_URL=http://analytics-service:3001
+      - BUSINESS_OPS_URL=http://business-operations:3003
+    deploy:
+      replicas: 3
+      update_config:
+        order: rolling
+        delay: 10s
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - robotics-network
+    depends_on:
+      - neural-core
+      - redis
+
+  # PostgreSQL Database Cluster
+  database:
+    image: postgres:15-alpine
+    container_name: robotics_database
+    environment:
+      - POSTGRES_DB=robotics_brain
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_INITDB_ARGS=--encoding=UTF8
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schemas:/docker-entrypoint-initdb.d
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+    ports:
+      - "5432:5432"
+    networks:
+      - robotics-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache & Message Queue
+  redis:
+    image: redis:7-alpine
+    container_name: robotics_redis
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    volumes:
+      - redis_data:/data
+    networks:
+      - robotics-network
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Elasticsearch for Knowledge Graph
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: robotics_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          memory: 2G
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - robotics-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Frontend Application
+  frontend:
+    build: ./frontend
+    container_name: robotics_frontend
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_URL=http://api-gateway:3000
+      - REACT_APP_ANALYTICS_ENABLED=true
+    ports:
+      - "8080:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - robotics-network
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  elastic_data:
+    driver: local
+  content_storage:
+    driver: local
+
+networks:
+  robotics-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
