@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package asa.content.v1;
+
+service ContentService {
+  rpc GetContent(GetContentRequest) returns (GetContentResponse);
+  rpc CreateContent(CreateContentRequest) returns (CreateContentResponse);
+  rpc UpdateContent(UpdateContentRequest) returns (UpdateContentResponse);
+  rpc DeleteContent(DeleteContentRequest) returns (DeleteContentResponse);
+  rpc OptimizeContent(OptimizeContentRequest) returns (OptimizeContentResponse);
+}
+
+message GetContentRequest {
+  string content_id = 1;
+}
+
+message GetContentResponse {
+  Content content = 1;
+}
+
+message CreateContentRequest {
+  string title = 1;
+  string body = 2;
+  string content_type = 3;
+  string author_id = 4;
+}
+
+message CreateContentResponse {
+  Content content = 1;
+}
+
+message UpdateContentRequest {
+  string content_id = 1;
+  optional string title = 2;
+  optional string body = 3;
+  optional string content_type = 4;
+}
+
+message UpdateContentResponse {
+  Content content = 1;
+}
+
+message DeleteContentRequest {
+  string content_id = 1;
+}
+
+message DeleteContentResponse {
+  bool success = 1;
+}
+
+message OptimizeContentRequest {
+  string content_id = 1;
+  string platform = 2;
+}
+
+message OptimizeContentResponse {
+  double score = 1;
+  repeated string improvements = 2;
+  string optimized_content = 3;
+}
+
+message Content {
+  string id = 1;
+  string title = 2;
+  string slug = 3;
+  string body = 4;
+  string content_type = 5;
+  string status = 6;
+  string author_id = 7;
+  string created_at = 8;
+  string updated_at = 9;
+}

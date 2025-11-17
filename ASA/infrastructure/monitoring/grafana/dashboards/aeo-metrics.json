@@ -1,0 +1,97 @@
+{
+  "dashboard": {
+    "title": "AEO Performance Metrics",
+    "tags": ["asa", "aeo"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Total Citations by Platform",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "sum by (platform) (aeo_citations_total)",
+            "legendFormat": "{{platform}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Citation Rate Trend",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(aeo_citations_total[1h])",
+            "legendFormat": "Citations/hour"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Average AEO Score by Platform",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "avg by (platform) (aeo_optimization_score)",
+            "legendFormat": "{{platform}}"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "Content Generation Requests",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(ai_generation_requests_total[5m])",
+            "legendFormat": "Generations/min"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "Top Cited Content",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "topk(10, sum by (content_id) (aeo_citations_total))",
+            "format": "table"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        }
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 27,
+    "version": 1
+  }
+}
