@@ -1,0 +1,77 @@
+version: '3.9'
+
+services:
+  # Valentin Shop Services
+  valentin-frontend:
+    build:
+      context: ./valentin-shop/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - VITE_AEOWEB_URL=http://localhost:4000
+      - VITE_CONTENT_SERVICE_URL=http://localhost:8082
+      - VITE_AEO_SERVICE_URL=http://localhost:4002
+      - VITE_SEARCH_SERVICE_URL=http://localhost:8084
+      - VITE_ANALYTICS_SERVICE_URL=http://localhost:8083
+    depends_on:
+      - valentin-backend
+    networks:
+      - aeoweb
+
+  valentin-backend:
+    build:
+      context: ./valentin-shop/backend
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - CONTENT_SERVICE_URL=http://content-service:8082
+      - AEO_SERVICE_URL=http://aeo-service:4002
+      - ANALYTICS_SERVICE_URL=http://analytics-service:8083
+      - SEARCH_SERVICE_URL=http://search-service:8084
+    volumes:
+      - ./valentin-shop/products:/app/products:ro
+    networks:
+      - aeoweb
+
+  # Hairwave Services
+  hairwave-frontend:
+    build:
+      context: ./hairwave/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    environment:
+      - VITE_AEOWEB_URL=http://localhost:4000
+      - VITE_CONTENT_SERVICE_URL=http://localhost:8082
+      - VITE_AEO_SERVICE_URL=http://localhost:4002
+      - VITE_SEARCH_SERVICE_URL=http://localhost:8084
+      - VITE_ANALYTICS_SERVICE_URL=http://localhost:8083
+    depends_on:
+      - hairwave-backend
+    networks:
+      - aeoweb
+
+  hairwave-backend:
+    build:
+      context: ./hairwave/backend
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5004"
+    environment:
+      - PORT=5004
+      - CONTENT_SERVICE_URL=http://content-service:8082
+      - AEO_SERVICE_URL=http://aeo-service:4002
+      - ANALYTICS_SERVICE_URL=http://analytics-service:8083
+      - SEARCH_SERVICE_URL=http://search-service:8084
+    volumes:
+      - ./hairwave/products:/app/products:ro
+    networks:
+      - aeoweb
+
+networks:
+  aeoweb:
+    external: true
+    name: aeoweb-refactored_default
