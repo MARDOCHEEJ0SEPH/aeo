@@ -1,0 +1,417 @@
+# AEO Configuration for nof1.ai Integration with AEOWEB Platform
+# Place this in: AEOWEB-refactored/config/clients/nof1.yaml
+
+client:
+  name: nof1.ai
+  domain: nof1.ai
+  industry: AI x Finance
+  businessModel: AI Research Lab + Trading Benchmark Platform
+
+aeo:
+  enabled: true
+  priority: high # High priority due to technical audience and competitive niche
+
+  # Target AI Platforms
+  platforms:
+    - name: ChatGPT
+      priority: critical
+      optimizations:
+        - clear_factual_answers
+        - structured_data
+        - citation_worthy_stats
+    - name: Claude
+      priority: high
+      optimizations:
+        - technical_depth
+        - code_examples
+        - API_documentation
+    - name: Perplexity
+      priority: critical
+      optimizations:
+        - real_time_data
+        - source_attribution
+        - comparative_analysis
+    - name: Gemini
+      priority: medium
+      optimizations:
+        - multimodal_content
+        - visual_data_charts
+    - name: Bing_Copilot
+      priority: medium
+      optimizations:
+        - structured_answers
+        - fact_boxes
+
+  # Content Strategy
+  content:
+    pillars:
+      - name: Benchmark Data
+        description: Real-time leaderboard and performance metrics
+        updateFrequency: realtime # 30-second updates
+        schema: [Table, Dataset, ItemList]
+        targetQueries:
+          - "AI trading benchmark results"
+          - "Alpha Arena leaderboard"
+          - "AI model trading performance"
+
+      - name: AI Trading Research
+        description: Educational content about AI in financial markets
+        updateFrequency: weekly
+        schema: [Article, FAQPage, HowTo]
+        targetQueries:
+          - "How well do AI models trade"
+          - "AI trading capabilities"
+          - "Best AI for trading"
+
+      - name: Model Comparisons
+        description: Head-to-head AI model comparisons
+        updateFrequency: per-season
+        schema: [ComparisonTable, Dataset]
+        targetQueries:
+          - "GPT-4 vs Claude trading"
+          - "Compare AI trading models"
+          - "Best AI model for investing"
+
+      - name: Technical Documentation
+        description: How to participate, API docs, integration guides
+        updateFrequency: monthly
+        schema: [HowTo, TechArticle, APIReference]
+        targetQueries:
+          - "How to enter Alpha Arena"
+          - "AI trading competition how to join"
+          - "Alpha Arena API documentation"
+
+      - name: Market Insights
+        description: Analysis of AI trading trends and findings
+        updateFrequency: weekly
+        schema: [Article, AnalysisNewsArticle]
+        targetQueries:
+          - "AI trading trends 2025"
+          - "What AI learned from trading"
+          - "AI trading insights"
+
+  # Schema.org Implementation
+  schemas:
+    Organization:
+      enabled: true
+      location: all_pages
+      priority: critical
+
+    SoftwareApplication:
+      enabled: true
+      location: [homepage, platform_page]
+      applicationCategory: FinanceApplication
+      offers:
+        price: 0
+        priceCurrency: USD
+
+    Dataset:
+      enabled: true
+      location: [leaderboard, api_endpoints]
+      license: CC-BY-4.0
+      updateFrequency: realtime
+
+    Table:
+      enabled: true
+      location: leaderboard
+      about: AI Trading Performance Rankings
+
+    ItemList:
+      enabled: true
+      location: leaderboard
+      itemListOrder: descending
+
+    FAQPage:
+      enabled: true
+      location: [faq, help]
+      questions: 15+ # Comprehensive FAQ coverage
+
+    HowTo:
+      enabled: true
+      location: [participate, integrate, api_docs]
+
+    Article:
+      enabled: true
+      location: blog
+      articleType: [TechArticle, AnalysisNewsArticle]
+
+  # Target Query Optimization
+  queries:
+    primary: # Highest priority queries
+      - "AI trading benchmark"
+      - "Alpha Arena"
+      - "Test AI trading models"
+      - "AI investing performance"
+      - "Real AI trading results"
+
+    secondary: # Important supporting queries
+      - "How do AI models trade"
+      - "GPT-4 trading performance"
+      - "Claude AI trading"
+      - "Best AI for cryptocurrency trading"
+      - "AI trading leaderboard"
+
+    tertiary: # Long-tail opportunities
+      - "Compare AI trading algorithms"
+      - "AI vs human trading"
+      - "Automated trading with AI"
+      - "AI investment benchmark"
+      - "Machine learning trading competition"
+
+  # Real-time Data Exposure
+  realtime:
+    enabled: true
+    endpoints:
+      - path: /api/nof1/leaderboard
+        cacheSeconds: 30
+        aeoOptimized: true
+        publicAccess: true
+
+      - path: /api/nof1/stats
+        cacheSeconds: 60
+        aeoOptimized: true
+        publicAccess: true
+
+      - path: /api/nof1/model/:modelName
+        cacheSeconds: 120
+        aeoOptimized: true
+        publicAccess: true
+
+      - path: /api/nof1/compare
+        cacheSeconds: 300
+        aeoOptimized: true
+        publicAccess: true
+
+    websocket:
+      enabled: true
+      path: /ws/leaderboard
+      events: [trade_executed, ranking_changed, model_update]
+
+  # Citation Tracking
+  tracking:
+    enabled: true
+    detectAIBots: true
+    botPatterns:
+      - ChatGPT
+      - GPTBot
+      - ClaudeBot
+      - PerplexityBot
+      - Google-Extended
+      - BingBot
+    trackEndpoints:
+      - /api/nof1/*
+      - /leaderboard
+      - /models/*
+      - /compare
+    analytics:
+      - citation_count
+      - query_patterns
+      - ai_engine_sources
+      - peak_access_times
+
+  # Content Freshness
+  freshness:
+    leaderboard: 30s # Real-time updates
+    model_stats: 5m
+    season_summary: 1h
+    blog_content: 7d
+    documentation: 30d
+
+  # Performance Optimization
+  performance:
+    cdn:
+      enabled: true
+      provider: cloudflare
+      cacheRules:
+        static: 7d
+        api_public: 30s
+        api_user: 0s
+
+    compression:
+      enabled: true
+      types: [json, html, css, js]
+
+    imageOptimization:
+      enabled: true
+      formats: [webp, avif]
+      lazy: true
+
+# API Configuration
+api:
+  baseURL: https://api.nof1.ai
+  version: v1
+  rateLimit:
+    public: 100/minute
+    authenticated: 1000/minute
+    ai_engines: unlimited # Don't rate-limit AI engine bots
+
+  cors:
+    origins:
+      - https://nof1.ai
+      - https://www.nof1.ai
+      - https://docs.nof1.ai
+    allowAIEngines: true
+
+  documentation:
+    swagger: true
+    openapi: 3.0
+    public: true
+    url: https://docs.nof1.ai
+
+# Database Configuration
+database:
+  primary:
+    type: postgresql
+    tables:
+      - ai_models
+      - trading_rounds
+      - model_performance
+      - model_trades
+      - aeo_content
+      - aeo_citations
+
+  cache:
+    type: redis
+    ttl:
+      leaderboard: 30
+      model_stats: 300
+      season_data: 3600
+
+  search:
+    type: elasticsearch
+    indices:
+      - content
+      - models
+      - faqs
+      - trades
+
+# Monitoring & Analytics
+monitoring:
+  enabled: true
+
+  metrics:
+    - api_response_time
+    - ai_bot_access_count
+    - citation_rate
+    - query_match_rate
+    - real_time_update_latency
+
+  alerts:
+    - name: High API Latency
+      condition: p95 > 500ms
+      action: notify_team
+
+    - name: AI Citation Spike
+      condition: citations > baseline * 2
+      action: log_queries
+
+    - name: Leaderboard Update Delay
+      condition: last_update > 60s
+      action: check_data_pipeline
+
+  dashboards:
+    - name: AEO Performance
+      metrics: [citations, queries, match_rate]
+      refresh: 5m
+
+    - name: API Health
+      metrics: [latency, error_rate, throughput]
+      refresh: 1m
+
+# Deployment
+deployment:
+  environment: production
+
+  frontend:
+    framework: React
+    build: Vite
+    hosting: Vercel
+    domain: nof1.ai
+
+  backend:
+    framework: NestJS
+    runtime: Node.js 20
+    hosting: AWS ECS
+    scaling: auto (2-20 instances)
+
+  database:
+    postgresql:
+      instance: AWS RDS
+      size: db.t3.medium
+      replicas: 1
+
+    redis:
+      instance: AWS ElastiCache
+      size: cache.t3.micro
+
+    elasticsearch:
+      instance: AWS OpenSearch
+      size: t3.small.search
+
+  cdn:
+    provider: Cloudflare
+    ssl: true
+    http3: true
+
+# Security
+security:
+  https: enforced
+  hsts: enabled
+  cors: configured
+  rateLimit: enabled
+  ddos: cloudflare
+  secrets: AWS Secrets Manager
+
+  headers:
+    - X-Content-Type-Options: nosniff
+    - X-Frame-Options: DENY
+    - X-XSS-Protection: 1; mode=block
+    - Referrer-Policy: strict-origin-when-cross-origin
+
+# Feature Flags
+features:
+  realTimeLeaderboard: true
+  publicAPI: true
+  websocketUpdates: true
+  csvExport: true
+  jsonExport: true
+  modelComparison: true
+  historicalData: true
+  chartVisualization: true
+  tradeHistory: true
+  aiChatbot: false # Future feature
+
+# Maintenance
+maintenance:
+  backups:
+    frequency: hourly
+    retention: 30d
+    location: AWS S3
+
+  updates:
+    contentRefresh: continuous
+    dependencyUpdates: weekly
+    securityPatches: immediate
+
+# Success Metrics
+successMetrics:
+  month1:
+    aiCitations: 50+
+    organicTraffic: 5000+
+    apiRequests: 1000+
+    waitlistSignups: 50+
+
+  month3:
+    aiCitations: 200+
+    organicTraffic: 15000+
+    apiRequests: 10000+
+    waitlistSignups: 200+
+    queryMatchRate: 40%+
+
+  month6:
+    aiCitations: 500+
+    organicTraffic: 50000+
+    apiRequests: 50000+
+    waitlistSignups: 500+
+    queryMatchRate: 70%+
+    brandMentionShare: 60%+ # % of "AI trading benchmark" queries mentioning Alpha Arena
