@@ -1352,4 +1352,4 @@ The question is no longer "Should we invest in AEO?" but rather "How quickly can
 - [ ] Plan for 6-12 month implementation timeline for meaningful results
 
 **Next Steps:**
-Return to Chapter 10 to establish your specific measurement framework, using the benchmarks from these case studies as reference points for expected performance.
+Return to [Chapter 10: Measuring ChatGPT AEO Success](chapter-10.md) to establish your specific measurement framework, using the benchmarks from these case studies as reference points for expected performance.
