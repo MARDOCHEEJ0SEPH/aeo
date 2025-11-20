@@ -30,20 +30,22 @@ AEO (Answer Engine Optimization) is the practice of optimizing your content and 
 2. [How Answer Engines Work](chapters/chapter-02.md) - The technology behind AI search
 3. [AEO vs SEO](chapters/chapter-03.md) - Understanding the critical differences
 
-### Part 2: Building Your AEO Strategy (Chapters 4-5)
+### Part 2: Building Your AEO Strategy (Chapter 4)
 4. [Setting Up Your AEO Strategy](chapters/chapter-04.md) - Foundation and planning
-5. [Creating AEO-Optimized Content](chapters/chapter-05.md) - Content that AI engines love
 
-### Part 3: AEO for Advertising (Chapters 6-8)
-6. [AEO for Paid Advertising](chapters/chapter-06.md) - Maximizing ad performance
-7. [AEO for Social Media Marketing](chapters/chapter-07.md) - Social platforms meet AI
-8. [Structured Data and Schema Markup](chapters/chapter-08.md) - Technical optimization
+### Part 3: Strategy-Specific Optimization (Chapters 5-7)
+5. [Shopping & E-Commerce Optimization](chapters/chapter-05.md) - E-commerce AEO strategies
+6. [Local Business Strategies](chapters/chapter-06.md) - Local AEO and Google Business Profile
+7. [Enterprise & B2B Strategies](chapters/chapter-07.md) - B2B and enterprise AEO tactics
 
-### Part 4: Advanced AEO (Chapters 9-12)
-9. [Measuring AEO Performance](chapters/chapter-09.md) - Metrics and analytics
-10. [AEO Use Cases by Industry](chapters/chapter-10.md) - Practical applications
-11. [Advanced AEO Techniques](chapters/chapter-11.md) - Expert strategies
-12. [Future of AEO and AI Search](chapters/chapter-12.md) - What's next
+### Part 4: Channels & Formats (Chapters 8-9)
+8. [Custom GPTs as AEO Channels](chapters/chapter-08.md) - GPT Store optimization
+9. [Voice & Multimodal Optimization](chapters/chapter-09.md) - Voice, image, video, and audio
+
+### Part 5: Measurement & Advanced Tactics (Chapters 10-12)
+10. [Measuring ChatGPT AEO Success](chapters/chapter-10.md) - Metrics, tracking, and ROI
+11. [Advanced Tactics](chapters/chapter-11.md) - Expert strategies and techniques
+12. [Case Studies (2025)](chapters/chapter-12.md) - Real-world implementations
 
 ### Conclusion
 **[Conclusion: Your AEO Journey Starts Now](chapters/conclusion.md)**
@@ -97,8 +99,8 @@ New to AEO? Start here:
 
 1. Read Chapter 1 to understand the fundamentals
 2. Complete Chapter 4 to create your strategy
-3. Implement Chapter 5 to optimize your content
-4. Use Chapter 9 to track your results
+3. Choose your focus: Chapter 5 (E-commerce), Chapter 6 (Local), or Chapter 7 (B2B/Enterprise)
+4. Use Chapter 10 to track your results and measure success
 
 ## Getting Started
 
@@ -114,14 +116,14 @@ Begin with [Chapter 1: Introduction to AEO](chapters/chapter-01.md) and work thr
 | 2 | How Answer Engines Work | Technology |
 | 3 | AEO vs SEO | Strategy |
 | 4 | Setting Up Your AEO Strategy | Planning |
-| 5 | Creating AEO-Optimized Content | Content |
-| 6 | AEO for Paid Advertising | Ads |
-| 7 | AEO for Social Media | Social |
-| 8 | Structured Data | Technical |
-| 9 | Measuring AEO Performance | Analytics |
-| 10 | Use Cases by Industry | Examples |
-| 11 | Advanced Techniques | Expert |
-| 12 | Future of AEO | Trends |
+| 5 | Shopping & E-Commerce Optimization | E-commerce |
+| 6 | Local Business Strategies | Local SEO |
+| 7 | Enterprise & B2B Strategies | B2B |
+| 8 | Custom GPTs as AEO Channels | GPT Store |
+| 9 | Voice & Multimodal Optimization | Multimodal |
+| 10 | Measuring ChatGPT AEO Success | Analytics |
+| 11 | Advanced Tactics | Expert |
+| 12 | Case Studies (2025) | Real-world |
 
 ---
 
