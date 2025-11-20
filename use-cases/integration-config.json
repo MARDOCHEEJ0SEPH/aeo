@@ -1,0 +1,339 @@
+{
+  "useCases": {
+    "valentinShop": {
+      "name": "Valentin Shop",
+      "description": "Fashion & Lifestyle E-Commerce Platform",
+      "status": "active",
+      "integration": {
+        "aeoweb": {
+          "version": "1.0.0",
+          "services": {
+            "contentService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8082",
+              "features": ["product-catalog", "content-management", "versioning"]
+            },
+            "aeoService": {
+              "enabled": true,
+              "endpoint": "http://localhost:4002",
+              "platforms": ["CHATGPT", "CLAUDE", "PERPLEXITY", "GEMINI", "BING"],
+              "autoOptimize": true,
+              "optimizationSchedule": "daily"
+            },
+            "analyticsService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8083",
+              "tracking": ["product-views", "ai-discovery", "conversions", "citations"]
+            },
+            "searchService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8084",
+              "features": ["full-text-search", "autocomplete", "filters"]
+            },
+            "authService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8081",
+              "features": ["customer-accounts", "oauth", "jwt"]
+            }
+          },
+          "database": {
+            "postgres": {
+              "enabled": true,
+              "tables": ["products", "orders", "customers", "inventory"]
+            },
+            "elasticsearch": {
+              "enabled": true,
+              "indices": ["products", "categories"]
+            },
+            "redis": {
+              "enabled": true,
+              "use": ["cache", "sessions", "cart"]
+            }
+          }
+        },
+        "frontend": {
+          "framework": "React",
+          "components": [
+            "ProductList",
+            "ProductDetail",
+            "AEOScoreDisplay",
+            "ShoppingCart",
+            "Checkout"
+          ],
+          "routes": [
+            "/",
+            "/products",
+            "/products/:id",
+            "/cart",
+            "/checkout",
+            "/aeo-dashboard"
+          ]
+        }
+      },
+      "configuration": {
+        "brand": {
+          "name": "Valentin Shop",
+          "tagline": "Curated Fashion & Lifestyle",
+          "colors": {
+            "primary": "#2C3E50",
+            "secondary": "#E74C3C",
+            "accent": "#ECF0F1"
+          }
+        },
+        "aeoStrategy": {
+          "targetCitationRate": 0.15,
+          "minScore": 85,
+          "platforms": {
+            "CHATGPT": {
+              "priority": "high",
+              "contentStyle": "conversational"
+            },
+            "CLAUDE": {
+              "priority": "high",
+              "contentStyle": "detailed"
+            },
+            "PERPLEXITY": {
+              "priority": "high",
+              "contentStyle": "data-driven"
+            },
+            "GEMINI": {
+              "priority": "medium",
+              "contentStyle": "visual"
+            },
+            "BING": {
+              "priority": "medium",
+              "contentStyle": "concise"
+            }
+          }
+        },
+        "businessMetrics": {
+          "revenueGoal": 500000,
+          "conversionTarget": 0.08,
+          "averageOrderValue": 175
+        }
+      },
+      "deployment": {
+        "production": {
+          "url": "https://valentinshop.com",
+          "apiUrl": "https://api.valentinshop.com"
+        },
+        "staging": {
+          "url": "https://staging.valentinshop.com",
+          "apiUrl": "https://staging-api.valentinshop.com"
+        }
+      }
+    },
+    "hairwave": {
+      "name": "Hairwave",
+      "description": "Premium Natural Hair Care Brand",
+      "status": "active",
+      "integration": {
+        "aeoweb": {
+          "version": "1.0.0",
+          "services": {
+            "contentService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8082",
+              "features": ["product-catalog", "ingredient-database", "clinical-studies"]
+            },
+            "aeoService": {
+              "enabled": true,
+              "endpoint": "http://localhost:4002",
+              "platforms": ["CHATGPT", "CLAUDE", "PERPLEXITY", "GEMINI", "BING"],
+              "autoOptimize": true,
+              "optimizationSchedule": "weekly",
+              "specializations": ["hair-care-queries", "ingredient-questions", "product-recommendations"]
+            },
+            "analyticsService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8083",
+              "tracking": ["product-discovery", "ai-recommendations", "subscription-conversions", "customer-journey"]
+            },
+            "searchService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8084",
+              "features": ["ingredient-search", "hair-type-filters", "concern-based-search"]
+            },
+            "authService": {
+              "enabled": true,
+              "endpoint": "http://localhost:8081",
+              "features": ["customer-accounts", "subscription-management", "loyalty-program"]
+            }
+          },
+          "database": {
+            "postgres": {
+              "enabled": true,
+              "tables": ["products", "ingredients", "clinical_studies", "subscriptions", "customers"]
+            },
+            "elasticsearch": {
+              "enabled": true,
+              "indices": ["products", "ingredients", "articles"]
+            },
+            "redis": {
+              "enabled": true,
+              "use": ["cache", "sessions", "recommendation-engine"]
+            }
+          }
+        },
+        "frontend": {
+          "framework": "React",
+          "components": [
+            "ProductCatalog",
+            "ProductDetail",
+            "IngredientBreakdown",
+            "HairQuiz",
+            "SubscriptionManager",
+            "AEODashboard"
+          ],
+          "routes": [
+            "/",
+            "/products",
+            "/products/:id",
+            "/hair-quiz",
+            "/ingredients",
+            "/subscribe",
+            "/aeo-performance"
+          ]
+        }
+      },
+      "configuration": {
+        "brand": {
+          "name": "Hairwave",
+          "tagline": "Beautiful Hair, Naturally Powered",
+          "colors": {
+            "primary": "#4A90E2",
+            "secondary": "#50E3C2",
+            "accent": "#F5A623"
+          }
+        },
+        "aeoStrategy": {
+          "targetCitationRate": 0.20,
+          "minScore": 90,
+          "platforms": {
+            "CHATGPT": {
+              "priority": "high",
+              "contentStyle": "how-to-guides",
+              "specialQueries": ["how to use", "best for", "hair routine"]
+            },
+            "CLAUDE": {
+              "priority": "high",
+              "contentStyle": "scientific-detailed",
+              "specialQueries": ["ingredient analysis", "clinical studies", "formulation"]
+            },
+            "PERPLEXITY": {
+              "priority": "high",
+              "contentStyle": "evidence-based",
+              "specialQueries": ["research", "statistics", "clinical data"]
+            },
+            "GEMINI": {
+              "priority": "high",
+              "contentStyle": "visual-transformation",
+              "specialQueries": ["before after", "results", "testimonials"]
+            },
+            "BING": {
+              "priority": "medium",
+              "contentStyle": "quick-answers",
+              "specialQueries": ["price", "buy", "where to get"]
+            }
+          }
+        },
+        "businessMetrics": {
+          "mrrGoal": 2500000,
+          "customerLTV": 450,
+          "subscriptionRate": 0.65,
+          "retentionTarget": 0.78
+        }
+      },
+      "deployment": {
+        "production": {
+          "url": "https://hairwave.com",
+          "apiUrl": "https://api.hairwave.com"
+        },
+        "staging": {
+          "url": "https://staging.hairwave.com",
+          "apiUrl": "https://staging-api.hairwave.com"
+        }
+      }
+    }
+  },
+  "sharedConfiguration": {
+    "aeoweb": {
+      "baseUrl": "http://localhost:4000",
+      "graphqlUrl": "http://localhost:4001/graphql",
+      "services": {
+        "gateway": "http://localhost:4000",
+        "graphql": "http://localhost:4001",
+        "aeo": "http://localhost:4002",
+        "auth": "http://localhost:8081",
+        "content": "http://localhost:8082",
+        "analytics": "http://localhost:8083",
+        "search": "http://localhost:8084"
+      }
+    },
+    "monitoring": {
+      "prometheus": "http://localhost:9090",
+      "grafana": "http://localhost:3001",
+      "jaeger": "http://localhost:16686"
+    },
+    "databases": {
+      "postgres": "postgresql://aeoweb:password@localhost:5432/aeoweb",
+      "mongodb": "mongodb://localhost:27017/aeoweb",
+      "redis": "redis://localhost:6379",
+      "elasticsearch": "http://localhost:9200"
+    }
+  },
+  "setupInstructions": {
+    "prerequisites": [
+      "AEOWEB-refactored platform running",
+      "Docker and Docker Compose installed",
+      "Node.js 20+ installed",
+      "PostgreSQL, MongoDB, Redis, Elasticsearch running"
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "title": "Start AEOWEB-refactored",
+        "command": "cd AEOWEB-refactored && docker-compose up -d"
+      },
+      {
+        "step": 2,
+        "title": "Import Product Catalogs",
+        "commands": [
+          "curl -X POST http://localhost:8082/content -H 'Content-Type: application/json' -d @use-cases/valentin-shop/products/catalog.json",
+          "curl -X POST http://localhost:8082/content -H 'Content-Type: application/json' -d @use-cases/hairwave/products/hairwave-catalog.json"
+        ]
+      },
+      {
+        "step": 3,
+        "title": "Index Products in Elasticsearch",
+        "commands": [
+          "curl -X POST http://localhost:8084/index/bulk -H 'Content-Type: application/json' -d @use-cases/valentin-shop/products/catalog.json",
+          "curl -X POST http://localhost:8084/index/bulk -H 'Content-Type: application/json' -d @use-cases/hairwave/products/hairwave-catalog.json"
+        ]
+      },
+      {
+        "step": 4,
+        "title": "Run AEO Optimization",
+        "commands": [
+          "node scripts/optimize-use-case.js valentin-shop",
+          "node scripts/optimize-use-case.js hairwave"
+        ]
+      },
+      {
+        "step": 5,
+        "title": "Verify Setup",
+        "commands": [
+          "curl http://localhost:8082/content | grep valentin",
+          "curl http://localhost:8083/metrics"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2025-01-17",
+    "lastUpdated": "2025-01-17",
+    "maintainer": "AEOWEB Team",
+    "documentation": "https://docs.aeoweb.com/use-cases"
+  }
+}
