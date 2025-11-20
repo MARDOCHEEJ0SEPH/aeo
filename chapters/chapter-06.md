@@ -1,700 +1,1685 @@
-# Chapter 6: AEO for Paid Advertising
+# Chapter 6: Local Business Strategies
 
-## Amplifying Your Ad ROI with Answer Engine Optimization
+## Dominating "Near Me" Queries in AI Answer Engines
 
-Paid advertising and AEO might seem unrelated, but they're powerfully complementary. When you optimize your ad landing pages and content for answer engines, you don't just get better ad performance—you create organic visibility that continues working long after your ad budget runs out.
+When someone asks ChatGPT "Where's the best Italian restaurant near me?" or "Find a plumber open now in Austin," your local business needs to be the answer. With 76% of smartphone users conducting local searches before visiting a business, and AI answer engines increasingly handling these queries, local AEO optimization isn't optional—it's survival.
+
+This chapter shows you how to position your local business as the go-to AI recommendation for your geographic area and service category.
 
 ## What You'll Learn in This Chapter
 
-- How AEO reduces customer acquisition costs
-- Optimizing Google Ads landing pages for AEO
-- Facebook/Instagram ad content that supports AEO
-- Creating ad copy that feeds into AEO strategy
-- Retargeting strategies with AEO
-- Measuring the compound effect of ads + AEO
+- How AI engines handle location-based queries
+- Google Business Profile optimization for AEO
+- Local structured data implementation
+- "Near me" and location-specific content strategies
+- Review optimization for local AI visibility
+- Multi-location business AEO tactics
+- Local citation building for AI trust
+- Service area vs physical location optimization
+- Emergency and time-sensitive local queries
 
-## The AEO-Advertising Multiplier Effect
+## How AI Engines Handle Local Queries
 
-### Traditional Advertising Model
+### The Local Query Processing Flow
+
+**User Query:** "Best coffee shop near me"
+
+**AI Processing Steps:**
+
+**Step 1: Location Detection**
+- Device GPS data
+- IP address geolocation
+- User-specified location in chat
+- Previous conversation context
+
+**Step 2: Intent Analysis**
+- "Best" = recommendation request
+- "Coffee shop" = business category
+- "Near me" = proximity requirement
+- Current time consideration (is it open now?)
+
+**Step 3: Data Source Consultation**
+- Web crawl data (business websites)
+- Structured data (LocalBusiness schema)
+- Google Business Profile information
+- Review aggregation sites
+- Local directories
+- Social media mentions
+
+**Step 4: Ranking and Recommendation**
+Factors considered:
+- Proximity to user
+- Business rating/reviews
+- Operating hours (open now?)
+- Category relevance
+- Content quality/completeness
+- Authority signals
+
+**Step 5: Response Generation**
+"Based on your location, here are the top coffee shops near you:
+
+1. **Brew Haven** (0.3 miles) - 4.8★ (342 reviews)
+   Known for: Specialty lattes, cozy atmosphere, fast WiFi
+   Hours: Open now, closes at 8pm
+   Price: $$
+
+2. **The Daily Grind** (0.5 miles) - 4.7★ (521 reviews)
+   Known for: Single-origin pour-overs, fresh pastries
+   Hours: Open now, closes at 6pm
+   Price: $$
+
+3. **Java Junction** (0.8 miles) - 4.6★ (287 reviews)
+   Known for: Large workspace, cold brew selection
+   Hours: Open now, closes at 9pm
+   Price: $"
+
+### Local Query Types
+
+**Type 1: "Near Me" Queries**
+- "Plumber near me"
+- "Best tacos near me"
+- "Gym near me open now"
+
+**AI Behavior:** Uses device location, prioritizes proximity + rating
+
+**Type 2: Specific Location Queries**
+- "Best Italian restaurant in Austin"
+- "Dentist downtown Seattle"
+- "Hair salon in Brooklyn"
+
+**AI Behavior:** Uses specified location, broader radius acceptable
+
+**Type 3: Service + Location Queries**
+- "Emergency plumber in Dallas"
+- "24-hour pharmacy Chicago"
+- "Weekend auto repair Austin"
+
+**AI Behavior:** Time-sensitive, prioritizes availability
+
+**Type 4: Comparative Local Queries**
+- "Best coffee shop vs Starbucks in Portland"
+- "Local gym vs Planet Fitness"
+
+**AI Behavior:** Compares local independent to chains
+
+**Type 5: Problem-Solution Local Queries**
+- "Flat tire, need help in Austin"
+- "Lost phone, where to get replacement today"
+- "Urgent dental pain, open Saturday"
+
+**AI Behavior:** Urgency-focused, immediate availability critical
+
+## Google Business Profile Optimization for AEO
+
+### Why GBP is Critical for Local AEO
+
+**Google Business Profile Data Powers AI:**
+- Business name, address, phone
+- Categories and attributes
+- Operating hours
+- Reviews and ratings
+- Photos and videos
+- Q&A section
+- Posts and updates
+
+**AI engines pull GBP data directly or indirectly through:**
+- Google's Knowledge Graph
+- Local search results scraping
+- Structured data correlation
+
+### Complete GBP Optimization Framework
+
+**1. Business Information Accuracy**
+
+**NAP Consistency (Name, Address, Phone):**
+```
+❌ Inconsistent:
+Website: "Joe's Plumbing Services LLC"
+GBP: "Joe's Plumbing"
+Citations: "Joe Plumbing Services"
+
+✅ Consistent Everywhere:
+"Joe's Plumbing Services"
+123 Main St, Suite 100
+Austin, TX 78701
+(512) 555-0123
+```
+
+**Business Name Optimization:**
+```
+❌ Keyword-stuffed:
+"Joe's Plumbing | Best Plumber Austin | Emergency Plumbing 24/7"
+
+✅ Clean + Descriptive:
+"Joe's Plumbing Services"
+
+(Use business category and attributes fields for keywords)
+```
+
+**2. Category Selection**
+
+**Primary Category:** Most specific, accurate category
+```
+Example - Coffee Shop:
+Primary: "Coffee shop"
+
+Not: "Cafe" (less specific)
+Not: "Restaurant" (too broad)
+Not: "Coffee roastery" (unless you actually roast)
+```
+
+**Additional Categories:** Relevant secondary services
+```
+Coffee Shop Additional Categories:
+- "Breakfast restaurant"
+- "Wi-Fi spot"
+- "Dessert shop" (if applicable)
+
+Maximum: Choose all relevant (up to 10)
+```
+
+**3. Attributes Selection**
+
+Enable ALL accurate attributes:
+```
+Service Options:
+✓ Dine-in
+✓ Takeout
+✓ Delivery
+✓ Curbside pickup
+
+Amenities:
+✓ Free Wi-Fi
+✓ Outdoor seating
+✓ Wheelchair accessible
+✓ Good for working
+✓ Dogs allowed
+
+Planning:
+✓ Reservations accepted
+✓ Walk-ins welcome
+
+Payments:
+✓ Credit cards accepted
+✓ Cash only (if true)
+```
+
+**Why This Matters:**
+AI answers specific queries: "Coffee shops with WiFi near me" or "Dog-friendly cafe"
+
+**4. Operating Hours Optimization**
+
+**Standard Hours - Be Detailed:**
+```
+Monday: 7:00 AM - 8:00 PM
+Tuesday: 7:00 AM - 8:00 PM
+Wednesday: 7:00 AM - 8:00 PM
+Thursday: 7:00 AM - 8:00 PM
+Friday: 7:00 AM - 9:00 PM
+Saturday: 8:00 AM - 9:00 PM
+Sunday: 8:00 AM - 6:00 PM
+```
+
+**Special Hours:**
+- Holiday hours (mark specific dates)
+- Temporary changes
+- Seasonal hours
+
+**Why Accuracy Matters:**
+"Open now" is a critical filter. Incorrect hours = lost customers.
+
+**5. Business Description Optimization**
+
+**GBP Description (750 character limit):**
+```
+❌ Generic:
+"We're a great coffee shop serving quality coffee in a friendly atmosphere. Come visit us for the best coffee experience!"
+
+✅ AEO-Optimized:
+"Brew Haven is Austin's specialty coffee shop known for house-roasted beans and handcrafted lattes. Located in downtown Austin near the Capitol, we offer fast WiFi, spacious work tables, and outdoor seating perfect for remote workers and coffee enthusiasts.
+
+Our menu features:
+• Single-origin pour-overs
+• Specialty lattes and cappuccinos
+• Fresh-baked pastries daily
+• Vegan and dairy-free options
+
+Highlights:
+• Free WiFi (no purchase required)
+• Plenty of outlets and workspace
+• Dog-friendly patio
+• Quiet atmosphere for working/studying
+
+Open 7 days a week. Located at 123 Main St with street parking and garage nearby. Voted 'Best Coffee Shop' by Austin Monthly 2024."
+```
+
+**Optimization Elements:**
+- Specific offerings, not vague claims
+- Location context (landmarks, neighborhood)
+- Target audience addressed
+- Unique features highlighted
+- Awards/recognition mentioned
+- Parking information (practical detail)
+
+**6. Photo and Video Optimization**
+
+**Minimum Photo Count: 20-30 high-quality images**
+
+**Photo Categories:**
+```
+Exterior:
+- Storefront (daytime and evening)
+- Signage (close-up, readable)
+- Entrance
+- Parking area
+- Outdoor seating
+
+Interior:
+- Seating areas (various angles)
+- Counter/service area
+- Workspace/tables
+- Ambiance shots
+- Decor and atmosphere
+
+Products/Services:
+- Menu items (professional shots)
+- Products in action
+- Service being performed
+- Before/after (if applicable)
+
+Team:
+- Staff photos
+- Owner/manager
+- Team at work
+- Friendly, approachable shots
+
+Customer Experience:
+- Customers enjoying (with permission)
+- Events and activities
+- Community engagement
+```
+
+**Photo Optimization:**
+- **Filename:** "brew-haven-austin-latte-art.jpg" (not IMG_1234.jpg)
+- **Quality:** High-resolution, well-lit
+- **Consistency:** Professional style throughout
+- **Frequency:** Add new photos monthly
+
+**Video Content (1-30 seconds):**
+- Tour of space
+- Product/service demonstration
+- "About us" message
+- Special offerings highlight
+
+**7. Reviews and Q&A Optimization**
+
+**Review Generation Strategy:**
+
+**Proactive Review Requests:**
+```
+After positive interaction:
+"Glad you enjoyed your coffee! If you have 30 seconds, a Google review would help other coffee lovers find us. Here's the link: [short URL]"
+
+Email follow-up (24 hours later):
+"Hi [Name], thanks for visiting Brew Haven yesterday!
+
+If your [latte/cappuccino/order] hit the spot, we'd love a quick Google review. It helps locals discover great coffee spots like ours.
+
+[Leave Review Button]
+
+See you soon!
+- The Brew Haven Team"
+```
+
+**Review Response Template:**
+
+**Positive Review Response:**
+```
+"Thanks so much, [Name]! Glad you enjoyed the [specific item they mentioned]. Our team works hard to [specific thing they praised]. Hope to see you back soon for another [item]! ☕
+
+- [Your Name], Owner/Manager"
+```
+
+**Negative Review Response:**
+```
+"Hi [Name], I'm sorry your experience didn't meet expectations. [Specifically acknowledge their complaint].
+
+I'd like to make this right. Please email me directly at [email] or call [phone] so we can resolve this.
+
+- [Your Name], Owner
+[Phone/Email]"
+```
+
+**Q&A Section Proactive Population:**
+
+Don't wait for questions—add them proactively:
 
 ```
-Ad Spend → Traffic → Conversion → Stop
-(When budget ends, traffic stops)
-```
+Q: Do you have WiFi?
+A: Yes! Free WiFi for all customers. Network: "BrewHaven-Guest" (no password required). We have plenty of outlets and large tables perfect for working.
 
-**Cost Per Acquisition:** Fixed
-**Long-term Value:** Limited to immediate conversions
+Q: Do you have dairy-free milk options?
+A: Absolutely! We offer oat milk, almond milk, and soy milk for all drinks at no extra charge.
 
-### AEO-Enhanced Advertising Model
+Q: Is there parking nearby?
+A: Yes, street parking on Main St (metered) and a public garage 1 block away at 200 Main St ($2/hour). We validate garage parking for purchases over $10.
 
-```
-Ad Spend → Traffic → AEO-Optimized Landing Page → Conversions
-                                     ↓
-                           AI Engines Index Content
-                                     ↓
-                           Organic Citations Begin
-                                     ↓
-                           Free Traffic Continues
-```
+Q: Are dogs allowed?
+A: Yes! Dogs are welcome on our outdoor patio. We even provide water bowls. 🐕
 
-**Cost Per Acquisition:** Decreases over time
-**Long-term Value:** Compound (paid + organic)
+Q: Do you have outdoor seating?
+A: Yes, we have a covered patio with 6 tables that's dog-friendly and great for enjoying coffee in nice weather.
 
-## Why AEO Matters for Advertisers
+Q: What are your most popular drinks?
+A: Our top sellers are the Honey Lavender Latte, Classic Cappuccino, and Cold Brew. Seasonal specials change monthly!
 
-### Benefit 1: Lower Bounce Rates = Better Quality Scores
+Q: Do you serve food?
+A: Yes! Fresh-baked pastries, breakfast tacos (8am-11am), and sandwiches. Everything pairs perfectly with our coffee.
 
-**Google Ads Quality Score Factors:**
-- Expected click-through rate
-- Ad relevance
-- **Landing page experience** ← AEO helps here
-
-**How AEO Improves Landing Pages:**
-- Clear, direct answers reduce bounce
-- Better structure improves engagement
-- Fast answers increase time on page
-- Satisfied users signal quality to Google
-
-**Result:**
-Better Quality Score → Lower cost per click → Better ad positions
-
-### Benefit 2: Organic Traffic Supplements Paid
-
-**Scenario:** You run ads for "best CRM for small business"
-
-**With AEO-Optimized Landing Page:**
-1. **Week 1-2:** Only paid traffic
-2. **Week 3-4:** AI engines index your content
-3. **Week 5+:** ChatGPT starts citing your landing page
-4. **Month 3:** 30% of traffic now organic from AI citations
-5. **Month 6:** 50% of traffic organic
-
-**Impact on CAC:**
-- Month 1 CAC: $80
-- Month 3 CAC: $56 (30% organic offset)
-- Month 6 CAC: $40 (50% organic offset)
-
-### Benefit 3: Content Becomes Research Material
-
-**User Journey:**
-1. User asks ChatGPT: "How to choose a marketing agency?"
-2. AI cites your comprehensive guide
-3. User reads your content
-4. Days later, sees your retargeting ad
-5. Higher conversion (pre-educated buyer)
-
-**Result:** Warmer leads, higher conversion rates, lower CAC
-
-## Google Ads Landing Page AEO Optimization
-
-### The Problem with Typical Ad Landing Pages
-
-**Standard PPC Landing Page:**
-```
-- Hero headline with CTA
-- Vague benefits ("Industry-leading solution")
-- Generic features list
-- Testimonials
-- Another CTA
-- Minimal actual information
-```
-
-**Why This Fails AEO:**
-- ❌ No direct answers
-- ❌ Marketing fluff, not information
-- ❌ No question coverage
-- ❌ Poor structure for AI parsing
-
-### AEO-Optimized Ad Landing Page Structure
-
-**Page Layout:**
-
-```html
-<!-- Above Fold -->
-<h1>Question-Based Headline</h1>
-<p>Direct answer (100-150 words)</p>
-<CTA button>
-
-<!-- Scroll Down -->
-<h2>How [Product/Service] Works</h2>
-<ol>Step-by-step explanation</ol>
-
-<h2>Pricing & Plans</h2>
-<table>Clear pricing comparison</table>
-
-<h2>Who [Product/Service] Is Best For</h2>
-<ul>Specific use cases with details</ul>
-
-<h2>Common Questions</h2>
-<div>FAQ with schema markup</div>
-
-<h2>Get Started</h2>
-<CTA with details>
+Q: Is it a good place to work/study?
+A: Definitely! Fast WiFi, plenty of outlets, large tables, and a quiet atmosphere. Many remote workers and students make us their regular spot.
 ```
 
 **Why This Works:**
-- ✅ Converts paid traffic (clear CTA above fold)
-- ✅ Provides information AI can cite
-- ✅ Answers related questions
-- ✅ Builds long-term organic value
+- AI pulls Q&A data for specific queries
+- Anticipates common questions
+- Provides detailed, helpful answers
+- Shows business personality
 
-### Real Example: Google Ads for SaaS Product
+### Google Business Posts for AEO
 
-**Ad Copy:**
+**Post Types and Strategy:**
+
+**1. What's New Posts** (weekly)
 ```
-Headline: Project Management for Remote Teams
-Description: Simple PM software teams actually use. Free 14-day trial, no credit card required.
-URL: yoursite.com/remote-team-project-management
+Title: "New Winter Menu Drops Today! ❄️"
+
+We're excited to introduce our winter drink lineup:
+
+🍫 Peppermint Mocha
+🎃 Spiced Chai Latte
+☕ Maple Cinnamon Brew
+🥐 Fresh apple pastries
+
+Available now through February. Stop by and warm up!
+
+[Photo of winter drinks]
+
+#AustinCoffee #WinterMenu #BrewHaven
 ```
 
-**Landing Page Optimization:**
+**2. Event Posts** (for special occasions)
+```
+Title: "Live Acoustic Music This Saturday"
+
+Join us Saturday, January 20th, 7-9pm for live acoustic music from local artist Sarah Chen.
+
+Free admission, great coffee, cozy vibes. Perfect Saturday evening!
+
+📅 Saturday, 1/20
+🕖 7-9pm
+📍 Brew Haven, 123 Main St
+
+[Event photo]
+```
+
+**3. Offer Posts** (monthly specials)
+```
+Title: "Happy Hour: $2 Off Lattes"
+
+New! Weekday happy hour from 3-5pm.
+
+$2 off all lattes (hot or iced)
+Perfect afternoon pick-me-up
+
+Valid Monday-Friday, 3-5pm
+No coupon needed, just mention at checkout!
+
+[Latte photo]
+```
+
+**Post Frequency:**
+- Minimum: 1 per week
+- Optimal: 2-3 per week
+- Special posts: Events, offers, news
+
+**Why Posts Matter for AEO:**
+- Fresh content signals active business
+- Keywords in posts indexed by AI
+- Shows current offerings and personality
+- "Updated recently" credibility boost
+
+## Local Structured Data Implementation
+
+### LocalBusiness Schema: Complete Implementation
+
+**Full LocalBusiness Schema Example:**
+
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "@id": "https://brewhaven.com#business",
+  "name": "Brew Haven",
+  "alternateName": "Brew Haven Coffee",
+  "description": "Specialty coffee shop in downtown Austin featuring house-roasted beans, handcrafted lattes, free WiFi, and spacious workspace perfect for remote workers and coffee enthusiasts.",
+  "image": [
+    "https://brewhaven.com/images/storefront.jpg",
+    "https://brewhaven.com/images/interior.jpg",
+    "https://brewhaven.com/images/coffee-menu.jpg"
+  ],
+  "logo": "https://brewhaven.com/logo.png",
+  "url": "https://brewhaven.com",
+  "telephone": "+15125550123",
+  "email": "hello@brewhaven.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main Street",
+    "addressLocality": "Austin",
+    "addressRegion": "TX",
+    "postalCode": "78701",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "30.2672",
+    "longitude": "-97.7431"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      "opens": "07:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Friday",
+      "opens": "07:00",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "08:00",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "08:00",
+      "closes": "18:00"
+    }
+  ],
+  "priceRange": "$$",
+  "servesCuisine": "Coffee, Pastries, Breakfast",
+  "acceptsReservations": "False",
+  "menu": "https://brewhaven.com/menu",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "342",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Sarah Martinez"
+      },
+      "datePublished": "2025-01-10",
+      "reviewBody": "Perfect coffee shop for working remotely. Fast WiFi, comfortable seating, and the best lattes in Austin. The staff is friendly and the atmosphere is calm and focused. Been coming here 3x a week for months!",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      }
+    }
+  ],
+  "paymentAccepted": "Cash, Credit Card, Apple Pay, Google Pay",
+  "currenciesAccepted": "USD",
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Free WiFi",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Outdoor Seating",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Wheelchair Accessible",
+      "value": true
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "Dogs Allowed",
+      "value": "Patio only"
+    }
+  ],
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": "30.2672",
+      "longitude": "-97.7431"
+    },
+    "geoRadius": "5000"
+  },
+  "hasMap": "https://goo.gl/maps/example",
+  "sameAs": [
+    "https://facebook.com/brewhaven",
+    "https://instagram.com/brewhaven",
+    "https://twitter.com/brewhaven"
+  ],
+  "foundingDate": "2020",
+  "slogan": "Your Daily Brew, Your Happy Place",
+  "knowsAbout": [
+    "Specialty Coffee",
+    "Latte Art",
+    "Pour Over Coffee",
+    "Cold Brew",
+    "Coffee Roasting",
+    "Breakfast Pastries"
+  ],
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Specialty Coffee Service"
+      },
+      "availableAtOrFrom": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Austin",
+          "addressRegion": "TX"
+        }
+      }
+    }
+  ]
+}
+</script>
+```
+
+**Critical Fields for Local AEO:**
+- **@type**: Use most specific type (CafeOrCoffeeShop, not just LocalBusiness)
+- **geo**: Exact coordinates crucial for proximity
+- **openingHoursSpecification**: Detailed hours for "open now" queries
+- **aggregateRating**: Social proof for AI recommendation
+- **amenityFeature**: Answers attribute queries ("WiFi", "outdoor seating")
+- **areaServed**: Defines service radius
+
+### Service Area Business Schema
+
+**For businesses that travel to customers:**
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "Joe's Plumbing Services",
+  "description": "Licensed and insured plumbing services in Austin and surrounding areas. Emergency 24/7 service, residential and commercial plumbing repairs, installations, and maintenance.",
+  "telephone": "+15125550199",
+  "email": "contact@joesplumbing.com",
+  "url": "https://joesplumbing.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Austin",
+    "addressRegion": "TX",
+    "postalCode": "78701",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Austin"
+    },
+    {
+      "@type": "City",
+      "name": "Round Rock"
+    },
+    {
+      "@type": "City",
+      "name": "Cedar Park"
+    },
+    {
+      "@type": "City",
+      "name": "Pflugerville"
+    }
+  ],
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": "30.2672",
+      "longitude": "-97.7431"
+    },
+    "geoRadius": "40000"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "$$",
+  "paymentAccepted": "Cash, Check, Credit Card, Financing Available",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "287"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Plumbing Services",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Emergency Plumbing",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Emergency Leak Repair",
+              "description": "24/7 emergency service for burst pipes, major leaks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Emergency Drain Clearing",
+              "description": "Same-day service for clogged drains and sewers"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Residential Plumbing",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Water Heater Installation",
+              "description": "Tank and tankless water heater installation and replacement"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "1200",
+              "maxPrice": "3500",
+              "priceCurrency": "USD"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "award": "Best Plumber Austin 2024 - Austin Home Services",
+  "slogan": "Fast, Reliable Plumbing - 24/7 Emergency Service",
+  "knowsAbout": [
+    "Emergency Plumbing",
+    "Water Heater Repair",
+    "Drain Cleaning",
+    "Pipe Repair",
+    "Leak Detection",
+    "Sewer Line Repair",
+    "Fixture Installation"
+  ]
+}
+```
+
+**Key Differences for Service Area Businesses:**
+- **areaServed**: List of cities/areas you serve
+- **serviceArea**: Geographic radius from base location
+- **hasOfferCatalog**: Detailed service offerings
+- **24/7 availability** if applicable (critical for emergency services)
+
+## Location-Specific Content Strategies
+
+### Service Area Pages
+
+**Create dedicated pages for each service area:**
+
+**URL Structure:**
+```
+yoursite.com/austin-plumbing
+yoursite.com/round-rock-plumbing
+yoursite.com/cedar-park-plumbing
+```
+
+**Service Area Page Template:**
 
 ```markdown
-# Best Project Management Software for Remote Teams
+# Plumbing Services in Cedar Park, TX
 
-**Looking for project management software for your remote team?**
+## Trusted Cedar Park Plumber | 24/7 Emergency Service
 
-[Product Name] is designed specifically for distributed teams across time zones. Unlike traditional PM tools built for office workers, we focus on:
-• Async communication (updates without meetings)
-• Timezone-aware scheduling
-• Remote-friendly workflows
-• Integration with Slack, Zoom, Google Workspace
+Joe's Plumbing Services has served Cedar Park residents since 2015. We're your local plumbing experts, providing fast, reliable service throughout Cedar Park and surrounding areas.
 
-Over 5,000 remote teams use [Product] to stay aligned without constant meetings.
+**Quick Facts:**
+- **Service Area:** All of Cedar Park (78613, 78641)
+- **Average Response Time:** 45-60 minutes
+- **Availability:** 24/7 Emergency Service
+- **Rating:** 4.9★ (287 reviews)
+- **Licensed:** TX Master Plumber #M-12345
 
-[CTA: Start Free 14-Day Trial]
+## Common Plumbing Issues in Cedar Park
 
----
+Cedar Park's hard water and aging infrastructure create specific plumbing challenges:
 
-## How It Works for Remote Teams
+**Hard Water Problems:**
+Cedar Park has some of the hardest water in Texas (250-300 PPM). Common issues:
+- Water heater sediment buildup
+- Fixture corrosion
+- Pipe scaling
 
-1. **Create projects** with automatic timezone conversion
-2. **Assign tasks** with async status updates
-3. **Track progress** with daily digest emails (not notifications)
-4. **Collaborate** via threaded comments, not meetings
+**Solution:** We recommend water softeners and annual water heater flushing.
 
-## Pricing for Remote Teams
+**Older Home Plumbing:**
+Many Cedar Park homes built in the 1990s-2000s now need:
+- Pipe repiping (galvanized to PEX/copper)
+- Water heater replacement (10-12 year lifespan)
+- Fixture upgrades
 
-| Plan | Price | Team Size | Best For |
-|------|-------|-----------|----------|
-| Starter | $10/user/mo | 5-15 | Small teams |
-| Business | $18/user/mo | 16-50 | Growing companies |
-| Enterprise | Custom | 50+ | Large organizations |
+## Our Cedar Park Plumbing Services
 
-**All plans include:**
-✓ Unlimited projects
-✓ Time tracking
-✓ Integrations
-✓ Mobile apps
-✓ 24/7 support
+### Emergency Plumbing (24/7)
+- **Burst pipe repair** - Average response: 45 minutes
+- **Major leak repair** - Same-day service guaranteed
+- **Sewer backups** - Emergency service available
+- **No hot water** - Rapid water heater diagnosis
 
-## Who [Product] Is Best For
+**Emergency Service Area:** All of Cedar Park, including:
+- Whitestone / Avery Ranch
+- Buttercup Creek
+- Anderson Mill
+- Twin Creeks
+- Lakeline area
 
-**✅ Perfect if you:**
-- Have team members in 3+ time zones
-- Want to reduce meeting time
-- Need visibility without micromanaging
-- Use Slack/Teams for communication
-- Value async work culture
+### Residential Plumbing Services
 
-**❌ Not ideal if you:**
-- All work from same office
-- Need complex Gantt charts
-- Require detailed resource planning
-- Want heavy customization
+**Water Heater Services:**
+- Installation (tank and tankless)
+- Repair and maintenance
+- Replacement (same-day available)
 
-## Common Questions About Remote Team PM Software
+**Cedar Park Pricing:**
+- Tank water heater: $1,200-$2,000 installed
+- Tankless water heater: $2,500-$3,500 installed
+(Prices include removal of old unit, installation, permits)
 
-### How is this different from Asana or Monday.com?
-[Direct, specific answer with comparison]
+**Drain Cleaning:**
+- Kitchen drain clearing: $150-$300
+- Main sewer line cleaning: $200-$500
+- Video inspection: $150 (free with service)
 
-### Can we migrate from [Competitor]?
-[Yes, process explained]
+**Leak Detection & Repair:**
+- Slab leak detection: $300-$500
+- Pipe repair: $200-$800 (depending on location)
+- Fixture leak repair: $150-$300
 
-### What integrations are available?
-[List with logos]
+## Why Cedar Park Residents Choose Joe's Plumbing
 
-### How long does setup take?
-[Specific timeframe]
+✓ **Local Knowledge:** We know Cedar Park's unique plumbing challenges
+✓ **Fast Response:** Average 45-minute arrival for emergencies
+✓ **Transparent Pricing:** No hidden fees, upfront quotes
+✓ **Licensed & Insured:** TX Master Plumber License #M-12345
+✓ **Satisfaction Guaranteed:** 100% satisfaction or we make it right
 
-[CTA: See How It Works - Watch 2-Min Demo]
+## Cedar Park Service Areas
 
----
+We serve all Cedar Park neighborhoods including:
 
-**Free 14-day trial. No credit card required. Setup in 10 minutes.**
-```
+**78613 Zip Code:**
+- Whitestone
+- Avery Ranch
+- Brushy Creek
+- Vista Oaks
+- Carriage Hills
 
-**Results from this approach:**
-- **Paid traffic:** Higher conversion (clear value prop + pricing)
-- **AEO benefit:** Cited by ChatGPT for "remote team project management" queries
-- **Compound effect:** CPC decreases as Quality Score improves
+**78641 Zip Code:**
+- Buttercup Creek
+- Anderson Mill West
+- Twin Creeks Country Club
+- Lakeline Oaks
+- Cedar Park Town Center area
 
-## Facebook/Instagram Ad Content + AEO
+## Customer Reviews from Cedar Park
 
-### The Challenge
+★★★★★ "Had a burst pipe emergency at 2am. Joe's Plumbing was here in 40 minutes and fixed it fast. Transparent pricing, no upselling. Highly recommend for Cedar Park residents!" - Sarah M., Avery Ranch
 
-Social media ads don't directly influence AEO (AI doesn't crawl Facebook ads).
+★★★★★ "Needed water heater replacement. Got 3 quotes, Joe's was most reasonable and explained everything clearly. Completed same day. Great service in Cedar Park!" - Mike T., Buttercup Creek
 
-**However:** Social ads drive traffic to your AEO-optimized content.
+[More Cedar Park reviews...]
 
-### Strategy: Use Ads to Amplify AEO Content
+## Frequently Asked Questions - Cedar Park
 
-**1. Create AEO-Optimized Blog Post**
+**Q: How quickly can you get to Cedar Park for emergencies?**
+A: Average response time is 45-60 minutes anywhere in Cedar Park. For central Cedar Park (near 1431/183), often 30-40 minutes.
 
-Example: "How to Choose a Standing Desk: Complete Guide 2025"
+**Q: Do you service all Cedar Park zip codes?**
+A: Yes, we service all of Cedar Park including 78613 and 78641, plus surrounding areas like Leander and North Austin.
 
-Content includes:
-- Direct answers to common questions
-- Detailed comparison tables
-- Buying guide
-- FAQ section
-- Structured data markup
+**Q: What's the best way to prevent hard water damage in Cedar Park?**
+A: Install a water softener system. Cedar Park's water hardness (250-300 PPM) can damage fixtures and pipes over time. We offer free water testing.
 
-**2. Run Facebook Ads to That Content**
+**Q: Do you offer financing?**
+A: Yes, we offer financing for water heater replacements and larger plumbing projects. Apply online or ask during service.
 
-**Ad Format:** Carousel or Single Image
+**Q: Are you licensed in Cedar Park?**
+A: Yes, Master Plumber License #M-12345, fully insured with $2M liability coverage.
 
-**Ad Copy:**
-```
-Headline: Confused About Standing Desks?
-Text: Electric vs manual, desktop vs full, height ranges, weight capacity—our complete guide answers every question.
+## Contact Joe's Plumbing - Cedar Park
 
-[Image: Infographic preview]
+📞 **24/7 Emergency:** (512) 555-0199
+📧 **Email:** cedarpark@joesplumbing.com
+🌐 **Online Booking:** [Schedule Service]
 
-Body: Free guide compares 15 popular standing desks by price, features, and use case. Find your perfect fit in 5 minutes.
+**Service Hours:**
+- Emergency: 24/7/365
+- Standard Service: Monday-Saturday 7am-7pm
+- Office Hours: Monday-Friday 8am-5pm
 
-CTA: Read Free Guide
-```
+**Location:**
+Based in Austin, serving all of Cedar Park with 45-minute average response time.
 
-**Landing Page:** Your AEO-optimized guide
-
-**3. The Multiplier Effect**
-
-- Ad drives 1,000 visitors to guide
-- 10% (100 people) click through to your product pages
-- High engagement signals quality to AI engines
-- AI starts citing your guide in 2-3 weeks
-- Now getting 200 organic visitors/month + paid continues
-- Total traffic compounds
-
-### Social Ad Creative That Supports AEO
-
-**Quote Key Facts from Your AEO Content:**
-
-```
-Ad Image: Bold text overlayed on product photo
-Text: "67% of office workers have back pain.
-      Standing desks reduce it by 32%."
-
-Caption: We analyzed 25 studies on standing desks and found 5 that actually work for different budgets and spaces.
-
-See the comparison →
-
-[Link to AEO content]
+[Book Appointment] [Get Quote] [Emergency Service]
 ```
 
 **Why This Works:**
-- Specific statistics attract clicks
-- Content provides value (not just sales page)
-- Visitors spend time reading, improving engagement metrics
-- AI sees valuable content → indexes and cites
+- City-specific content (not duplicate/template)
+- Local knowledge demonstrated (hard water issues)
+- Specific neighborhoods mentioned
+- Local pricing transparency
+- Customer reviews from that area
+- Location-specific FAQ
+- Zip codes explicitly mentioned
 
-## Ad Copy That Feeds AEO Strategy
+### Neighborhood-Specific Content
 
-### Traditional Ad Copy
+**For businesses in larger cities, create neighborhood pages:**
 
-```
-Headline: Best CRM Software
-Description: Transform your sales process. Try free!
-```
+```markdown
+# Coffee Shop in Whitestone / Avery Ranch - Brew Haven
 
-**Problems:**
-- Generic claims
-- No specific value
-- Doesn't educate
+## Your Neighborhood Coffee Spot in Avery Ranch
 
-### AEO-Aligned Ad Copy
+Located at the intersection of Parmer Lane and 620, Brew Haven is Whitestone and Avery Ranch residents' favorite coffee shop for remote work, morning lattes, and afternoon pick-me-ups.
 
-```
-Headline: CRM for Teams Under 20 People
-Description: Built for small teams. $29/user. Setup in 15 min. No complex features you won't use.
-```
+**Avery Ranch / Whitestone Details:**
+- **Location:** 123 Parmer Ln (across from HEB)
+- **Distance:** 2 miles from Avery Ranch Blvd
+- **Parking:** Free parking lot (50+ spaces)
+- **Popular Times:** Weekday mornings (7-9am), afternoons (2-4pm)
 
-**Benefits:**
-- Specific audience
-- Clear pricing
-- Sets expectations
-- Matches searcher intent
+## Why Avery Ranch Residents Love Us
 
-**Then the Landing Page:**
-Answers "What's the best CRM for small teams under 20 people?" with your product positioned as the answer.
+**For Remote Workers:**
+Many Avery Ranch tech workers make us their daily office:
+- Fast, reliable WiFi (500 Mbps)
+- Quiet during work hours (not music-blasting)
+- Plenty of outlets at every table
+- All-day seating (no pressure to leave)
+- Conference call friendly corner booths
 
-**Result:** Ad copy → Landing page → AEO content alignment creates consistent message AI can cite.
+**For Parents:**
+Drop the kids at Avery Ranch Elementary or Purple Sage and grab your morning coffee:
+- Drive-thru for busy mornings
+- Mobile order ahead (ready when you arrive)
+- Breakfast tacos (7-11am)
+- Kids drinks available
 
-## Retargeting Strategy with AEO
+**For Weekend Hangouts:**
+- Dog-friendly patio (bring your pup!)
+- Outdoor seating overlooking greenbelt
+- Board games available
+- Community events monthly
 
-### The Traditional Retargeting Problem
+## Directions from Avery Ranch
 
-User visits your site → Leaves → Sees generic retargeting ad → Ignores
+**From Avery Ranch Blvd:**
+- Head south on Avery Ranch Blvd
+- Right on Parmer Lane
+- 1.5 miles on left (across from HEB)
+- Free parking lot
 
-**Why it fails:** No new information, just repeated pitch
+**From Whitestone Blvd:**
+- North on Whitestone Blvd to Parmer
+- Left on Parmer Lane
+- 0.5 miles on right
 
-### AEO-Enhanced Retargeting
+**Nearby Landmarks:**
+- Across from HEB Whitestone
+- Next to Panda Express
+- 2 miles from Avery Ranch Golf Club
 
-**Step 1:** User visits your product page (doesn't convert)
+## Avery Ranch Resident Favorites
 
-**Step 2:** Create AEO content answering their objections
+**Most Popular Drinks:**
+1. Honey Lavender Latte - "Avery Ranch signature drink"
+2. Cold Brew - "Perfect for Texas heat"
+3. Maple Cinnamon Latte - "Better than Starbucks on 620"
 
-Example topics:
-- "How to calculate ROI for [product category]"
-- "[Product] vs [Competitor]: Detailed comparison"
-- "Is [Product] worth it for [specific use case]?"
+**Local Review:**
+★★★★★ "This is THE spot for Avery Ranch remote workers. I'm here 3-4 days a week. Fast WiFi, comfortable chairs, and great coffee. Way better than driving to Starbucks or McDonald's on 620!" - Jennifer K., Avery Ranch
 
-**Step 3:** Retarget with ads to this educational content
+[More Avery Ranch reviews]
 
-**Step 4:** Educational content → Product comparison → Conversion
+## Frequently Asked Questions - Avery Ranch
 
-**Example Flow:**
+**Q: Do you have a drive-thru?**
+A: Yes! Perfect for busy mornings when you're dropping kids at school.
 
-```
-User visits: CRM product page
+**Q: Is there parking?**
+A: Yes, free parking lot with 50+ spaces. Never an issue finding a spot.
 
-Leaves without converting
+**Q: How far from Avery Ranch neighborhoods?**
+A: 2-3 miles from most Avery Ranch homes. 5-7 minute drive.
 
-Retargeting ad (7 days later):
-"Still researching CRM options? See how [Your CRM] compares to Salesforce, HubSpot, and Pipedrive for small businesses."
+**Q: Can I work from here all day?**
+A: Absolutely! Many Avery Ranch remote workers make us their daily spot. No time limits, just enjoy your coffee and get work done.
 
-Clicks → Lands on comparison guide (AEO-optimized)
-
-Guide mentions your CRM's advantages for small teams
-
-CTA: "Try [Your CRM] free for 14 days"
-
-Higher conversion rate
-```
-
-## Creating AEO Content Libraries for Ad Campaigns
-
-### The Content Cluster Strategy
-
-**Step 1: Core Pillar Content** (AEO-optimized)
-
-Main topic: "Complete Guide to Email Marketing for E-commerce"
-- 2,000 words
-- Answers 15+ questions
-- Comparison tables
-- FAQ section
-- Schema markup
-
-**Step 2: Supporting Content Pieces** (AEO-optimized)
-
-- "Email Marketing Automation for Shopify Stores"
-- "How Often to Send Marketing Emails"
-- "Email Subject Lines That Get Opens"
-- "Email Marketing Benchmarks for E-commerce"
-
-**Step 3: Run Ads to Different Pieces**
-
-Match ad to user stage:
-
-- **Awareness stage:** Ad to "Complete Guide"
-- **Consideration stage:** Ad to "How Often to Send Emails"
-- **Decision stage:** Ad to product comparison
-
-**Step 4: Cross-Linking**
-
-All content pieces link to each other + product pages
-
-**AEO Benefit:**
-- AI sees comprehensive topic coverage
-- Higher authority signals
-- More citation opportunities
-- Each piece supports the others
-
-## Budget Allocation: Paid Ads + AEO Content
-
-### Traditional Allocation
-
-```
-Total Marketing Budget: $10,000/month
-
-- Google Ads: $6,000
-- Facebook Ads: $3,000
-- Content: $500
-- SEO: $500
+**Q: Is it kid-friendly?**
+A: Very kid-friendly! We have kids' drinks, pastries, and a chill atmosphere. Some parents make it their morning routine after school drop-off.
 ```
 
-### AEO-Enhanced Allocation
+**Why Hyperlocal Works:**
+- Speaks directly to neighborhood residents
+- Mentions specific landmarks they know
+- Addresses their specific needs (remote work, school drop-off)
+- Uses neighborhood names in queries ("coffee shop in Avery Ranch")
 
+## Review Optimization for Local AI Visibility
+
+### Review Generation Strategies
+
+**1. In-Person Request (Highest Conversion)**
+
+**At point of service:**
 ```
-Total Marketing Budget: $10,000/month
+Cashier/Server script:
+"Glad you enjoyed your [coffee/service]! If you have 30 seconds, a quick Google review helps other [coffee lovers/customers] find us. I can text you the link if you'd like?"
 
-- Google Ads: $4,000 (40%)
-- Facebook Ads: $2,500 (25%)
-- AEO Content Creation: $2,000 (20%)
-- Schema/Technical AEO: $500 (5%)
-- SEO: $1,000 (10%)
+[If yes]
+"What's your number? I'll send it right now."
+
+[Send SMS with direct review link]
+"Review link for Brew Haven: [URL] - Thanks for your support! ☕"
 ```
 
-**Rationale:**
-- Reduce paid spend by 25%
-- Invest in AEO content that compounds
-- After 6 months, AEO provides organic traffic offsetting paid reduction
-- Total traffic stays same or increases, CAC decreases
+**Conversion rate:** 20-30% (high-touch, immediate)
 
-### ROI Comparison Timeline
+**2. Email Follow-Up (Moderate Conversion)**
 
-**Month 1:**
-- Traditional approach: 100 customers, $100 CAC
-- AEO-enhanced: 90 customers, $111 CAC
-(Slight disadvantage due to learning curve)
+**24-48 hours after visit:**
+```
+Subject: "Quick favor? 30-second review would help us!"
 
-**Month 3:**
-- Traditional: 100 customers, $100 CAC
-- AEO-enhanced: 110 customers, $91 CAC
-(AEO content starts driving organic)
+Hi [Name],
 
-**Month 6:**
-- Traditional: 100 customers, $100 CAC
-- AEO-enhanced: 140 customers, $71 CAC
-(30% organic traffic from AEO)
+Thanks for stopping by Brew Haven on [day]! Hope your [order item] hit the spot.
 
-**Month 12:**
-- Traditional: 100 customers, $100 CAC
-- AEO-enhanced: 180 customers, $56 CAC
-(50% organic traffic from AEO)
+If you have 30 seconds, a quick Google review would mean the world to us. It helps other coffee lovers in [neighborhood] discover their new favorite spot.
 
-## Measuring Ad + AEO Performance
+[Leave Review - Big Button]
 
-### Traditional Ad Metrics
+No worries if you're busy! Either way, hope to see you back soon.
 
-- Impressions
-- Click-through rate (CTR)
-- Cost per click (CPC)
-- Conversion rate
-- Cost per acquisition (CPA)
+Cheers,
+[Name]
+Brew Haven Team
 
-### Additional AEO Metrics
+P.S. If something wasn't perfect, please reply and I'll make it right!
+```
 
-**For Ad Landing Pages:**
-- Time on page (should increase with AEO)
-- Scroll depth (how far users read)
-- Bounce rate (should decrease)
-- Pages per session
-- Return visitor rate
+**Conversion rate:** 5-10% (still effective)
 
-**AI Citation Metrics:**
-- Number of questions page is cited for
-- Brand mentions in AI answers
-- Direct traffic increases (from AI referrals)
+**3. Receipt/Invoice Link (Low Conversion)**
 
-**Compound Metrics:**
-- Total traffic (paid + organic)
-- Blended CAC (total cost / total customers)
-- Organic traffic growth rate
-- Assisted conversions (AI → later paid ad conversion)
+**Printed on receipt:**
+```
+━━━━━━━━━━━━━━━━━━━━━
+Thanks for visiting!
 
-### Attribution Challenges
+Love us? Leave a review:
+brewhaven.com/review
+(Takes 30 seconds)
+━━━━━━━━━━━━━━━━━━━━━
+```
 
-**The Problem:**
-User journey might be:
-1. ChatGPT mentions your brand
-2. User googles your brand name
-3. Clicks your Google Ad
-4. Converts
+**Conversion rate:** 1-3% (passive, but adds up)
 
-**Who gets credit?**
-- Google Ads says: "Paid search"
-- Reality: AEO initiated the journey
+### Review Response Strategy
 
-**Solution:** Track multi-touch attribution
-- Use UTM parameters for all paid channels
-- Monitor direct + branded search increases
-- Survey new customers: "How did you hear about us?"
+**Response Time Target:** Within 24 hours
 
-## Ad Creative Best Practices for AEO Support
+**Positive Review Template:**
+```
+Thanks so much, [Name]! We're thrilled you enjoyed [specific item/service they mentioned].
 
-### DO: Lead with Specific Value
+[Personal touch based on their review - reference something specific they said]
 
-**✅ Good:**
-"CRM with built-in email automation. $29/mo. Setup in 15 minutes."
+Hope to see you back soon for [related suggestion]!
 
-**❌ Bad:**
-"The world's best CRM software. Transform your business today!"
-
-### DO: Use Questions in Ad Copy
-
-**✅ Good:**
-"Need a CRM for a team under 10 people? We built one specifically for small teams. No bloat, just what you need."
-
-**❌ Bad:**
-"Try our CRM today! Free trial available."
-
-### DO: Match Ad Copy to Landing Page
-
-**Ad Headline:** "Email Marketing for Shopify Stores"
-**Landing Page H1:** "How to Set Up Email Marketing for Your Shopify Store"
-
-Consistency signals relevance to both users and AI.
-
-### DO: Provide Value Before the Sale
-
-**✅ Good approach:**
-Ad → Free comprehensive guide → CTA to product
-
-**❌ Bad approach:**
-Ad → "Buy now" landing page with no info
-
-## Industry-Specific Ad + AEO Strategies
-
-### E-commerce Brands
-
-**Ad Strategy:**
-- Product-specific ads (Google Shopping, Facebook Dynamic Ads)
-- Remarketing to abandoned carts
-
-**AEO Layer:**
-- Detailed product buying guides
-- "Best [product] for [use case]" content
-- Size/fit/compatibility guides
-- Product comparison pages
+- [Your name], [Your role]
+Brew Haven
+```
 
 **Example:**
-Running shoe brand runs Google Shopping ads, but also creates:
-- "Best Running Shoes for Flat Feet"
-- "Marathon Training Shoe Guide"
-- "Running Shoe Size Conversion Chart"
+```
+Review: "Great coffee and WiFi! Worked here for 4 hours, nobody bothered me. The honey lavender latte is amazing."
 
-AI cites guides → Organic traffic → Supplements paid product ads
+Response:
+"Thanks, Alex! The honey lavender is our most popular drink - glad it lived up to the hype! We love being a workspace for remote workers like you. The corner booth has the best outlet setup if you come back for another work session. ☕
 
-### Service Businesses (Agencies, Consultants)
+- Sarah, Owner
+Brew Haven"
+```
 
-**Ad Strategy:**
-- Local service ads
-- LinkedIn/Facebook lead gen ads
-- Search ads for "[service] near me"
+**Negative Review Response (Public):**
+```
+"Hi [Name], I'm really sorry [specific issue] happened. This isn't the experience we aim for.
 
-**AEO Layer:**
-- "How to choose a [service] provider"
-- "[Service] cost in [city]"
-- "[Service] process explained"
-- FAQ pages for common objections
+[Acknowledge specific complaint without excuses]
 
-**Example:**
-Marketing agency runs LinkedIn ads to CMOs, but creates:
-- "How Much Does a Marketing Agency Cost?"
-- "In-house vs Agency Marketing: Complete Comparison"
-- "Questions to Ask Before Hiring an Agency"
+I'd love to make this right. Please email me directly at [email] or call [phone] so we can resolve this.
 
-### SaaS Companies
+- [Your name], Owner
+[Direct contact]"
+```
 
-**Ad Strategy:**
-- Free trial ads
-- Comparison keyword ads ("[competitor] alternative")
-- Feature-specific ads
+**Then follow-up privately to resolve**
 
-**AEO Layer:**
-- Detailed feature documentation
-- Use case guides
-- Industry-specific applications
-- Integration tutorials
+**Critical Negative Review Follow-Up:**
 
-**Example:**
-Project management SaaS runs ads, plus creates:
-- "Project Management for Construction Companies"
-- "How to Migrate from [Competitor] to [Your Tool]"
-- "Remote Team PM Best Practices"
+After resolution:
+```
+[Private follow-up after public response]
 
-## The 30-Day Ad + AEO Sprint
+"Hi [Name],
 
-Want to test this approach? Here's a quick implementation:
+Thanks for speaking with me about [issue]. I wanted to follow up:
 
-**Week 1: Audit & Plan**
-- Review current ad landing pages
-- Identify 5 high-spend ad campaigns
-- Research questions customers ask
-- Plan 5 AEO content pieces
+[Summary of what you did to resolve]
 
-**Week 2: Create AEO Content**
-- Write/optimize 5 pieces using Chapter 5 techniques
-- Implement schema markup
-- Add FAQ sections
-- Internal link to product pages
+I hope this makes things right. If you're willing, I'd appreciate if you could update your review to reflect our resolution. Either way, thank you for the feedback - it helps us improve.
 
-**Week 3: Integrate with Ads**
-- Update ad landing pages with AEO structure
-- Launch retargeting campaign to AEO content
-- Create social ads promoting best AEO content
-- Set up tracking
+If you'd like to give us another try, your next [coffee/service] is on me. Just mention this when you come in.
 
-**Week 4: Test & Measure**
-- Monitor AEO content performance
-- Test AI engines (ask ChatGPT relevant questions)
-- Compare metrics to previous period
-- Adjust based on results
+Thanks for your understanding,
+[Name]"
+```
+
+**Updated review outcome:** 40% of customers update negative reviews after good resolution
+
+### Leveraging Reviews in AI-Cited Content
+
+**Create Review Summary Pages:**
+
+```markdown
+# What Customers Say About Brew Haven
+
+## Overall Rating: 4.8★ (342 Google Reviews)
+
+### Most Common Praise (based on 285 positive reviews):
+
+**1. "Best place to work remotely"** - 38% of reviewers
+Customers love:
+- Fast, reliable WiFi
+- Comfortable seating for hours
+- Quiet atmosphere
+- Plenty of outlets
+
+**2. "Amazing coffee quality"** - 31% of reviewers
+Top-rated drinks:
+- Honey Lavender Latte (mentioned 47 times)
+- Cold Brew (mentioned 39 times)
+- Cappuccino (mentioned 28 times)
+
+**3. "Friendly, welcoming staff"** - 28% of reviewers
+Staff members mentioned by name:
+- Sarah (owner) - 23 mentions
+- Mike (barista) - 17 mentions
+- Jenny (barista) - 12 mentions
+
+**4. "Dog-friendly patio"** - 19% of reviewers
+Perfect for dog owners in Avery Ranch
+
+**5. "Great vibe and atmosphere"** - 16% of reviewers
+Described as: "cozy," "not too loud," "Instagram-worthy," "chill"
+
+### Common Questions from Reviews:
+
+**"Is it crowded?"**
+Based on reviews: Busy 7-9am and 2-4pm weekdays. Quieter 10am-2pm and after 5pm.
+
+**"Is parking easy?"**
+Based on reviews: 100% of reviews mentioning parking said "easy" or "plenty of spots."
+
+**"Can I really work here all day?"**
+Based on reviews: Yes! Multiple reviewers mention working "4+ hours" with no issues.
+
+### Areas for Improvement (based on 12 critical reviews):
+
+**Pastry selection** - 4 reviews mentioned wanting more variety
+Our response: Added 3 new pastry options in November 2024
+
+**Busy during peak hours** - 3 reviews mentioned wait times during morning rush
+Our response: Added second espresso machine, reduced wait times 40%
+
+**Limited seating on weekends** - 3 reviews mentioned full seating Saturday mornings
+Our response: Expanded patio seating (6 → 10 tables) in December 2024
+
+### Recent Reviews (January 2025):
+
+★★★★★ "Been coming here for 2 years as my daily coffee shop. Hands down the best spot in Cedar Park for remote work. Sarah and the team know my order by heart now. Can't recommend enough!" - Jennifer K.
+
+★★★★★ "Discovered this place while visiting Avery Ranch. Way better than the Starbucks on 620. The honey lavender latte is incredible. Wish we had one in our city!" - Michael T.
+
+★★★★★ "Dog-friendly patio was perfect for a Sunday morning with our lab. Good coffee, nice outdoor space, they even brought water for the dog. Will be back!" - Lisa & John M.
+
+[View All 342 Reviews on Google]
+```
+
+**Why This Works:**
+- Aggregates social proof
+- Answers common questions from review data
+- Shows business responsiveness
+- AI can extract specific insights
+- Builds trust through transparency
+
+## Multi-Location Business AEO
+
+### Strategy for 2-10 Locations
+
+**1. Individual Location Pages**
+
+Each location gets its own page with:
+- Unique content (not duplicated templates)
+- Location-specific details
+- Local staff mentions
+- Neighborhood information
+- Location-specific reviews
+- Unique photos of that location
+
+**URL Structure:**
+```
+yoursite.com/locations/downtown-austin
+yoursite.com/locations/avery-ranch
+yoursite.com/locations/round-rock
+```
+
+**2. Location Finder Page**
+
+Main locations page:
+```markdown
+# Brew Haven Locations - Find Your Nearest Coffee Shop
+
+## 3 Locations in the Austin Area
+
+### Downtown Austin
+📍 123 Main Street, Austin, TX 78701
+📞 (512) 555-0123
+⏰ Mon-Fri 7am-8pm, Sat-Sun 8am-6pm
+⭐ 4.8★ (342 reviews)
+
+**Best for:** Remote workers, downtown employees, tourists
+**Parking:** Street parking, garage 1 block away
+**Unique features:** Largest location, event space available
+
+[View Details] [Get Directions] [Order Ahead]
+
+---
+
+### Avery Ranch / Cedar Park
+📍 456 Parmer Lane, Cedar Park, TX 78613
+📞 (512) 555-0124
+⏰ Mon-Fri 6:30am-9pm, Sat-Sun 7am-9pm
+⭐ 4.7★ (218 reviews)
+
+**Best for:** Families, dog owners, northwest Austin residents
+**Parking:** Free parking lot (50 spaces)
+**Unique features:** Drive-thru, largest patio, kid-friendly
+
+[View Details] [Get Directions] [Order Ahead]
+
+---
+
+### Round Rock
+📍 789 IH-35, Round Rock, TX 78681
+📞 (512) 555-0125
+⏰ Mon-Sun 6am-10pm
+⭐ 4.9★ (156 reviews)
+
+**Best for:** Round Rock residents, I-35 travelers
+**Parking:** Free lot, easy highway access
+**Unique features:** Late hours, breakfast tacos all day
+
+[View Details] [Get Directions] [Order Ahead]
+
+## Find Your Nearest Location
+
+[Location Finder Widget - Enter Zip or Address]
+
+## What Makes Each Location Special
+
+**Downtown:** Biggest selection, fastest WiFi, event space
+**Avery Ranch:** Most family-friendly, drive-thru, huge patio
+**Round Rock:** Latest hours, best for quick stop on I-35
+```
+
+**3. Multi-Location Schema Implementation**
+
+**Organization schema (site-wide):**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Brew Haven",
+  "url": "https://brewhaven.com",
+  "logo": "https://brewhaven.com/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-512-555-0123",
+    "contactType": "Customer Service"
+  },
+  "location": [
+    {
+      "@type": "CafeOrCoffeeShop",
+      "name": "Brew Haven Downtown",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Main Street",
+        "addressLocality": "Austin",
+        "addressRegion": "TX",
+        "postalCode": "78701"
+      },
+      "telephone": "+1-512-555-0123",
+      "url": "https://brewhaven.com/locations/downtown-austin"
+    },
+    {
+      "@type": "CafeOrCoffeeShop",
+      "name": "Brew Haven Avery Ranch",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "456 Parmer Lane",
+        "addressLocality": "Cedar Park",
+        "addressRegion": "TX",
+        "postalCode": "78613"
+      },
+      "telephone": "+1-512-555-0124",
+      "url": "https://brewhaven.com/locations/avery-ranch"
+    },
+    {
+      "@type": "CafeOrCoffeeShop",
+      "name": "Brew Haven Round Rock",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "789 IH-35",
+        "addressLocality": "Round Rock",
+        "addressRegion": "TX",
+        "postalCode": "78681"
+      },
+      "telephone": "+1-512-555-0125",
+      "url": "https://brewhaven.com/locations/round-rock"
+    }
+  ]
+}
+```
+
+**Individual location pages get full LocalBusiness schema (shown earlier)**
+
+### Strategy for 10+ Locations (Regional/National Chains)
+
+**Challenge:** Can't create unique content for 100+ locations
+
+**Solution: Templated + Dynamic Content**
+
+**Location Page Template Structure:**
+```markdown
+# [Business Name] in [City, State]
+
+## [Service Type] in [City] - [Unique Value Prop]
+
+[Dynamic intro using city/neighborhood variables]
+
+**Location Details:**
+- **Address:** [Street], [City], [State] [Zip]
+- **Phone:** [Local phone]
+- **Hours:** [Location-specific hours]
+- **Rating:** [Star rating] ([Review count] reviews)
+
+[Auto-generated driving directions from major landmarks]
+
+## Our [City] Location Features
+
+[Checkboxes based on location attributes database:
+✓ Drive-thru (if applicable)
+✓ Outdoor seating (if applicable)
+✓ WiFi (if applicable)
+etc.]
+
+## Serving [City] Since [Year]
+
+[Template paragraph with [City] variables]
+
+We're proud to serve [neighborhood names from database] and surrounding areas.
+
+## [City] Customer Reviews
+
+[Pull recent Google reviews via API - display 3-5]
+
+## Frequently Asked Questions - [City]
+
+**Q: What are your hours in [City]?**
+A: [Dynamic hours from database]
+
+**Q: Do you offer [service] in [City]?**
+A: [Dynamic based on services offered at location]
+
+[Location-specific FAQ from template]
+
+## Contact [Business] in [City]
+
+📞 **Call:** [Local phone]
+📍 **Address:** [Full address with map embed]
+🌐 **Book Online:** [Booking link with location pre-selected]
+
+[Dynamic: Nearest other locations if within 10 miles]
+```
+
+**Keys to Scaling:**
+- Dynamic content from location database
+- Automatic review pulling via API
+- Location attributes drive content display
+- Still feels somewhat custom per location
+
+## Emergency and Time-Sensitive Local Queries
+
+### Optimizing for "Open Now" and Emergency Searches
+
+**Query Patterns:**
+- "Plumber open now"
+- "24-hour pharmacy near me"
+- "Emergency vet open Sunday"
+- "Dentist accepting new patients today"
+
+**Optimization Strategy:**
+
+**1. Explicit Availability Statements**
+
+**On homepage and key pages:**
+```
+🚨 EMERGENCY SERVICE: 24/7/365
+Call now: (512) 555-0199
+
+Average response time: 45 minutes
+Currently: AVAILABLE (always show current status)
+```
+
+**2. Operating Hours Prominence**
+
+**Make hours impossible to miss:**
+```
+━━━━━━━━━━━━━━━━━━━━━
+⏰ OPEN NOW
+Monday 7am-8pm
+Currently: Open (closes in 4 hours)
+━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Use schema to mark current status:**
+```json
+{
+  "@type": "LocalBusiness",
+  "openingHoursSpecification": [...],
+  "specialOpeningHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "opens": "00:00",
+      "closes": "23:59",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"
+      ],
+      "validFrom": "2025-01-01",
+      "validThrough": "2025-12-31"
+    }
+  ]
+}
+```
+
+**3. Emergency-Focused Content**
+
+Create dedicated emergency pages:
+
+```markdown
+# Emergency Plumbing Service Austin - 24/7 Availability
+
+## Fast Emergency Plumber - Average 45-Minute Response
+
+When plumbing emergencies strike, every minute counts. Joe's Plumbing offers 24/7 emergency service throughout Austin with an average 45-minute response time.
+
+📞 **CALL NOW: (512) 555-0199**
+🚨 Available 24 hours a day, 7 days a week, 365 days a year
+⏱️ Average arrival: 45 minutes anywhere in Austin
+
+## What Qualifies as a Plumbing Emergency?
+
+**Call immediately for:**
+- ✓ Burst pipes or major leaks
+- ✓ Sewage backup or overflow
+- ✓ No water in entire house
+- ✓ Gas leak (call gas company FIRST, then us)
+- ✓ Flooding from plumbing failure
+- ✓ Water heater leaking heavily
+
+**Can wait until business hours:**
+- Slow drip from faucet
+- Running toilet (not overflowing)
+- Minor drain slowness
+- Scheduled maintenance
+
+## What to Expect: Emergency Service Process
+
+**1. Call Us Immediately**
+📞 (512) 555-0199 - answered by a real person, not a recording
+
+**2. Quick Assessment**
+We'll ask a few questions to understand the emergency and provide guidance for immediate safety.
+
+**3. Plumber Dispatched**
+Nearest available plumber dispatched to your location. We'll text you their name, photo, and ETA.
+
+**4. Rapid Arrival**
+Average response time: 45 minutes (Central Austin often 30 minutes)
+
+**5. Problem Solved**
+Our plumber will diagnose, explain the issue, provide upfront pricing, and fix it fast.
+
+## Emergency Plumbing Pricing
+
+**Service Call Fee:** $150 (nights/weekends)
+Includes:
+- First hour of labor
+- Diagnosis
+- Minor repairs (parts under $50)
+
+**After-hours additional:** $50 surcharge (10pm-6am)
+
+**Common Emergency Repairs:**
+- Burst pipe repair: $300-$800 (depending on location)
+- Sewer backup clearing: $350-$700
+- Emergency water heater repair: $200-$500
+- Major leak repair: $250-$900
+
+**Transparent Pricing:**
+Price quoted before work begins. No hidden fees. Payment due upon completion.
+
+## Areas We Cover for Emergency Service
+
+**Austin Metro Emergency Coverage:**
+All of Austin including:
+- Downtown Austin
+- South Austin
+- North Austin
+- West Austin
+- East Austin
+
+**Surrounding Areas (within 45-60 minutes):**
+- Round Rock
+- Cedar Park / Leander
+- Pflugerville
+- Georgetown (northern areas)
+- Bee Cave / Lakeway
+
+## Why Choose Us for Emergency Plumbing
+
+✓ **Actually 24/7:** Real person answers, not "leave a message"
+✓ **Fast Response:** 45-minute average, often faster
+✓ **Upfront Pricing:** Know the cost before work begins
+✓ **Licensed & Insured:** Master Plumber #M-12345, $2M insurance
+✓ **Fully Stocked Trucks:** Most repairs completed first visit
+✓ **Satisfaction Guaranteed:** We stand behind our work
+
+## Emergency Plumbing FAQ
+
+**Q: Do you really answer 24/7?**
+A: Yes. A real person, not an answering service. Try calling now to verify!
+
+**Q: How fast can you really get here?**
+A: Average 45 minutes. Central Austin often 30 minutes. Far suburbs up to 60 minutes.
+
+**Q: What if it's 3am on Christmas?**
+A: We're available. $150 service call + $50 after-hours surcharge.
+
+**Q: Can I get a price over the phone?**
+A: We can give ranges, but accurate pricing requires seeing the problem. Price always quoted before work starts.
+
+**Q: What if the problem is worse than expected?**
+A: We stop, explain the situation, provide new pricing, and only continue with your approval.
+
+## Real Emergency Reviews
+
+★★★★★ "Pipe burst at 2am, water everywhere. Called Joe's, they answered immediately and had someone here in 35 minutes. Fixed fast, fair price. Saved us from major damage!" - David R., South Austin
+
+★★★★★ "Sunday morning sewage backup. Joe's was here within an hour on a weekend! Professional, explained everything, had it cleared in 30 minutes. Worth every penny for emergency service." - Maria L., Round Rock
+
+## Contact for Emergency Service
+
+📞 **EMERGENCY: (512) 555-0199**
+Available 24/7/365 - Real person answers
+
+📧 **Non-Emergency:** contact@joesplumbing.com
+🌐 **Website:** joesplumbing.com
+
+**Average Response Time:** 45 minutes
+**Service Area:** Austin + 30-mile radius
+
+[CALL NOW FOR EMERGENCY SERVICE]
+```
+
+**Why This Works:**
+- "Emergency" in title and throughout content
+- Explicit 24/7 availability stated multiple times
+- Response time prominently featured
+- Current availability shown
+- Clear pricing transparency
+- Emergency vs non-emergency guidance
+- Strong call-to-action
 
 ## Chapter Summary
 
-- AEO-optimized landing pages improve ad Quality Scores and reduce CPC
-- Content created for ads can generate long-term organic traffic from AI citations
-- Use ads to drive initial traffic to AEO content, creating compound effect
-- Retargeting with educational AEO content outperforms generic retargeting
-- Budget shift toward AEO content pays off in months 3-6
-- Measure both traditional ad metrics and AEO impact (citations, organic traffic)
-- Different industries require different ad + AEO combinations
+- Local AEO requires location-specific optimization beyond general business strategies
+- Google Business Profile is critical - complete every section thoroughly
+- LocalBusiness schema must include geo-coordinates, hours, and all relevant details
+- Create unique content for each service area and major neighborhood
+- Reviews are social proof AI engines heavily weight for local recommendations
+- Multi-location businesses need individual pages with unique content per location
+- Emergency and time-sensitive queries require specialized optimization
+- "Open now" and availability must be prominently displayed and marked up
 
 ## Key Takeaways
 
-1. **Ads and AEO multiply each other** - Not separate strategies
-2. **Landing pages should inform AND convert** - Balance sales and information
-3. **Content you pay to promote becomes free traffic source** - Long-term asset
-4. **Quality Score improves with AEO** - Better pages = lower costs
-5. **Retarget with value, not just pitches** - Educational content converts better
-6. **Shift 15-20% of ad budget to AEO content** - Investment pays off quickly
+1. **NAP consistency is non-negotiable** - Same everywhere or AI gets confused
+2. **Complete GBP fully** - Every field matters for local AI visibility
+3. **Geo-coordinates are critical** - Required for proximity-based recommendations
+4. **Reviews drive local rankings** - Quality and quantity both matter
+5. **Unique local content wins** - Don't duplicate templates across locations
+6. **Neighborhood names matter** - Use hyperlocal terminology residents recognize
+7. **Availability prominence critical** - "Open now" must be obvious and accurate
+8. **Emergency optimization differs** - 24/7 availability needs special treatment
 
 ## Action Items
 
-Implement ad + AEO integration:
+Implement local business AEO:
 
-- [ ] Audit your top 3 ad landing pages for AEO
-- [ ] Rewrite one landing page using AEO principles
-- [ ] Create one comprehensive guide related to your ads
-- [ ] Set up retargeting campaign to educational content
-- [ ] Add FAQ section to main ad landing pages
-- [ ] Implement schema markup on landing pages
-- [ ] Create tracking dashboard for paid + organic traffic
-- [ ] Test in AI engines after 2-3 weeks
+- [ ] Audit NAP consistency across all online properties
+- [ ] Complete 100% of Google Business Profile
+- [ ] Implement LocalBusiness schema with all fields
+- [ ] Create location-specific content pages
+- [ ] Set up review generation system
+- [ ] Respond to all existing reviews
+- [ ] Add Q&A content to GBP proactively
+- [ ] Create neighborhood-specific content
+- [ ] Post to GBP weekly (minimum)
+- [ ] Test local queries in ChatGPT weekly
 
-## Ad Landing Page AEO Checklist
+## Local Business AEO Checklist
 
-Use this for your paid landing pages:
+**Google Business Profile:**
+- [ ] Business name (consistent with website)
+- [ ] Complete address with suite/unit numbers
+- [ ] Phone number (local area code preferred)
+- [ ] Website URL
+- [ ] Primary category (most specific)
+- [ ] All additional relevant categories
+- [ ] All accurate attributes selected
+- [ ] Detailed operating hours (including special hours)
+- [ ] 750-character description (AEO-optimized)
+- [ ] 20+ high-quality photos
+- [ ] Logo uploaded
+- [ ] Cover photo uploaded
+- [ ] Products/services listed
+- [ ] Q&A section populated (10+ questions)
+- [ ] Weekly posts
+- [ ] Review response within 24 hours
 
-**Content:**
-- [ ] Question-format H1 headline
-- [ ] Direct answer in first 150 words
-- [ ] Pricing clearly visible
-- [ ] Comparison to alternatives
-- [ ] Detailed feature/benefit explanation
-- [ ] FAQ section (5+ questions)
-- [ ] Specific use cases with examples
+**Website Local AEO:**
+- [ ] LocalBusiness schema on every page
+- [ ] Geo-coordinates in schema
+- [ ] Complete operating hours in schema
+- [ ] Service area defined in schema
+- [ ] Location-specific content pages
+- [ ] Neighborhood-specific pages (if applicable)
+- [ ] Local images with geo-tagged EXIF data
+- [ ] Embedded Google Map
+- [ ] Click-to-call phone numbers
+- [ ] Driving directions from major areas
 
-**Technical:**
-- [ ] Schema markup (FAQ, Product, or Service)
-- [ ] Fast page load (<3 seconds)
-- [ ] Mobile-optimized
-- [ ] Clear navigation
-- [ ] Publication/update date visible
-
-**Conversion:**
-- [ ] CTA above the fold
-- [ ] CTA after valuable content
-- [ ] Low-friction conversion (no long forms)
-- [ ] Trust signals (reviews, logos, guarantees)
+**Review Strategy:**
+- [ ] Review generation process established
+- [ ] Review monitoring set up (daily checks)
+- [ ] Response templates created
+- [ ] Negative review protocol documented
+- [ ] Review summary page on website
+- [ ] Review schema markup implemented
 
 ## Coming Up Next
 
-In **Chapter 7: AEO for Social Media Marketing**, you'll learn how to optimize your social media presence to support AEO, use social platforms to amplify AI-citable content, and create social content that feeds into your overall AEO strategy.
+In **Chapter 7: Enterprise & B2B Strategies**, you'll learn how to optimize for complex B2B buying cycles, position your enterprise solution in AI recommendations, handle long-form technical content, and dominate industry-specific AI queries that drive high-value leads.
 
 ---
 
-[← Previous: Chapter 5](chapter-05.md) | [Home](../README.md) | [Next: Chapter 7 - AEO for Social Media Marketing →](chapter-07.md)
+[← Previous: Chapter 5](chapter-05.md) | [Home](../README.md) | [Next: Chapter 7 - Enterprise & B2B Strategies →](chapter-07.md)
