@@ -1,0 +1,337 @@
+{
+  "name": "03 - Automated Outreach",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "name": "Schedule Hourly",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  c.id as campaign_id,\n  c.name as campaign_name,\n  c.message_template,\n  c.daily_message_limit,\n  c.messages_sent,\n  c.target_follower_min,\n  c.target_follower_max,\n  c.target_niches\nFROM public.outreach_campaigns c\nWHERE c.is_active = true\n  AND c.status = 'active'\n  AND c.messages_sent < c.daily_message_limit\nLIMIT 1;",
+        "options": {}
+      },
+      "name": "Get Active Campaign",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [470, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  id,\n  instagram_username,\n  instagram_user_id,\n  full_name,\n  bio,\n  follower_count,\n  engagement_rate,\n  location,\n  niche,\n  has_website,\n  existing_website_url,\n  lead_score,\n  priority,\n  custom_fields\nFROM public.instagram_leads\nWHERE status = 'qualified'\n  AND deleted_at IS NULL\n  AND first_contacted_at IS NULL\n  AND follower_count >= {{$json.target_follower_min}}\n  AND ({{$json.target_follower_max}} IS NULL OR follower_count <= {{$json.target_follower_max}})\nORDER BY lead_score DESC, created_at DESC\nLIMIT 5;",
+        "options": {}
+      },
+      "name": "Get Qualified Leads",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [690, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a professional outreach specialist for AEO Agency, a web design agency. Create personalized, conversational Instagram DM messages that feel authentic and not salesy. Keep messages under 150 words. Use the template as a guide but personalize it significantly based on the lead's profile.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Create a personalized outreach message using this template:\\n\\n{{$node['Get Active Campaign'].json.message_template}}\\n\\nPersonalize for:\\nName: {{$json.full_name}}\\nUsername: @{{$json.instagram_username}}\\nFollowers: {{$json.follower_count}}\\nBio: {{$json.bio}}\\nLocation: {{$json.location}}\\nNiche: {{$json.niche}}\\nHas Website: {{$json.has_website}}\\n\\nMake it personal, friendly, and value-focused. Do not use emojis excessively.\"\n    }\n  ],\n  \"temperature\": 0.8\n}",
+        "options": {}
+      },
+      "name": "Generate Personalized Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [910, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "OpenAI API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract the message from OpenAI response\nconst response = $json;\nconst message = response.choices[0].message.content;\nconst lead = $node[\"Get Qualified Leads\"].json;\nconst campaign = $node[\"Get Active Campaign\"].json;\n\nreturn [{\n  json: {\n    lead_id: lead.id,\n    campaign_id: campaign.campaign_id,\n    instagram_username: lead.instagram_username,\n    instagram_user_id: lead.instagram_user_id,\n    message_text: message,\n    message_type: 'initial',\n    prepared_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Prepare Message Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v18.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "={{$credentials.instagramAccessToken}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": {\n    \"id\": \"{{$json.instagram_user_id}}\"\n  },\n  \"message\": {\n    \"text\": \"{{$json.message_text}}\"\n  },\n  \"messaging_type\": \"MESSAGE_TAG\",\n  \"tag\": \"ACCOUNT_UPDATE\"\n}",
+        "options": {}
+      },
+      "name": "Send Instagram DM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1350, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4",
+          "name": "Instagram Graph API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.outreach_messages (\n  lead_id,\n  campaign_id,\n  message_text,\n  message_type,\n  sent_at,\n  delivered,\n  instagram_message_id\n) VALUES (\n  '{{$json.lead_id}}',\n  '{{$json.campaign_id}}',\n  '{{$json.message_text}}',\n  '{{$json.message_type}}',\n  NOW(),\n  true,\n  '{{$json.message_id}}'\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Log Message in DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1570, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.instagram_leads\nSET\n  status = 'contacted',\n  first_contacted_at = NOW(),\n  last_contacted_at = NOW(),\n  contact_attempts = contact_attempts + 1,\n  updated_at = NOW()\nWHERE id = '{{$node[\"Prepare Message Data\"].json.lead_id}}';",
+        "options": {}
+      },
+      "name": "Update Lead Status",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1790, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.analytics_events (\n  event_type,\n  event_category,\n  event_data,\n  lead_id,\n  campaign_id\n) VALUES (\n  'message_sent',\n  'outreach',\n  jsonb_build_object(\n    'username', '{{$node[\"Get Qualified Leads\"].json.instagram_username}}',\n    'message_type', 'initial',\n    'campaign_name', '{{$node[\"Get Active Campaign\"].json.campaign_name}}'\n  ),\n  '{{$node[\"Prepare Message Data\"].json.lead_id}}',\n  '{{$node[\"Prepare Message Data\"].json.campaign_id}}'\n);",
+        "options": {}
+      },
+      "name": "Log Analytics",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2010, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 300,
+        "unit": "seconds"
+      },
+      "name": "Wait 5 Minutes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2230, 300],
+      "webhookId": "outreach-delay"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$node['Get Active Campaign'].json.messages_sent}}",
+              "operation": "smaller",
+              "value2": "={{$node['Get Active Campaign'].json.daily_message_limit}}"
+            }
+          ]
+        }
+      },
+      "name": "Check Daily Limit",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [2450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// This is a placeholder for loop logic\n// In production, this would trigger the workflow again\nreturn $input.all();"
+      },
+      "name": "Continue Processing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2670, 200]
+    }
+  ],
+  "connections": {
+    "Schedule Hourly": {
+      "main": [
+        [
+          {
+            "node": "Get Active Campaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Campaign": {
+      "main": [
+        [
+          {
+            "node": "Get Qualified Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Qualified Leads": {
+      "main": [
+        [
+          {
+            "node": "Generate Personalized Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Personalized Message": {
+      "main": [
+        [
+          {
+            "node": "Prepare Message Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Message Data": {
+      "main": [
+        [
+          {
+            "node": "Send Instagram DM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Instagram DM": {
+      "main": [
+        [
+          {
+            "node": "Log Message in DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Message in DB": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Lead Status": {
+      "main": [
+        [
+          {
+            "node": "Log Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Analytics": {
+      "main": [
+        [
+          {
+            "node": "Wait 5 Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 5 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Check Daily Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Daily Limit": {
+      "main": [
+        [
+          {
+            "node": "Continue Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "meta": {
+    "instanceId": "aeo-lovable-platform"
+  }
+}

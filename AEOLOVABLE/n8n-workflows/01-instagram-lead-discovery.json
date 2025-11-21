@@ -1,0 +1,226 @@
+{
+  "name": "01 - Instagram Lead Discovery",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "name": "Schedule Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Define search parameters for target Instagram profiles\nconst searchQueries = [\n  'fitness coach location:\"New York\"',\n  'restaurant owner location:\"Los Angeles\"',\n  'real estate agent location:\"Miami\"',\n  'fashion boutique location:\"Chicago\"',\n  'personal trainer location:\"Austin\"',\n  'yoga instructor location:\"San Francisco\"',\n  'salon owner location:\"Seattle\"',\n  'cafe owner location:\"Portland\"',\n  'photography business location:\"Denver\"',\n  'consulting business location:\"Boston\"'\n];\n\nconst results = [];\n\nfor (const query of searchQueries) {\n  results.push({\n    json: {\n      search_query: query,\n      timestamp: new Date().toISOString()\n    }\n  });\n}\n\nreturn results;"
+      },
+      "name": "Generate Search Queries",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/apify~instagram-profile-scraper/runs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "search",
+              "value": "={{$json.search_query}}"
+            },
+            {
+              "name": "resultsLimit",
+              "value": "50"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Apify Instagram Scraper",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [670, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "1",
+          "name": "Apify API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Filter profiles based on criteria\nconst items = $input.all();\nconst qualified = [];\n\nfor (const item of items) {\n  const data = item.json;\n  \n  // Check minimum follower count\n  if (data.followersCount >= 10000) {\n    // Calculate engagement rate\n    const avgLikes = data.likesCount || 0;\n    const avgComments = data.commentsCount || 0;\n    const engagementRate = ((avgLikes + avgComments) / data.followersCount) * 100;\n    \n    // Extract location from bio\n    const locationMatch = data.biography?.match(/📍\\s*([^\\n|]+)/i);\n    const location = locationMatch ? locationMatch[1].trim() : null;\n    \n    // Detect niche from bio and username\n    let niche = 'general';\n    const bioLower = (data.biography || '').toLowerCase();\n    const nameLower = (data.fullName || '').toLowerCase();\n    \n    if (bioLower.includes('fitness') || bioLower.includes('gym') || bioLower.includes('personal trainer')) niche = 'fitness';\n    else if (bioLower.includes('restaurant') || bioLower.includes('food') || bioLower.includes('chef')) niche = 'restaurant';\n    else if (bioLower.includes('real estate') || bioLower.includes('realtor')) niche = 'real_estate';\n    else if (bioLower.includes('fashion') || bioLower.includes('boutique') || bioLower.includes('clothing')) niche = 'fashion';\n    else if (bioLower.includes('salon') || bioLower.includes('hair') || bioLower.includes('beauty')) niche = 'beauty';\n    \n    qualified.push({\n      json: {\n        instagram_username: data.username,\n        instagram_user_id: data.id,\n        full_name: data.fullName,\n        bio: data.biography,\n        profile_picture_url: data.profilePicUrl,\n        follower_count: data.followersCount,\n        following_count: data.followingCount,\n        post_count: data.postsCount,\n        engagement_rate: parseFloat(engagementRate.toFixed(2)),\n        avg_likes: avgLikes,\n        avg_comments: avgComments,\n        has_website: data.externalUrl ? true : false,\n        existing_website_url: data.externalUrl || null,\n        location: location,\n        niche: niche,\n        discovered_at: new Date().toISOString()\n      }\n    });\n  }\n}\n\nreturn qualified;"
+      },
+      "name": "Filter & Format Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [890, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.instagram_leads (\n  instagram_username,\n  instagram_user_id,\n  full_name,\n  bio,\n  profile_picture_url,\n  follower_count,\n  following_count,\n  post_count,\n  engagement_rate,\n  avg_likes,\n  avg_comments,\n  has_website,\n  existing_website_url,\n  location,\n  niche,\n  status\n) VALUES (\n  '{{$json.instagram_username}}',\n  '{{$json.instagram_user_id}}',\n  '{{$json.full_name}}',\n  '{{$json.bio}}',\n  '{{$json.profile_picture_url}}',\n  {{$json.follower_count}},\n  {{$json.following_count}},\n  {{$json.post_count}},\n  {{$json.engagement_rate}},\n  {{$json.avg_likes}},\n  {{$json.avg_comments}},\n  {{$json.has_website}},\n  '{{$json.existing_website_url}}',\n  '{{$json.location}}',\n  '{{$json.niche}}',\n  'discovered'\n)\nON CONFLICT (instagram_username) DO UPDATE SET\n  follower_count = EXCLUDED.follower_count,\n  engagement_rate = EXCLUDED.engagement_rate,\n  updated_at = NOW()\nRETURNING id, instagram_username, lead_score, priority;",
+        "options": {}
+      },
+      "name": "Save to Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1110, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.analytics_events (\n  event_type,\n  event_category,\n  event_data,\n  lead_id\n) VALUES (\n  'lead_discovered',\n  'lead_generation',\n  jsonb_build_object(\n    'username', '{{$json.instagram_username}}',\n    'followers', {{$json.follower_count}},\n    'score', {{$json.lead_score}},\n    'source', 'apify_scraper'\n  ),\n  '{{$json.id}}'\n);",
+        "options": {}
+      },
+      "name": "Log Analytics Event",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1330, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.lead_score}}",
+              "operation": "largerEqual",
+              "value2": 8
+            }
+          ]
+        }
+      },
+      "name": "High Score Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1550, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.notifications (\n  user_id,\n  title,\n  message,\n  notification_type,\n  related_type,\n  related_id,\n  priority,\n  action_url\n)\nSELECT\n  id,\n  'High-Value Lead Discovered! 🎯',\n  'New lead @{{$json.instagram_username}} with {{$json.follower_count}} followers and score {{$json.lead_score}}/10',\n  'lead_interested',\n  'lead',\n  '{{$json.id}}',\n  'high',\n  '/leads/{{$json.id}}'\nFROM public.users\nWHERE role = 'admin';",
+        "options": {}
+      },
+      "name": "Notify Admin",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1770, 200],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Every 6 Hours": {
+      "main": [
+        [
+          {
+            "node": "Generate Search Queries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Search Queries": {
+      "main": [
+        [
+          {
+            "node": "Apify Instagram Scraper",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Instagram Scraper": {
+      "main": [
+        [
+          {
+            "node": "Filter & Format Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter & Format Leads": {
+      "main": [
+        [
+          {
+            "node": "Save to Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Supabase": {
+      "main": [
+        [
+          {
+            "node": "Log Analytics Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Analytics Event": {
+      "main": [
+        [
+          {
+            "node": "High Score Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High Score Lead?": {
+      "main": [
+        [
+          {
+            "node": "Notify Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "meta": {
+    "instanceId": "aeo-lovable-platform"
+  }
+}

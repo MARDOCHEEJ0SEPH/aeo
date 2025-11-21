@@ -1,0 +1,287 @@
+{
+  "name": "02 - Lead Analysis & Qualification",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2
+            }
+          ]
+        }
+      },
+      "name": "Schedule Every 2 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  id,\n  instagram_username,\n  instagram_user_id,\n  bio,\n  follower_count,\n  following_count,\n  post_count,\n  engagement_rate,\n  has_website,\n  existing_website_url,\n  location,\n  niche\nFROM public.instagram_leads\nWHERE status = 'discovered'\n  AND deleted_at IS NULL\nORDER BY created_at DESC\nLIMIT 20;",
+        "options": {}
+      },
+      "name": "Get New Leads",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [470, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/apify~instagram-post-scraper/runs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "={{$json.instagram_username}}"
+            },
+            {
+              "name": "resultsLimit",
+              "value": "12"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Recent Posts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [690, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "1",
+          "name": "Apify API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Analyze posts and calculate detailed metrics\nconst posts = $input.all();\nconst lead = $node[\"Get New Leads\"].json;\n\nlet totalLikes = 0;\nlet totalComments = 0;\nlet contentThemes = [];\nlet postTypes = { image: 0, video: 0, carousel: 0 };\n\nfor (const post of posts) {\n  totalLikes += post.json.likesCount || 0;\n  totalComments += post.json.commentsCount || 0;\n  \n  // Detect post type\n  if (post.json.type === 'Video') postTypes.video++;\n  else if (post.json.type === 'Sidecar') postTypes.carousel++;\n  else postTypes.image++;\n  \n  // Extract hashtags for content themes\n  const caption = post.json.caption || '';\n  const hashtags = caption.match(/#\\w+/g) || [];\n  contentThemes.push(...hashtags);\n}\n\nconst avgLikes = Math.round(totalLikes / posts.length);\nconst avgComments = Math.round(totalComments / posts.length);\nconst engagementRate = ((avgLikes + avgComments) / lead.follower_count * 100).toFixed(2);\n\n// Get top themes\nconst themeCounts = {};\ncontentThemes.forEach(theme => {\n  themeCounts[theme] = (themeCounts[theme] || 0) + 1;\n});\nconst topThemes = Object.entries(themeCounts)\n  .sort((a, b) => b[1] - a[1])\n  .slice(0, 5)\n  .map(([theme]) => theme.replace('#', ''));\n\nreturn [{\n  json: {\n    lead_id: lead.id,\n    instagram_username: lead.instagram_username,\n    avg_likes: avgLikes,\n    avg_comments: avgComments,\n    engagement_rate: parseFloat(engagementRate),\n    content_themes: topThemes,\n    post_type_distribution: postTypes,\n    analyzed_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Analyze Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an expert business analyst. Analyze Instagram profiles and determine if they would benefit from a professional website. Consider their follower count, engagement, business type, and current web presence.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze this Instagram business:\\n\\nUsername: {{$json.instagram_username}}\\nFollowers: {{$node['Get New Leads'].json.follower_count}}\\nEngagement Rate: {{$json.engagement_rate}}%\\nBio: {{$node['Get New Leads'].json.bio}}\\nHas Website: {{$node['Get New Leads'].json.has_website}}\\nNiche: {{$node['Get New Leads'].json.niche}}\\nContent Themes: {{$json.content_themes.join(', ')}}\\n\\nProvide:\\n1. Website Need Score (1-10)\\n2. Recommended package tier (starter/professional/enterprise)\\n3. Key selling points (3 bullets)\\n4. Potential project value ($)\\n\\nRespond in JSON format.\"\n    }\n  ],\n  \"temperature\": 0.7\n}",
+        "options": {}
+      },
+      "name": "AI Lead Qualification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1130, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "OpenAI API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse AI response and prepare data for database\nconst aiResponse = JSON.parse($json.choices[0].message.content);\nconst lead = $node[\"Get New Leads\"].json;\nconst analysis = $node[\"Analyze Content\"].json;\n\n// Determine final status\nlet status = 'discovered';\nif (aiResponse.websiteNeedScore >= 7) {\n  status = 'qualified';\n} else if (aiResponse.websiteNeedScore >= 5) {\n  status = 'discovered';\n} else {\n  status = 'invalid';\n}\n\nreturn [{\n  json: {\n    lead_id: lead.id,\n    avg_likes: analysis.avg_likes,\n    avg_comments: analysis.avg_comments,\n    engagement_rate: analysis.engagement_rate,\n    content_themes: analysis.content_themes,\n    website_quality_score: aiResponse.websiteNeedScore,\n    recommended_package: aiResponse.recommendedPackageTier,\n    selling_points: aiResponse.keySellingPoints,\n    estimated_value: aiResponse.potentialProjectValue,\n    status: status,\n    qualified_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Process AI Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1350, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.instagram_leads\nSET\n  avg_likes = {{$json.avg_likes}},\n  avg_comments = {{$json.avg_comments}},\n  engagement_rate = {{$json.engagement_rate}},\n  content_themes = ARRAY[{{$json.content_themes.map(t => `'${t}'`).join(',')}}],\n  website_quality_score = {{$json.website_quality_score}},\n  status = '{{$json.status}}',\n  custom_fields = jsonb_build_object(\n    'recommended_package', '{{$json.recommended_package}}',\n    'selling_points', '{{JSON.stringify($json.selling_points)}}',\n    'estimated_value', {{$json.estimated_value}}\n  ),\n  updated_at = NOW()\nWHERE id = '{{$json.lead_id}}'\nRETURNING id, instagram_username, status, lead_score;",
+        "options": {}
+      },
+      "name": "Update Lead Status",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1570, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.analytics_events (\n  event_type,\n  event_category,\n  event_data,\n  lead_id\n) VALUES (\n  'lead_qualified',\n  'lead_generation',\n  jsonb_build_object(\n    'username', '{{$json.instagram_username}}',\n    'status', '{{$json.status}}',\n    'lead_score', {{$json.lead_score}},\n    'qualification_method', 'ai_analysis'\n  ),\n  '{{$json.id}}'\n);",
+        "options": {}
+      },
+      "name": "Log Qualification Event",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1790, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.status}}",
+              "operation": "equals",
+              "value2": "qualified"
+            }
+          ]
+        }
+      },
+      "name": "Is Qualified?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [2010, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.notifications (\n  user_id,\n  title,\n  message,\n  notification_type,\n  related_type,\n  related_id,\n  priority,\n  action_url\n)\nSELECT\n  id,\n  'Lead Qualified for Outreach 🚀',\n  'Lead @{{$json.instagram_username}} has been qualified with score {{$json.lead_score}}/10. Ready for outreach!',\n  'lead_interested',\n  'lead',\n  '{{$json.id}}',\n  'high',\n  '/leads/{{$json.id}}'\nFROM public.users\nWHERE role = 'admin';",
+        "options": {}
+      },
+      "name": "Notify Qualified Lead",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2230, 200],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Every 2 Hours": {
+      "main": [
+        [
+          {
+            "node": "Get New Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get New Leads": {
+      "main": [
+        [
+          {
+            "node": "Get Recent Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Posts": {
+      "main": [
+        [
+          {
+            "node": "Analyze Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Content": {
+      "main": [
+        [
+          {
+            "node": "AI Lead Qualification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Lead Qualification": {
+      "main": [
+        [
+          {
+            "node": "Process AI Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process AI Results": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Lead Status": {
+      "main": [
+        [
+          {
+            "node": "Log Qualification Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Qualification Event": {
+      "main": [
+        [
+          {
+            "node": "Is Qualified?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Qualified?": {
+      "main": [
+        [
+          {
+            "node": "Notify Qualified Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "meta": {
+    "instanceId": "aeo-lovable-platform"
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "name": "04 - Response Monitoring",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "name": "Schedule Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://graph.facebook.com/v18.0/me/conversations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "={{$credentials.instagramAccessToken}}"
+            },
+            {
+              "name": "fields",
+              "value": "participants,messages{message,from,created_time}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Instagram Conversations",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [470, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4",
+          "name": "Instagram Graph API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Filter conversations for new messages\nconst conversations = $json.data;\nconst newMessages = [];\n\nfor (const conversation of conversations) {\n  const messages = conversation.messages.data;\n  \n  // Get the latest message\n  if (messages && messages.length > 0) {\n    const latestMessage = messages[0];\n    \n    // Check if message is from the other participant (not from us)\n    const participantId = conversation.participants.data.find(p => p.id !== 'me')?.id;\n    \n    if (latestMessage.from.id === participantId) {\n      // This is a response from a lead\n      newMessages.push({\n        json: {\n          conversation_id: conversation.id,\n          participant_id: participantId,\n          message_text: latestMessage.message,\n          message_id: latestMessage.id,\n          created_time: latestMessage.created_time\n        }\n      });\n    }\n  }\n}\n\nreturn newMessages;"
+      },
+      "name": "Filter New Responses",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  l.id as lead_id,\n  l.instagram_username,\n  l.instagram_user_id,\n  l.full_name,\n  l.status,\n  m.id as message_id,\n  m.campaign_id\nFROM public.instagram_leads l\nLEFT JOIN public.outreach_messages m ON m.lead_id = l.id\nWHERE l.instagram_user_id = '{{$json.participant_id}}'\n  AND l.deleted_at IS NULL\nORDER BY m.sent_at DESC\nLIMIT 1;",
+        "options": {}
+      },
+      "name": "Find Lead in Database",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [910, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a sentiment analyzer. Analyze Instagram DM responses and classify the sentiment as 'positive', 'negative', or 'neutral'. Also indicate if the lead is showing interest in web design services. Return JSON with: sentiment, interest_level (1-10), key_points (array), suggested_response.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze this response from @{{$node['Find Lead in Database'].json.instagram_username}}:\\n\\n{{$node['Filter New Responses'].json.message_text}}\\n\\nProvide sentiment analysis and assess interest level.\"\n    }\n  ],\n  \"temperature\": 0.3\n}",
+        "options": {}
+      },
+      "name": "Analyze Response Sentiment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1130, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "OpenAI API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse AI analysis results\nconst aiResponse = JSON.parse($json.choices[0].message.content);\nconst lead = $node[\"Find Lead in Database\"].json;\nconst message = $node[\"Filter New Responses\"].json;\n\n// Determine new lead status based on sentiment and interest\nlet newStatus = lead.status;\nif (aiResponse.sentiment === 'positive' && aiResponse.interest_level >= 7) {\n  newStatus = 'interested';\n} else if (aiResponse.sentiment === 'positive' && aiResponse.interest_level >= 4) {\n  newStatus = 'engaged';\n} else if (aiResponse.sentiment === 'negative') {\n  newStatus = 'rejected';\n} else {\n  newStatus = 'engaged';\n}\n\nreturn [{\n  json: {\n    lead_id: lead.lead_id,\n    message_id: lead.message_id,\n    campaign_id: lead.campaign_id,\n    instagram_username: lead.instagram_username,\n    response_text: message.message_text,\n    response_sentiment: aiResponse.sentiment,\n    interest_level: aiResponse.interest_level,\n    key_points: aiResponse.key_points,\n    suggested_response: aiResponse.suggested_response,\n    new_status: newStatus,\n    conversation_id: message.conversation_id,\n    analyzed_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Process Analysis Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1350, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.outreach_messages\nSET\n  response_received = true,\n  response_text = '{{$json.response_text}}',\n  response_received_at = NOW(),\n  response_sentiment = '{{$json.response_sentiment}}',\n  conversation_id = '{{$json.conversation_id}}',\n  updated_at = NOW()\nWHERE id = '{{$json.message_id}}';\n\nUPDATE public.instagram_leads\nSET\n  status = '{{$json.new_status}}',\n  response_received = true,\n  response_sentiment = '{{$json.response_sentiment}}',\n  custom_fields = custom_fields || jsonb_build_object(\n    'interest_level', {{$json.interest_level}},\n    'key_points', '{{JSON.stringify($json.key_points)}}',\n    'suggested_response', '{{$json.suggested_response}}'\n  ),\n  updated_at = NOW()\nWHERE id = '{{$json.lead_id}}';\n\nSELECT '{{$json.lead_id}}' as lead_id, '{{$json.new_status}}' as status;",
+        "options": {}
+      },
+      "name": "Update Database",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1570, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.analytics_events (\n  event_type,\n  event_category,\n  event_data,\n  lead_id,\n  campaign_id\n) VALUES (\n  'response_received',\n  'outreach',\n  jsonb_build_object(\n    'username', '{{$json.instagram_username}}',\n    'sentiment', '{{$json.response_sentiment}}',\n    'interest_level', {{$json.interest_level}},\n    'new_status', '{{$json.new_status}}'\n  ),\n  '{{$json.lead_id}}',\n  '{{$json.campaign_id}}'\n);",
+        "options": {}
+      },
+      "name": "Log Response Event",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1790, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.new_status}}",
+              "operation": "equals",
+              "value2": "interested"
+            }
+          ]
+        }
+      },
+      "name": "Check if Interested",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [2010, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.notifications (\n  user_id,\n  title,\n  message,\n  notification_type,\n  related_type,\n  related_id,\n  priority,\n  action_url\n)\nSELECT\n  id,\n  '🎉 Lead Showing Interest!',\n  '@{{$json.instagram_username}} responded positively! Interest level: {{$json.interest_level}}/10',\n  'lead_interested',\n  'lead',\n  '{{$json.lead_id}}',\n  'high',\n  '/leads/{{$json.lead_id}}'\nFROM public.users\nWHERE role IN ('admin', 'team_member');",
+        "options": {}
+      },
+      "name": "Notify Team",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2230, 200],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.response_sentiment}}",
+              "operation": "equals",
+              "value2": "negative"
+            }
+          ]
+        }
+      },
+      "name": "Check if Rejected",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [2010, 500]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.instagram_leads\nSET\n  status = 'do_not_contact',\n  notes = COALESCE(notes, '') || '\\n[AUTO] Negative response received: ' || '{{$json.response_text}}',\n  updated_at = NOW()\nWHERE id = '{{$json.lead_id}}';",
+        "options": {}
+      },
+      "name": "Mark as Do Not Contact",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2230, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Instagram Conversations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Instagram Conversations": {
+      "main": [
+        [
+          {
+            "node": "Filter New Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter New Responses": {
+      "main": [
+        [
+          {
+            "node": "Find Lead in Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Lead in Database": {
+      "main": [
+        [
+          {
+            "node": "Analyze Response Sentiment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Response Sentiment": {
+      "main": [
+        [
+          {
+            "node": "Process Analysis Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Analysis Results": {
+      "main": [
+        [
+          {
+            "node": "Update Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Database": {
+      "main": [
+        [
+          {
+            "node": "Log Response Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Response Event": {
+      "main": [
+        [
+          {
+            "node": "Check if Interested",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check if Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Interested": {
+      "main": [
+        [
+          {
+            "node": "Notify Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Rejected": {
+      "main": [
+        [
+          {
+            "node": "Mark as Do Not Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "meta": {
+    "instanceId": "aeo-lovable-platform"
+  }
+}

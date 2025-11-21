@@ -1,0 +1,420 @@
+{
+  "name": "06 - Lead Conversion Tracking",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-conversion",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "lead-conversion-webhook"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract conversion data from webhook\nconst body = $input.first().json.body;\n\nreturn [{\n  json: {\n    lead_id: body.lead_id,\n    project_name: body.project_name,\n    project_type: body.project_type || 'website',\n    package_tier: body.package_tier || 'professional',\n    project_value: body.project_value,\n    deposit_amount: body.deposit_amount || 0,\n    converted_by: body.converted_by,\n    notes: body.notes || '',\n    conversion_date: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Parse Conversion Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  l.id,\n  l.instagram_username,\n  l.instagram_user_id,\n  l.full_name,\n  l.bio,\n  l.follower_count,\n  l.location,\n  l.niche,\n  l.lead_score,\n  u.id as user_id,\n  u.email\nFROM public.instagram_leads l\nLEFT JOIN public.users u ON u.email = l.custom_fields->>'email'\nWHERE l.id = '{{$json.lead_id}}'\nLIMIT 1;",
+        "options": {}
+      },
+      "name": "Get Lead Details",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [690, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.user_id}}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "name": "User Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "users",
+        "columns": "email,full_name,role",
+        "values": "={{$node['Get Lead Details'].json.email || $node['Get Lead Details'].json.instagram_username + '@temp.aeo.com'}},={{$node['Get Lead Details'].json.full_name}},client",
+        "options": {}
+      },
+      "name": "Create User Account",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1130, 200],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Merge user data\nconst lead = $node[\"Get Lead Details\"].json;\nconst newUser = $json.id ? $json : null;\n\nreturn [{\n  json: {\n    user_id: newUser ? newUser.id : lead.user_id,\n    lead_id: lead.id,\n    instagram_username: lead.instagram_username,\n    full_name: lead.full_name,\n    location: lead.location\n  }\n}];"
+      },
+      "name": "Merge User Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1350, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.clients (\n  user_id,\n  lead_id,\n  source,\n  company_name,\n  instagram_handle,\n  primary_contact_name,\n  city,\n  industry,\n  status,\n  assigned_to\n) VALUES (\n  '{{$json.user_id}}',\n  '{{$json.lead_id}}',\n  'instagram',\n  '{{$node['Get Lead Details'].json.full_name}} Business',\n  '{{$node['Get Lead Details'].json.instagram_username}}',\n  '{{$node['Get Lead Details'].json.full_name}}',\n  '{{$node['Get Lead Details'].json.location}}',\n  '{{$node['Get Lead Details'].json.niche}}',\n  'onboarding',\n  '{{$node['Parse Conversion Data'].json.converted_by}}'\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Create Client Record",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1570, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.projects (\n  client_id,\n  project_name,\n  project_type,\n  package_tier,\n  project_value,\n  deposit_amount,\n  balance_due,\n  payment_status,\n  status,\n  project_manager_id,\n  start_date,\n  notes\n) VALUES (\n  '{{$json.id}}',\n  '{{$node['Parse Conversion Data'].json.project_name}}',\n  '{{$node['Parse Conversion Data'].json.project_type}}',\n  '{{$node['Parse Conversion Data'].json.package_tier}}',\n  {{$node['Parse Conversion Data'].json.project_value}},\n  {{$node['Parse Conversion Data'].json.deposit_amount}},\n  {{$node['Parse Conversion Data'].json.project_value - $node['Parse Conversion Data'].json.deposit_amount}},\n  '{{$node['Parse Conversion Data'].json.deposit_amount > 0 ? \"deposit_paid\" : \"pending\"}}',\n  'planning',\n  '{{$node['Parse Conversion Data'].json.converted_by}}',\n  CURRENT_DATE,\n  '{{$node['Parse Conversion Data'].json.notes}}'\n)\nRETURNING id, project_name;",
+        "options": {}
+      },
+      "name": "Create Project",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1790, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.instagram_leads\nSET\n  status = 'converted',\n  converted_at = NOW(),\n  conversion_value = {{$node['Parse Conversion Data'].json.project_value}},\n  client_id = '{{$node['Create Client Record'].json.id}}',\n  updated_at = NOW()\nWHERE id = '{{$node['Parse Conversion Data'].json.lead_id}}';",
+        "options": {}
+      },
+      "name": "Update Lead Status",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2010, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.outreach_campaigns\nSET\n  total_conversions = total_conversions + 1,\n  updated_at = NOW()\nWHERE id IN (\n  SELECT DISTINCT campaign_id \n  FROM public.outreach_messages \n  WHERE lead_id = '{{$node['Parse Conversion Data'].json.lead_id}}'\n);",
+        "options": {}
+      },
+      "name": "Update Campaign Stats",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2230, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.analytics_events (\n  event_type,\n  event_category,\n  event_data,\n  lead_id,\n  project_id,\n  user_id\n) VALUES (\n  'conversion',\n  'lead_generation',\n  jsonb_build_object(\n    'username', '{{$node['Get Lead Details'].json.instagram_username}}',\n    'project_name', '{{$node['Create Project'].json.project_name}}',\n    'project_value', {{$node['Parse Conversion Data'].json.project_value}},\n    'package_tier', '{{$node['Parse Conversion Data'].json.package_tier}}',\n    'lead_score', {{$node['Get Lead Details'].json.lead_score}}\n  ),\n  '{{$node['Parse Conversion Data'].json.lead_id}}',\n  '{{$node['Create Project'].json.id}}',\n  '{{$node['Merge User Data'].json.user_id}}'\n);",
+        "options": {}
+      },
+      "name": "Log Conversion Event",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2450, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.notifications (\n  user_id,\n  title,\n  message,\n  notification_type,\n  related_type,\n  related_id,\n  priority,\n  action_url\n)\nSELECT\n  id,\n  '🎉 Lead Converted to Client!',\n  '@{{$node['Get Lead Details'].json.instagram_username}} converted! Project: {{$node['Create Project'].json.project_name}} (${{$node['Parse Conversion Data'].json.project_value}})',\n  'project_update',\n  'project',\n  '{{$node['Create Project'].json.id}}',\n  'high',\n  '/projects/{{$node['Create Project'].json.id}}'\nFROM public.users\nWHERE role IN ('admin', 'team_member');",
+        "options": {}
+      },
+      "name": "Notify Team of Conversion",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2670, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Lead converted successfully\",\n  \"client_id\": \"{{$node['Create Client Record'].json.id}}\",\n  \"project_id\": \"{{$node['Create Project'].json.id}}\",\n  \"lead_username\": \"{{$node['Get Lead Details'].json.instagram_username}}\"\n}",
+        "options": {}
+      },
+      "name": "Send Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2890, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a professional project onboarding specialist. Create a warm, professional welcome message for new clients who just signed up for website development services.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Create a welcome Instagram DM for:\\n\\nClient: {{$node['Get Lead Details'].json.full_name}}\\nUsername: @{{$node['Get Lead Details'].json.instagram_username}}\\nProject: {{$node['Create Project'].json.project_name}}\\nPackage: {{$node['Parse Conversion Data'].json.package_tier}}\\n\\nInclude:\\n- Warm welcome and congratulations\\n- Next steps overview\\n- Timeline expectations\\n- Contact information\\n\\nKeep it under 200 words and professional yet friendly.\"\n    }\n  ],\n  \"temperature\": 0.7\n}",
+        "options": {}
+      },
+      "name": "Generate Welcome Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [2670, 500],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "OpenAI API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v18.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "={{$credentials.instagramAccessToken}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": {\n    \"id\": \"{{$node['Get Lead Details'].json.instagram_user_id}}\"\n  },\n  \"message\": {\n    \"text\": \"{{$json.choices[0].message.content}}\"\n  },\n  \"messaging_type\": \"MESSAGE_TAG\",\n  \"tag\": \"CONFIRMED_EVENT_UPDATE\"\n}",
+        "options": {}
+      },
+      "name": "Send Welcome DM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [2890, 500],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4",
+          "name": "Instagram Graph API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Parse Conversion Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Conversion Data": {
+      "main": [
+        [
+          {
+            "node": "Get Lead Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Lead Details": {
+      "main": [
+        [
+          {
+            "node": "User Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "User Exists?": {
+      "main": [
+        [
+          {
+            "node": "Create User Account",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge User Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create User Account": {
+      "main": [
+        [
+          {
+            "node": "Merge User Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge User Data": {
+      "main": [
+        [
+          {
+            "node": "Create Client Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Client Record": {
+      "main": [
+        [
+          {
+            "node": "Create Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Project": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Lead Status": {
+      "main": [
+        [
+          {
+            "node": "Update Campaign Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Campaign Stats": {
+      "main": [
+        [
+          {
+            "node": "Log Conversion Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Conversion Event": {
+      "main": [
+        [
+          {
+            "node": "Notify Team of Conversion",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Welcome Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Team of Conversion": {
+      "main": [
+        [
+          {
+            "node": "Send Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Welcome Message": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome DM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "meta": {
+    "instanceId": "aeo-lovable-platform"
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "name": "05 - Follow-up Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 4
+            }
+          ]
+        }
+      },
+      "name": "Schedule Every 4 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  l.id as lead_id,\n  l.instagram_username,\n  l.instagram_user_id,\n  l.full_name,\n  l.bio,\n  l.follower_count,\n  l.niche,\n  l.location,\n  l.status,\n  l.last_contacted_at,\n  l.contact_attempts,\n  l.follow_up_count,\n  l.custom_fields,\n  m.id as last_message_id,\n  m.campaign_id,\n  m.sent_at as last_message_sent_at\nFROM public.instagram_leads l\nLEFT JOIN public.outreach_messages m ON m.lead_id = l.id\nWHERE l.status IN ('contacted', 'engaged')\n  AND l.deleted_at IS NULL\n  AND l.response_received = false\n  AND l.last_contacted_at < NOW() - INTERVAL '3 days'\n  AND l.follow_up_count < 2\nORDER BY l.lead_score DESC, l.last_contacted_at ASC\nLIMIT 10;",
+        "options": {}
+      },
+      "name": "Get Leads for Follow-up",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [470, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  follow_up_template\nFROM public.outreach_campaigns\nWHERE id = '{{$json.campaign_id}}'\nLIMIT 1;",
+        "options": {}
+      },
+      "name": "Get Follow-up Template",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [690, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a professional follow-up specialist for AEO Agency. Create friendly, non-pushy follow-up messages for Instagram DMs. The goal is to re-engage leads who haven't responded. Keep it short (under 100 words), add value, and create curiosity. Mention something specific about their profile or content.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Create a follow-up message for:\\n\\nName: {{$node['Get Leads for Follow-up'].json.full_name}}\\nUsername: @{{$node['Get Leads for Follow-up'].json.instagram_username}}\\nNiche: {{$node['Get Leads for Follow-up'].json.niche}}\\nLocation: {{$node['Get Leads for Follow-up'].json.location}}\\nFollowers: {{$node['Get Leads for Follow-up'].json.follower_count}}\\nDays since last contact: 3+\\nFollow-up number: {{$node['Get Leads for Follow-up'].json.follow_up_count + 1}}\\n\\nTemplate guidance: {{$node['Get Follow-up Template'].json.follow_up_template}}\\n\\nMake it personalized and valuable. Include a soft call-to-action.\"\n    }\n  ],\n  \"temperature\": 0.8\n}",
+        "options": {}
+      },
+      "name": "Generate Follow-up Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [910, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "OpenAI API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract message and prepare data\nconst response = $json;\nconst message = response.choices[0].message.content;\nconst lead = $node[\"Get Leads for Follow-up\"].json;\n\nreturn [{\n  json: {\n    lead_id: lead.lead_id,\n    campaign_id: lead.campaign_id,\n    instagram_username: lead.instagram_username,\n    instagram_user_id: lead.instagram_user_id,\n    message_text: message,\n    message_type: 'follow_up',\n    follow_up_number: lead.follow_up_count + 1,\n    prepared_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Prepare Follow-up Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v18.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "={{$credentials.instagramAccessToken}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": {\n    \"id\": \"{{$json.instagram_user_id}}\"\n  },\n  \"message\": {\n    \"text\": \"{{$json.message_text}}\"\n  },\n  \"messaging_type\": \"MESSAGE_TAG\",\n  \"tag\": \"ACCOUNT_UPDATE\"\n}",
+        "options": {}
+      },
+      "name": "Send Follow-up DM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1350, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4",
+          "name": "Instagram Graph API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.outreach_messages (\n  lead_id,\n  campaign_id,\n  message_text,\n  message_type,\n  sent_at,\n  delivered,\n  instagram_message_id\n) VALUES (\n  '{{$json.lead_id}}',\n  '{{$json.campaign_id}}',\n  '{{$json.message_text}}',\n  '{{$json.message_type}}',\n  NOW(),\n  true,\n  '{{$json.message_id}}'\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Log Follow-up Message",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1570, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.instagram_leads\nSET\n  last_contacted_at = NOW(),\n  follow_up_count = follow_up_count + 1,\n  updated_at = NOW()\nWHERE id = '{{$node[\"Prepare Follow-up Data\"].json.lead_id}}';",
+        "options": {}
+      },
+      "name": "Update Lead Follow-up Count",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1790, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.analytics_events (\n  event_type,\n  event_category,\n  event_data,\n  lead_id,\n  campaign_id\n) VALUES (\n  'follow_up_sent',\n  'outreach',\n  jsonb_build_object(\n    'username', '{{$node[\"Get Leads for Follow-up\"].json.instagram_username}}',\n    'follow_up_number', {{$node[\"Prepare Follow-up Data\"].json.follow_up_number}},\n    'days_since_last_contact', 3\n  ),\n  '{{$node[\"Prepare Follow-up Data\"].json.lead_id}}',\n  '{{$node[\"Prepare Follow-up Data\"].json.campaign_id}}'\n);",
+        "options": {}
+      },
+      "name": "Log Follow-up Analytics",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2010, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "2",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 600,
+        "unit": "seconds"
+      },
+      "name": "Wait 10 Minutes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2230, 300],
+      "webhookId": "follow-up-delay"
+    }
+  ],
+  "connections": {
+    "Schedule Every 4 Hours": {
+      "main": [
+        [
+          {
+            "node": "Get Leads for Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Leads for Follow-up": {
+      "main": [
+        [
+          {
+            "node": "Get Follow-up Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Follow-up Template": {
+      "main": [
+        [
+          {
+            "node": "Generate Follow-up Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Follow-up Message": {
+      "main": [
+        [
+          {
+            "node": "Prepare Follow-up Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Follow-up Data": {
+      "main": [
+        [
+          {
+            "node": "Send Follow-up DM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Follow-up DM": {
+      "main": [
+        [
+          {
+            "node": "Log Follow-up Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Follow-up Message": {
+      "main": [
+        [
+          {
+            "node": "Update Lead Follow-up Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Lead Follow-up Count": {
+      "main": [
+        [
+          {
+            "node": "Log Follow-up Analytics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Follow-up Analytics": {
+      "main": [
+        [
+          {
+            "node": "Wait 10 Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "pinData": {},
+  "meta": {
+    "instanceId": "aeo-lovable-platform"
+  }
+}
