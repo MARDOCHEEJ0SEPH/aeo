@@ -97,7 +97,7 @@ CREATE TABLE public.instagram_leads (
   -- Conversion tracking
   converted_at TIMESTAMP WITH TIME ZONE,
   conversion_value DECIMAL(10,2),
-  client_id UUID REFERENCES public.clients(id),
+  client_id UUID, -- Foreign key added later to avoid circular dependency
 
   -- Assignment
   assigned_to UUID REFERENCES public.users(id),
@@ -245,7 +245,7 @@ CREATE TABLE public.clients (
   user_id UUID REFERENCES public.users(id) ON DELETE CASCADE,
 
   -- Lead source
-  lead_id UUID REFERENCES public.instagram_leads(id),
+  lead_id UUID, -- Foreign key added later to avoid circular dependency
   source TEXT CHECK (source IN ('instagram', 'referral', 'website', 'cold_call', 'event', 'other')),
 
   -- Company information
@@ -621,6 +621,20 @@ CREATE TABLE public.file_uploads (
 CREATE INDEX idx_files_uploadable ON public.file_uploads(uploadable_type, uploadable_id) WHERE deleted_at IS NULL;
 CREATE INDEX idx_files_uploaded_by ON public.file_uploads(uploaded_by);
 CREATE INDEX idx_files_category ON public.file_uploads(category);
+
+-- ============================================================================
+-- FOREIGN KEY CONSTRAINTS (added after table creation to resolve circular dependencies)
+-- ============================================================================
+
+-- Add foreign key from instagram_leads to clients
+ALTER TABLE public.instagram_leads
+ADD CONSTRAINT fk_instagram_leads_client
+FOREIGN KEY (client_id) REFERENCES public.clients(id);
+
+-- Add foreign key from clients to instagram_leads
+ALTER TABLE public.clients
+ADD CONSTRAINT fk_clients_lead
+FOREIGN KEY (lead_id) REFERENCES public.instagram_leads(id);
 
 -- ============================================================================
 -- TRIGGERS
